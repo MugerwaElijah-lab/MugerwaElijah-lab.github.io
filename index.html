@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg: #f3f4f6;
-            --glass: rgba(255, 255, 255, 0.75);
+            --glass: rgba(255, 255, 255, 0.7);
             --text-main: #000000;
             --text-sub: #555c68;
             --accent: #000000;
@@ -24,15 +24,28 @@
         .nav-links a { color: var(--text-sub); text-decoration: none; margin-left: 2rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Hero Layout */
-        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 140px 2rem 80px; gap: 4rem; }
+        /* Hero Layout & 3D Profile Effect */
+        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 140px 2rem 80px; gap: 4rem; perspective: 1500px; }
         .hero-content { flex: 1.4; }
         h1 { font-size: 5rem; font-weight: 800; margin: 0; letter-spacing: -4px; line-height: 0.9; }
         .typing-box { font-size: 1.6rem; font-weight: 500; color: var(--text-sub); margin-top: 1rem; font-family: 'Fira Code', monospace; height: 2.5rem; }
         
-        .hero-img-area { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
-        .profile-img { width: 380px; height: 480px; border-radius: 30px; object-fit: cover; filter: grayscale(100%); border: 1px solid var(--border); transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-        .profile-img:hover { filter: grayscale(0%); transform: scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .hero-img-area { flex: 1; display: flex; justify-content: flex-end; align-items: center; perspective: 1000px; }
+        .profile-img { 
+            width: 380px; 
+            height: 480px; 
+            border-radius: 30px; 
+            object-fit: cover; 
+            filter: grayscale(100%); 
+            border: 1px solid var(--border); 
+            transition: 0.8s cubic-bezier(0.2, 1, 0.2, 1); 
+            transform-style: preserve-3d;
+        }
+        .hero-img-area:hover .profile-img { 
+            filter: grayscale(0%); 
+            transform: rotateY(-12deg) rotateX(7deg) scale(1.03); 
+            box-shadow: 25px 25px 60px rgba(0,0,0,0.12); 
+        }
 
         /* About & Socials */
         .about-section { margin-top: 4rem; max-width: 650px; }
@@ -42,17 +55,48 @@
         .social-link:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .email-display { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -0.5px; font-size: 0.9rem; color: var(--text-main); background: white; padding: 0.9rem 1.4rem; border-radius: 14px; border: 1px solid var(--border); }
 
-        /* Floating Arsenal Cards */
+        /* Technical Arsenal: Interactive 3D Cards */
         #skills { padding: 80px 2rem; max-width: 1100px; margin: 0 auto; }
         .section-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; color: #9ca3af; margin-bottom: 2rem; display: block; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .skill-card { background: white; border: 1px solid var(--border); padding: 2.5rem; border-radius: 28px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
-        .skill-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 60px rgba(0,0,0,0.06); }
-        .skill-card h4 { margin: 0 0 1.5rem; font-size: 1.1rem; letter-spacing: -0.5px; }
-        .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 2; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; perspective: 1200px; }
+        
+        .skill-card { 
+            background: var(--glass); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8); 
+            padding: 2.5rem; 
+            border-radius: 28px; 
+            position: relative;
+            overflow: hidden;
+            transition: 0.6s cubic-bezier(0.2, 1, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Mouse-Follow Spotlight Effect */
+        .skill-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.9) 0%, transparent 75%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .skill-card:hover { 
+            transform: translateY(-12px) rotateX(6deg) rotateY(-3deg); 
+            box-shadow: 0 35px 70px rgba(0,0,0,0.07); 
+            border-color: #000;
+            background: #ffffff;
+        }
+        .skill-card:hover::after { opacity: 1; }
+
+        .card-num { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #9ca3af; display: block; margin-bottom: 1.5rem; opacity: 0.6; font-weight: 600; }
+        .skill-card h4 { margin: 0 0 1.5rem; font-size: 1.2rem; letter-spacing: -0.5px; font-weight: 700; }
+        .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 2.2; position: relative; z-index: 1; }
         .skill-list li::before { content: "—"; margin-right: 10px; color: #d1d5db; }
 
-        /* Refined Experience Timeline */
+        /* Timeline */
         #experience { padding: 80px 2rem; max-width: 1100px; margin: 0 auto; }
         .exp-row { display: grid; grid-template-columns: 200px 1fr; gap: 4rem; padding: 3rem 0; border-top: 1px solid var(--border); }
         .exp-time { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.85rem; color: #000; letter-spacing: 1px; }
@@ -60,18 +104,9 @@
         .exp-body span { color: #9ca3af; font-size: 0.9rem; font-weight: 500; margin-bottom: 1rem; display: block; }
         .exp-body p { margin: 0; font-size: 1.05rem; color: var(--text-sub); max-width: 600px; }
 
-        /* Projects with Visual Upgrade */
+        /* Projects */
         #projects { padding: 80px 2rem 120px; max-width: 1100px; margin: 0 auto; }
-        .project-card { 
-            background: white; 
-            border: 1px solid var(--border); 
-            border-radius: 40px; 
-            padding: 0; 
-            display: grid; 
-            grid-template-columns: 1.2fr 1fr; 
-            overflow: hidden;
-            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-        }
+        .project-card { background: white; border: 1px solid var(--border); border-radius: 40px; padding: 0; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
         .project-card:hover { transform: scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,0.07); }
         .project-info { padding: 4rem; }
         .project-visual { background: #e5e7eb; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -117,7 +152,7 @@
         
         <div class="about-section">
             <p class="about-text">
-                Specializing in <strong>Cybersecurity and Networking </strong>with an interest of using <strong>Arifical Intelligence</strong> for enhancing security and automation. Currently I am a final year student of Science in Networking and Cybersecurity at Isbat University. This is my portfolio, where I share with the world my journey of learning, experience and growth as i navigate the complexities of a career in information security       
+                Specializing in <strong>Cybersecurity and Networking </strong>with an interest of using <strong>Arifical Intelligence</strong> for enhancing security and automation. Currently I am a final year student of Science in Networking and Cybersecurity at Isbat University. This is my portfolio, where I share with the world my journey of learning, experience and growth as i navigate the complexities of a career in information security        
             </p>
             <div class="socials">
                 <a href="https://linkedin.com/in/elijah-williams-b12112306" class="social-link" target="_blank">LinkedIn</a>
@@ -136,6 +171,7 @@
     <span class="section-label">Technical Arsenal</span>
     <div class="skills-grid">
         <div class="skill-card">
+            <span class="card-num">/01</span>
             <h4>Certifications</h4>
             <ul class="skill-list">
                 <li>ISC2 Certified in Cybersecurity</li>
@@ -144,7 +180,8 @@
             </ul>
         </div>
         <div class="skill-card">
-            <h4>Networking and Cybersecurity </h4>
+            <span class="card-num">/02</span>
+            <h4>Networking and Cybersecurity</h4>
             <ul class="skill-list">
                 <li>Infrastructure Hardening</li>
                 <li>Log Analysis & Triaging</li>
@@ -152,6 +189,7 @@
             </ul>
         </div>
         <div class="skill-card">
+            <span class="card-num">/03</span>
             <h4>ML & Arifical Intelligence</h4>
             <ul class="skill-list">
                 <li>NLP (DistilBert) Implementation</li>
@@ -211,6 +249,7 @@
 </footer>
 
 <script>
+    // Typing Animation logic
     const textElement = document.getElementById("typing");
     const phrases = ["cybersecurity Professional", "securing the future ", "learning through building"];
     let pIdx = 0, cIdx = 0, isDel = false;
@@ -224,6 +263,17 @@
         setTimeout(type, speed);
     }
     type();
+
+    // Technical Arsenal Card Spotlight Logic
+    document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
 </script>
 
 </body>
