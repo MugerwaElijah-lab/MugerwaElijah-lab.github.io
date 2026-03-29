@@ -45,8 +45,16 @@
         .social-link { background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
         .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
 
+        /* --- NEW: Skills Section --- */
+        #skills { padding: 40px 2rem 20px; max-width: 1100px; margin: 0 auto; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .skill-card { background: var(--glass); border: 1px solid white; padding: 2rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .skill-card h4 { margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; color: var(--accent); }
+        .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 1.8; }
+        .skill-list li::before { content: '▹'; color: var(--accent); margin-right: 8px; font-weight: bold; }
+
         /* Projects Section */
-        #projects { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
+        #projects { padding: 60px 2rem 100px; max-width: 1100px; margin: 0 auto; }
         .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-sub); margin-bottom: 1rem; display: block; }
         
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 2rem; }
@@ -54,7 +62,13 @@
         .project-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
         
         .project-card h3 { font-size: 1.8rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
-        .project-card p { color: var(--text-sub); margin-bottom: 2rem; flex-grow: 1; }
+        .project-card p { color: var(--text-sub); margin-bottom: 1rem; }
+
+        /* --- NEW: STAR Method Box --- */
+        .star-box { background: rgba(255,255,255,0.5); border-left: 3px solid var(--accent); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem; flex-grow: 1; }
+        .star-item { margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--text-sub); }
+        .star-item:last-child { margin-bottom: 0; }
+        .star-item strong { color: var(--text-main); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; width: 75px; }
         
         .btn-group { display: flex; gap: 1.5rem; align-items: center; }
         .btn-main { font-weight: 700; text-decoration: none; color: var(--accent); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
@@ -77,6 +91,7 @@
         <span class="logo">Elijah.</span>
         <div class="nav-links">
             <a href="#home">Focus</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Portfolio</a>
             <a href="mailto:your@email.com">Contact</a>
         </div>
@@ -93,7 +108,7 @@
         <div class="about-section">
             <h2>About Me</h2>
             <p class="about-text">
-                I am a <strong>Networking and Cybersecurity</strong> specialist dedicated to building the next generation of intelligent defense systems. Currently finalizing my research in Kampala, my work bridges the gap between traditional network architecture and <strong>AI-driven vulnerability detection</strong>. 
+                As a <strong>Networking and Cybersecurity</strong> specialist completing my degree in Kampala, I am transitioning into the professional field with a sharp focus on <strong>AI-driven security</strong>. My work bridges the gap between traditional network architecture and automated vulnerability detection. 
                 <br><br>
                 I don't just study theory; I learn by building. Whether it's hardening enterprise frameworks or training machine learning models to hunt for threats, my goal is world-class technical precision.
             </p>
@@ -110,24 +125,74 @@
     </div>
 </div>
 
+<section id="skills">
+    <span class="section-label">Technical Arsenal</span>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h4>Defensive Security</h4>
+            <ul class="skill-list">
+                <li>Network Architecture Hardening</li>
+                <li>Identity Access Management</li>
+                <li>Real-time Traffic Monitoring</li>
+                <li>Firewall Configuration</li>
+            </ul>
+        </div>
+        <div class="skill-card">
+            <h4>AI & Automation</h4>
+            <ul class="skill-list">
+                <li>Python Scripting</li>
+                <li>Machine Learning (DistilBert)</li>
+                <li>Log Classification</li>
+                <li>Security Data Processing</li>
+            </ul>
+        </div>
+        <div class="skill-card">
+            <h4>Core Systems</h4>
+            <ul class="skill-list">
+                <li>Linux OS environments</li>
+                <li>Active Directory Integration</li>
+                <li>Network Protocols</li>
+                <li>Threat Hunting Frameworks</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <section id="projects">
     <span class="section-label">Selected Works</span>
     <div class="project-grid">
         
         <div class="project-card">
             <h3>VULN-INTELLIGEN</h3>
-            <p>A flagship research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities within infrastructure logs. This system transforms raw network data into actionable security intelligence.</p>
+            <p>A flagship research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities within infrastructure logs.</p>
+            
+            <div class="star-box">
+                <div class="star-item"><strong>Situation</strong> High volume of raw network logs making manual tracking inefficient.</div>
+                <div class="star-item"><strong>Task</strong> Build an AI model to automate and categorize these threats accurately.</div>
+                <div class="star-item"><strong>Action</strong> Trained a DistilBert NLP model in Python to parse and classify log data.</div>
+                <div class="star-item"><strong>Result</strong> Transformed raw data into actionable intelligence, reducing analysis time.</div>
+            </div>
+
             <div class="btn-group">
                 <a href="#" class="btn-main">View Repository ➔</a>
-                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem;">Documentation</a>
+                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Read Case Study</a>
             </div>
         </div>
 
         <div class="project-card">
             <h3>Net-Hardening Lab</h3>
-            <p>Design and deployment of a secure networking environment. Focused on <strong>identity access management</strong>, real-time monitoring, and architecture defense to mitigate sophisticated attack vectors.</p>
+            <p>Design and deployment of a secure networking environment focused on architecture defense and mitigation.</p>
+            
+            <div class="star-box">
+                <div class="star-item"><strong>Situation</strong> Needed a practical environment to test enterprise-level mitigation strategies.</div>
+                <div class="star-item"><strong>Task</strong> Architect a simulated network with strict access controls and monitoring.</div>
+                <div class="star-item"><strong>Action</strong> Deployed identity access management (IAM) and configured firewall rules.</div>
+                <div class="star-item"><strong>Result</strong> Created a resilient infrastructure capable of mitigating lateral attacks.</div>
+            </div>
+
             <div class="btn-group">
-                <a href="#" class="btn-main">Case Study ➔</a>
+                <a href="#" class="btn-main">Live Documentation ➔</a>
+                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; font-weight: 600;">View Architecture</a>
             </div>
         </div>
 
