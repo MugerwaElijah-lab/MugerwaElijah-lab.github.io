@@ -3,85 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugerwa Elijah | Cyber Architect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+    <title>Mugerwa Elijah | Information Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f9fafb;
-            --glass: rgba(255, 255, 255, 0.8);
-            --text-main: #0f172a;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.7);
+            --text-main: #000000;
             --text-sub: #64748b;
             --accent: #000000;
-            --border: rgba(0, 0, 0, 0.04);
-            --float-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            --border: rgba(0, 0, 0, 0.06);
         }
+        
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; }
 
-        /* Animation for Floating Feel */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(30px); }
+        /* Smooth Entrance */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(249, 250, 251, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
-        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; align-items: center; }
-        .logo { font-weight: 800; letter-spacing: 2px; font-size: 0.9rem; border: 1.5px solid var(--accent); padding: 4px 10px; }
+        /* Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; align-items: center; }
+        .logo { font-weight: 900; letter-spacing: -1px; font-size: 1.2rem; }
 
-        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 140px 2rem 60px; gap: 4rem; animation: reveal 1s ease-out; }
-        .hero-content { flex: 1.2; }
+        /* Hero Section */
+        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1200px; margin: 0 auto; padding: 140px 2rem 60px; gap: 4rem; animation: fadeIn 0.8s ease-out; }
+        .hero-content { flex: 1.4; }
         
-        /* Cooler Hero Title */
-        .hero-title { font-size: 5rem; font-weight: 800; margin: 0; letter-spacing: -4px; line-height: 0.9; }
-        .hero-title span { color: transparent; -webkit-text-stroke: 1.5px var(--accent); }
+        h1 { font-size: 5.5rem; font-weight: 900; margin: 0; letter-spacing: -4px; line-height: 0.85; }
+        .typing-box { font-size: 1.6rem; font-weight: 400; color: var(--text-sub); margin-top: 1.5rem; font-family: 'Fira Code', monospace; }
+
+        /* About Section - Integrated Hero */
+        .about-box { margin-top: 3rem; max-width: 600px; line-height: 1.7; font-size: 1.15rem; color: var(--text-sub); }
+        .about-box strong { color: var(--text-main); }
+
+        .social-row { display: flex; gap: 2rem; margin-top: 2.5rem; }
+        .social-row a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .social-row a:hover { border-color: var(--text-main); }
+
+        /* Hero Image */
+        .hero-img-area { flex: 0.6; position: relative; }
+        .profile-img { width: 100%; border-radius: 24px; filter: grayscale(100%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .profile-img:hover { filter: grayscale(0%); transform: translateY(-10px); }
+
+        /* Projects - The "Floattie" Cards */
+        #projects { padding: 120px 2rem; background: var(--surface); }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 3rem; display: block; }
         
-        .typing-box { font-size: 1.4rem; font-weight: 400; color: var(--text-sub); margin-top: 1.5rem; font-family: 'Fira Code', monospace; }
-
-        .about-card { margin-top: 3rem; background: var(--glass); padding: 3rem; border-radius: 40px; border: 1px solid white; box-shadow: var(--float-shadow); position: relative; }
-        .about-card::before { content: 'SEC'; position: absolute; top: -15px; right: 40px; background: var(--accent); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; }
-
-        .hero-img-area { flex: 0.8; }
-        .profile-img { width: 100%; max-width: 360px; border-radius: 60px; filter: grayscale(100%); transition: 0.8s; border: 1px solid var(--border); box-shadow: var(--float-shadow); }
-        .profile-img:hover { filter: grayscale(0%); transform: rotate(-2deg) scale(1.05); }
-
-        #projects { padding: 120px 2rem; max-width: 1100px; margin: 0 auto; }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 3rem; }
         
-        /* Floating Project Cards */
         .project-card { 
             background: white; 
-            border: 1px solid var(--border); 
-            border-radius: 40px; 
-            padding: 3.5rem; 
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            animation: float 6s ease-in-out infinite;
+            padding: 4rem; 
+            border-radius: 32px; 
+            border: 1px solid var(--border);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* This is the "Floattie" effect: Deep, soft shadow */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
-        .project-card:nth-child(2) { animation-delay: 1s; } /* Offset the float */
 
         .project-card:hover { 
-            transform: translateY(-20px) scale(1.02); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.08); 
-            animation-play-state: paused; 
+            transform: translateY(-15px); 
+            box-shadow: 0 40px 70px rgba(0,0,0,0.07); 
+            border-color: rgba(0,0,0,0.1);
         }
 
-        .project-card h3 { font-size: 2.2rem; margin: 0 0 1.5rem 0; letter-spacing: -1.5px; }
-        .tag { display: inline-block; background: #f1f5f9; padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: var(--text-sub); margin-bottom: 1rem; }
+        .project-card h3 { font-size: 2rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        .project-card p { color: var(--text-sub); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
+        .proj-link { font-weight: 800; text-decoration: none; color: var(--text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .btn-main { display: inline-block; margin-top: 2rem; font-weight: 800; text-decoration: none; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 5px; transition: 0.3s; }
-        .btn-main:hover { padding-right: 10px; }
+        footer { text-align: center; padding: 6rem 0; color: var(--text-sub); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
 
-        footer { text-align: center; padding: 8rem 0; font-weight: 800; letter-spacing: 5px; font-size: 0.7rem; opacity: 0.3; }
-
-        @media (max-width: 900px) {
-            .hero-title { font-size: 3.5rem; }
-            #home { flex-direction: column-reverse; padding-top: 100px; text-align: center; }
+        @media (max-width: 1000px) {
+            h1 { font-size: 3.5rem; }
+            #home { flex-direction: column; text-align: center; padding-top: 120px; }
+            .about-box { margin: 2rem auto; }
+            .social-row { justify-content: center; }
             .project-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -90,56 +95,59 @@
 
 <nav>
     <div class="nav-content">
-        <span class="logo">ELIJAH</span>
+        <span class="logo">M. ELIJAH</span>
         <div class="nav-links">
-            <a href="#home">01. About</a>
-            <a href="#projects">02. Work</a>
-            <a href="mailto:your@email.com">03. Contact</a>
+            <a href="#projects" style="color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.85rem;">Work</a>
+            <a href="mailto:your@email.com" style="margin-left: 2rem; color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.85rem;">Contact</a>
         </div>
     </div>
 </nav>
 
 <div id="home">
     <div class="hero-content">
-        <h1 class="hero-title"><span>Hey,</span><br>It's Elijah</h1>
+        <h1>Hey,<br>It's Elijah.</h1>
         <div class="typing-box"><span id="typing"></span></div>
         
-        <div class="about-card">
-            <p style="font-size: 1.1rem; color: var(--text-sub); margin: 0;">
-                Networking & Cybersecurity professional nearing completion of a degree. 
-                Specializing in building <strong>world-class security systems</strong> by blending traditional network defense with modern AI research in Kampala.
-            </p>
-            <div style="margin-top: 2rem; display: flex; gap: 2rem;">
-                <a href="https://linkedin.com" style="color: black; font-weight: 800; text-decoration: none;">LN.</a>
-                <a href="https://github.com" style="color: black; font-weight: 800; text-decoration: none;">GH.</a>
-            </div>
+        <div class="about-box">
+            I am a <strong>Networking & Cybersecurity</strong> professional nearing the completion of my degree. 
+            I focus on building world-class information security systems by integrating <strong>Artificial Intelligence</strong> into network defense. Currently conducting research in Kampala.
+        </div>
+
+        <div class="social-row">
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+            <a href="mailto:your@email.com">Email</a>
         </div>
     </div>
+    
     <div class="hero-img-area">
         <img src="profile.jpg" alt="Mugerwa Elijah" class="profile-img">
     </div>
 </div>
 
 <section id="projects">
-    <div class="project-grid">
-        <div class="project-card">
-            <span class="tag">AI / Machine Learning</span>
-            <h3>VULN-INTELLIGEN</h3>
-            <p>Using <strong>DistilBert</strong> to automate the classification of infrastructure vulnerabilities from raw network logs.</p>
-            <a href="#" class="btn-main">EXPLORE PROJECT</a>
-        </div>
+    <div class="container">
+        <span class="section-label">Selected Projects</span>
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <h3>VULN-INTELLIGEN</h3>
+                <p>An AI-driven research project using <strong>DistilBert</strong> to automate vulnerability classification from network infrastructure logs.</p>
+                <a href="#" class="proj-link">View Project ↗</a>
+            </div>
 
-        <div class="project-card">
-            <span class="tag">Architecture Defense</span>
-            <h3>Net-Hardening Lab</h3>
-            <p>Deploying secure networking environments focused on <strong>identity access management</strong> and attack mitigation.</p>
-            <a href="#" class="btn-main">EXPLORE PROJECT</a>
+            <div class="project-card">
+                <h3>Net-Hardening Lab</h3>
+                <p>Architecting secure enterprise environments with a focus on <strong>identity access management</strong> and real-time threat monitoring.</p>
+                <a href="#" class="proj-link">Case Study ↗</a>
+            </div>
+
         </div>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 MUGERWA ELIJAH LABS
+    &copy; 2026 MUGERWA ELIJAH. KAMPALA, UGANDA.
 </footer>
 
 <script>
