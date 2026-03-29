@@ -7,97 +7,65 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Premium Slate Grey Background */
-            --bg: #f1f5f9; 
-            /* Enhanced Glass: More blur, less opacity for better "depth" */
-            --glass: rgba(255, 255, 255, 0.5); 
-            --text-main: #0f172a; 
-            --text-sub: #475569; 
-            --accent: #000000;
-            --border: rgba(255, 255, 255, 0.8);
-            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.03);
-            --shadow-float: 0 30px 60px rgba(0, 0, 0, 0.08);
+            --bg: #f3f4f6; /* Soft Grey Background */
+            --glass: rgba(255, 255, 255, 0.7); /* Transparent White */
+            --text-main: #111827; /* Deep Black/Grey */
+            --text-sub: #4b5563; /* Medium Grey */
+            --accent: #000000; /* Pure Black for contrast */
+            --border: rgba(0, 0, 0, 0.05);
         }
-
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.5; }
 
-        /* Smooth Reveal Animation */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(241, 245, 249, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; align-items: center; }
+        /* Sticky Glass Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.2rem 0; background: rgba(243, 244, 246, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; }
         .logo { font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; }
+        .nav-links a { color: var(--text-sub); text-decoration: none; margin-left: 2rem; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1200px; margin: 0 auto; padding: 140px 2rem 60px; gap: 5rem; animation: slideUp 1s ease-out; }
+        /* Hero Section */
+        #home { min-height: 80vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 120px 2rem 60px; gap: 4rem; }
         .hero-content { flex: 1.2; }
-        h1 { font-size: 5rem; font-weight: 800; margin: 0; letter-spacing: -4px; line-height: 0.9; color: var(--accent); }
-        .typing-box { font-size: 1.8rem; color: var(--text-sub); margin-top: 1rem; font-family: 'Fira Code', monospace; min-height: 2.5rem; }
+        h1 { font-size: 4.5rem; font-weight: 800; margin: 0; letter-spacing: -3px; color: var(--accent); }
+        .typing-box { font-size: 1.8rem; font-weight: 400; color: var(--text-sub); margin-top: 0.5rem; height: 2.5rem; font-family: 'Fira Code', monospace; }
+        
+        /* Profile Image */
+        .hero-img-area { flex: 0.8; display: flex; justify-content: center; }
+        .profile-img { width: 340px; height: 340px; border-radius: 40px; object-fit: cover; filter: grayscale(100%); transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid var(--border); }
+        .profile-img:hover { filter: grayscale(0%); transform: scale(1.02); }
 
-        /* Floating About Card */
-        .about-card { 
-            margin-top: 3.5rem; 
-            background: var(--glass); 
-            backdrop-filter: blur(25px); 
-            padding: 3rem; 
-            border-radius: 32px; 
-            border: 1px solid var(--border); 
-            box-shadow: var(--shadow-soft); 
-            transition: 0.4s ease;
-        }
-        .about-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
-        .about-text { font-size: 1.15rem; color: var(--text-sub); max-width: 650px; }
+        /* About Section (Directly under Hero) */
+        .about-section { margin-top: 3rem; background: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .about-section h2 { margin-top: 0; font-size: 1.5rem; }
+        .about-text { color: var(--text-sub); font-size: 1.1rem; max-width: 700px; }
 
-        /* Hero Image - Premium Rounded */
-        .hero-img-area { flex: 0.8; position: relative; }
-        .profile-img { 
-            width: 100%; 
-            max-width: 400px; 
-            border-radius: 50px; 
-            filter: grayscale(100%); 
-            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); 
-            box-shadow: var(--shadow-float);
-        }
-        .profile-img:hover { filter: grayscale(0%); transform: rotate(-2deg) scale(1.05); }
+        /* Social Socials */
+        .socials { display: flex; gap: 1rem; margin-top: 2rem; }
+        .social-link { background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
 
         /* Projects Section */
-        #projects { padding: 120px 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; color: var(--text-sub); margin-bottom: 3rem; display: block; opacity: 0.6; }
+        #projects { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-sub); margin-bottom: 1rem; display: block; }
         
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 3rem; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--glass); border: 1px solid white; border-radius: 32px; padding: 3rem; transition: 0.5s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
         
-        /* The Floating Cards */
-        .project-card { 
-            background: var(--glass); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid var(--border); 
-            border-radius: 40px; 
-            padding: 4rem; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            flex-direction: column;
-        }
-        .project-card:hover { 
-            transform: translateY(-20px); 
-            background: rgba(255, 255, 255, 0.8); 
-            box-shadow: 0 50px 100px rgba(0,0,0,0.1); 
-        }
+        .project-card h3 { font-size: 1.8rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        .project-card p { color: var(--text-sub); margin-bottom: 2rem; flex-grow: 1; }
+        
+        .btn-group { display: flex; gap: 1.5rem; align-items: center; }
+        .btn-main { font-weight: 700; text-decoration: none; color: var(--accent); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .btn-main:hover { gap: 12px; }
 
-        .project-card h3 { font-size: 2.2rem; margin: 0 0 1.2rem 0; letter-spacing: -1.5px; }
-        .project-card p { color: var(--text-sub); font-size: 1.1rem; flex-grow: 1; margin-bottom: 2.5rem; }
-        
-        .btn-main { font-weight: 800; text-decoration: none; color: var(--accent); font-size: 0.9rem; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-        .btn-main:hover { text-decoration: underline; }
-
-        footer { text-align: center; padding: 8rem 2rem; color: var(--text-sub); font-size: 0.75rem; letter-spacing: 3px; font-weight: 700; opacity: 0.5; }
+        footer { text-align: center; padding: 6rem 2rem; color: var(--text-sub); border-top: 1px solid var(--border); font-size: 0.8rem; }
 
         @media (max-width: 900px) {
-            h1 { font-size: 3.5rem; }
             #home { flex-direction: column; text-align: center; padding-top: 100px; }
+            h1 { font-size: 3rem; }
+            .profile-img { width: 280px; height: 280px; }
             .project-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -108,8 +76,9 @@
     <div class="nav-content">
         <span class="logo">Elijah.</span>
         <div class="nav-links">
-            <a href="#projects" style="color: var(--text-sub); text-decoration: none; font-weight: 700; font-size: 0.8rem;">WORK</a>
-            <a href="mailto:your@email.com" style="margin-left: 2rem; color: var(--text-sub); text-decoration: none; font-weight: 700; font-size: 0.8rem;">CONTACT</a>
+            <a href="#home">Focus</a>
+            <a href="#projects">Portfolio</a>
+            <a href="mailto:your@email.com">Contact</a>
         </div>
     </div>
 </nav>
@@ -117,65 +86,81 @@
 <div id="home">
     <div class="hero-content">
         <h1>Hey, It's Elijah</h1>
-        <div class="typing-box"><span id="typing"></span></div>
+        <div class="typing-box">
+            <span id="typing"></span>
+        </div>
         
-        <div class="about-card">
+        <div class="about-section">
+            <h2>About Me</h2>
             <p class="about-text">
-                I am a <strong>Networking and Cybersecurity</strong> specialist nearing the completion of my degree. My focus is on architecting intelligent defense systems that bridge the gap between traditional network infrastructure and <strong>AI-driven vulnerability management</strong>.
+                I am a <strong>Networking and Cybersecurity</strong> specialist dedicated to building the next generation of intelligent defense systems. Currently finalizing my research in Kampala, my work bridges the gap between traditional network architecture and <strong>AI-driven vulnerability detection</strong>. 
                 <br><br>
-                Currently finalizing research in Kampala, Uganda, I build to learn. From hardening enterprise frameworks to training <strong>Machine Learning models</strong>, I aim for world-class technical precision.
+                I don't just study theory; I learn by building. Whether it's hardening enterprise frameworks or training machine learning models to hunt for threats, my goal is world-class technical precision.
             </p>
-            <div style="margin-top: 2.5rem; display: flex; gap: 2rem;">
-                <a href="#" style="color: black; font-weight: 800; text-decoration: none; font-size: 0.8rem;">LINKEDIN</a>
-                <a href="#" style="color: black; font-weight: 800; text-decoration: none; font-size: 0.8rem;">GITHUB</a>
+            <div class="socials">
+                <a href="https://linkedin.com" class="social-link">LinkedIn</a>
+                <a href="https://github.com" class="social-link">GitHub</a>
+                <a href="mailto:your@email.com" class="social-link">Email Me</a>
             </div>
         </div>
     </div>
+    
     <div class="hero-img-area">
         <img src="profile.jpg" alt="Mugerwa Elijah" class="profile-img">
     </div>
 </div>
 
 <section id="projects">
-    <span class="section-label">Selected Projects</span>
+    <span class="section-label">Selected Works</span>
     <div class="project-grid">
         
         <div class="project-card">
             <h3>VULN-INTELLIGEN</h3>
-            <p>Utilizing <strong>DistilBert</strong> and Python to automate the classification of infrastructure vulnerabilities from raw network logs.</p>
-            <a href="#" class="btn-main">EXPLORE REPOSITORY ➔</a>
+            <p>A flagship research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities within infrastructure logs. This system transforms raw network data into actionable security intelligence.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-main">View Repository ➔</a>
+                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem;">Documentation</a>
+            </div>
         </div>
 
         <div class="project-card">
             <h3>Net-Hardening Lab</h3>
-            <p>A secure networking environment focused on <strong>Identity Access Management (IAM)</strong> and real-time threat mitigation.</p>
-            <a href="#" class="btn-main">VIEW CASE STUDY ➔</a>
+            <p>Design and deployment of a secure networking environment. Focused on <strong>identity access management</strong>, real-time monitoring, and architecture defense to mitigate sophisticated attack vectors.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-main">Case Study ➔</a>
+            </div>
         </div>
 
     </div>
 </section>
 
 <footer>
-    &copy; 2026 MUGERWA ELIJAH // SECURING THE FUTURE.
+    &copy; 2026 MUGERWA ELIJAH // KAMPALA, UGANDA // SECURING THE FUTURE.
 </footer>
 
 <script>
     const textElement = document.getElementById("typing");
-    const phrases = ["Security Architect.", "AI Researcher.", "Network Defender."];
+    const phrases = ["Cyber Security Professional.", "AI Research Specialist.", "Network Architect."];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
 
     function type() {
         const currentPhrase = phrases[phraseIndex];
-        textElement.textContent = isDeleting ? currentPhrase.substring(0, charIndex - 1) : currentPhrase.substring(0, charIndex + 1);
+        textElement.textContent = isDeleting 
+            ? currentPhrase.substring(0, charIndex - 1) 
+            : currentPhrase.substring(0, charIndex + 1);
+        
         charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
         let typeSpeed = isDeleting ? 40 : 100;
 
         if (!isDeleting && charIndex === currentPhrase.length) {
-            typeSpeed = 2000; isDeleting = true;
+            typeSpeed = 2000;
+            isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
-            isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
         }
         setTimeout(type, typeSpeed);
     }
