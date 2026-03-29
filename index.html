@@ -3,59 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugerwa Elijah | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Mugerwa Elijah | Cybersecurity & AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030712; --card: rgba(17, 24, 39, 0.7); --accent: #3b82f6; --text: #f3f4f6; --border: rgba(255, 255, 255, 0.1);
+            --bg: #020617; /* Deeper Midnight Blue */
+            --card: rgba(30, 41, 59, 0.5); 
+            --accent: #3b82f6; 
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
         }
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
 
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        /* Glass Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.2rem 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
         .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-weight: 800; font-size: 1.2rem; color: var(--accent); }
-        .nav-links a { color: var(--text); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; color: var(--accent); }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2rem; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Hero Section */
-        #home { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-        .hero-info { flex: 1; }
-        .hero-img-container { flex: 1; display: flex; justify-content: flex-end; position: relative; }
+        /* Hero & About Combined */
+        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 120px 2rem 60px; gap: 4rem; }
+        .hero-content { flex: 1.2; }
+        h1 { font-size: 4rem; font-weight: 800; margin: 0; line-height: 1; }
+        .typing-container { font-size: 2.2rem; font-weight: 700; color: var(--accent); margin-bottom: 1.5rem; height: 3.5rem; }
         
-        .hero-img-container::before { content: ''; position: absolute; width: 400px; height: 400px; background: var(--accent); filter: blur(100px); opacity: 0.2; z-index: -1; }
-        .profile-img { width: 380px; height: 380px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(59, 130, 246, 0.2); }
-
-        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
-        .typing-text { font-size: 2.5rem; font-weight: 700; color: var(--accent); border-right: 3px solid var(--accent); white-space: nowrap; overflow: hidden; animation: blink 0.7s infinite; }
-        @keyframes blink { 50% { border-color: transparent; } }
-
-        .hero-p { color: #9ca3af; max-width: 500px; margin: 1.5rem 0; font-size: 1.1rem; }
-
-        /* Social Icons */
-        .socials { display: flex; gap: 1.5rem; margin-top: 2rem; }
-        .social-btn { background: var(--card); border: 1px solid var(--border); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; text-decoration: none; }
-        .social-btn:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); }
-
-        /* Sections */
-        section { padding: 100px 0; max-width: 1100px; margin: 0 auto; padding: 100px 2rem; }
-        .section-title { font-size: 2rem; margin-bottom: 3rem; display: block; border-left: 4px solid var(--accent); padding-left: 1rem; }
+        .about-brief { font-size: 1.1rem; color: var(--text-dim); max-width: 550px; margin-bottom: 2rem; border-left: 2px solid var(--accent); padding-left: 1.5rem; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 20px; transition: 0.4s; position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--accent); transform: scale(1.02); }
-        .card h3 { font-size: 1.4rem; margin-top: 0; }
-        
-        footer { text-align: center; padding: 4rem 0; border-top: 1px solid var(--border); background: #010409; }
+        .hero-img-area { flex: 0.8; display: flex; justify-content: center; position: relative; }
+        .profile-img { width: 320px; height: 320px; border-radius: 30px; object-fit: cover; border: 1px solid var(--border); transform: rotate(2deg); transition: 0.5s; }
+        .profile-img:hover { transform: rotate(0deg) scale(1.05); }
 
-        @media (max-width: 900px) {
-            #home { flex-direction: column-reverse; text-align: center; padding-top: 150px; }
-            .hero-img-container { justify-content: center; margin-bottom: 3rem; }
-            .profile-img { width: 280px; height: 280px; }
+        /* Socials */
+        .socials { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-link { background: var(--card); border: 1px solid var(--border); padding: 0.8rem 1.5rem; border-radius: 12px; color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .social-link:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
+
+        /* Project Grid */
+        section { padding: 80px 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-header { margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; margin: 0; }
+        .section-header p { color: var(--accent); font-family: 'JetBrains Mono'; font-size: 0.9rem; text-transform: uppercase; }
+
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; display: flex; flex-direction: column; transition: 0.3s; height: 100%; }
+        .project-card:hover { background: rgba(59, 130, 246, 0.05); border-color: var(--accent); }
+        .project-card h3 { margin: 0 0 1rem 0; font-size: 1.4rem; }
+        .project-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; }
+        
+        .project-links { margin-top: 1.5rem; display: flex; gap: 1rem; }
+        .proj-btn { font-size: 0.8rem; font-weight: 700; text-decoration: none; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .proj-btn:hover { text-decoration: underline; }
+
+        footer { text-align: center; padding: 4rem 2rem; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+        @media (max-width: 850px) {
+            #home { flex-direction: column; text-align: center; padding-top: 100px; }
+            .about-brief { border-left: none; padding-left: 0; margin: 0 auto 2rem; }
             .socials { justify-content: center; }
-            h1 { font-size: 2.5rem; }
-            .typing-text { font-size: 1.8rem; }
+            h1 { font-size: 2.8rem; }
+            .profile-img { width: 250px; height: 250px; }
         }
     </style>
 </head>
@@ -63,88 +72,105 @@
 
 <nav>
     <div class="nav-content">
-        <span class="logo">ELIJAH.</span>
+        <span class="logo">ELIJAH.SEC</span>
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="#about">Education</a>
-            <a href="#contact">Contact</a>
+            <a href="#projects">Work</a>
+            <a href="#home">About</a>
+            <a href="mailto:your-email@gmail.com">Contact</a>
         </div>
     </div>
 </nav>
 
 <div id="home">
-    <div class="hero-info">
-        <h1>Hi, It's Elijah</h1>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 2.5rem; font-weight: 700;">I'm a </span>
-            <span id="typing" class="typing-text"></span>
+    <div class="hero-content">
+        <h1>Hey, It's Elijah</h1>
+        <div class="typing-container">
+            <span id="typing"></span>
         </div>
-        <p class="hero-p">Cybersecurity & AI Researcher. Specializing in network defense and automated vulnerability management.</p>
         
+        <div class="about-brief">
+            Networking and Cybersecurity professional nearing degree completion. 
+            I build intelligent defense systems by integrating AI and Machine Learning into core network infrastructure.
+        </div>
+
         <div class="socials">
-            <a href="#" class="social-btn">Li</a> <a href="#" class="social-btn">Gh</a> <a href="#" class="social-btn">X</a>
+            <a href="https://linkedin.com/in/yourprofile" class="social-link">LinkedIn</a>
+            <a href="mailto:your-email@gmail.com" class="social-link">Email</a>
+            <a href="https://github.com/MugerwaElijah-lab" class="social-link">GitHub</a>
         </div>
-        
-        <a href="#contact" style="display: inline-block; background: var(--accent); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; margin-top: 2rem; transition: 0.3s;">Hire me</a>
     </div>
     
-    <div class="hero-img-container">
+    <div class="hero-img-area">
         <img src="profile.jpg" alt="Mugerwa Elijah" class="profile-img">
     </div>
 </div>
 
 <section id="projects">
-    <span class="section-title">Latest Projects</span>
-    <div class="grid">
-        <div class="card">
+    <div class="section-header">
+        <p>Portfolio</p>
+        <h2>Featured Projects</h2>
+    </div>
+
+    <div class="project-grid">
+        <div class="project-card">
             <h3>VULN-INTELLIGEN</h3>
-            <p>Developing machine learning models (DistilBert) for infrastructure log analysis and threat detection.</p>
-            <a href="#" style="color: var(--accent); text-decoration: none; font-weight: 600;">View Repository →</a>
+            <p>Developing machine learning models using DistilBert to automate vulnerability detection in network infrastructure logs.</p>
+            <div class="project-links">
+                <a href="https://github.com/MugerwaElijah-lab" class="proj-btn">GitHub Repo</a>
+                <a href="#" class="proj-btn">Project Image</a>
+            </div>
         </div>
-        <div class="card">
+
+        <div class="project-card">
             <h3>Network Defense Labs</h3>
-            <p>Architecting and monitoring secure enterprise network frameworks.</p>
+            <p>Architecting secure enterprise frameworks focused on hardening architecture and proactive monitoring.</p>
+            <div class="project-links">
+                <a href="#" class="proj-btn">Case Study</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Future Project</h3>
+            <p>Details about your next big security research or AI integration will go here.</p>
+            <div class="project-links">
+                <a href="#" class="proj-btn">View Link</a>
+            </div>
         </div>
     </div>
 </section>
 
-<footer id="contact">
-    <p>&copy; 2026 Mugerwa Elijah | Information Security & AI</p>
+<footer>
+    &copy; 2026 Mugerwa Elijah | Uganda | Information Security professional
 </footer>
 
 <script>
     const textElement = document.getElementById("typing");
-    const phrases = ["Cybersecurity Pro", "AI Researcher", "Networking Student"];
+    const phrases = ["Cyber Security Professional", "AI Security Researcher", "Network Architect"];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
 
     function type() {
         const currentPhrase = phrases[phraseIndex];
+        textElement.textContent = isDeleting 
+            ? currentPhrase.substring(0, charIndex - 1) 
+            : currentPhrase.substring(0, charIndex + 1);
         
-        if (isDeleting) {
-            textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-        }
+        charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
 
-        let typeSpeed = isDeleting ? 100 : 200;
+        let typeSpeed = isDeleting ? 50 : 150;
 
         if (!isDeleting && charIndex === currentPhrase.length) {
-            typeSpeed = 2000; // Pause at end
+            typeSpeed = 2000;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
             typeSpeed = 500;
         }
-
         setTimeout(type, typeSpeed);
     }
-
     document.addEventListener("DOMContentLoaded", type);
 </script>
 
