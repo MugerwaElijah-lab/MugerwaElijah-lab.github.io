@@ -3,90 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugerwa Elijah | Information Security</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code&display=swap" rel="stylesheet">
+    <title>Mugerwa Elijah | Security Architect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #ffffff;
-            --surface: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.7);
-            --text-main: #000000;
-            --text-sub: #64748b;
-            --accent: #000000;
-            --border: rgba(0, 0, 0, 0.06);
+            --bg: #f3f4f6; /* Soft Grey Background */
+            --glass: rgba(255, 255, 255, 0.7); /* Transparent White */
+            --text-main: #111827; /* Deep Black/Grey */
+            --text-sub: #4b5563; /* Medium Grey */
+            --accent: #000000; /* Pure Black for contrast */
+            --border: rgba(0, 0, 0, 0.05);
         }
-        
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.5; }
 
-        /* Smooth Entrance */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Nav */
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
-        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; align-items: center; }
-        .logo { font-weight: 900; letter-spacing: -1px; font-size: 1.2rem; }
+        /* Sticky Glass Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.2rem 0; background: rgba(243, 244, 246, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; }
+        .logo { font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; }
+        .nav-links a { color: var(--text-sub); text-decoration: none; margin-left: 2rem; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
         /* Hero Section */
-        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1200px; margin: 0 auto; padding: 140px 2rem 60px; gap: 4rem; animation: fadeIn 0.8s ease-out; }
-        .hero-content { flex: 1.4; }
+        #home { min-height: 80vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 120px 2rem 60px; gap: 4rem; }
+        .hero-content { flex: 1.2; }
+        h1 { font-size: 4.5rem; font-weight: 800; margin: 0; letter-spacing: -3px; color: var(--accent); }
+        .typing-box { font-size: 1.8rem; font-weight: 400; color: var(--text-sub); margin-top: 0.5rem; height: 2.5rem; font-family: 'Fira Code', monospace; }
         
-        h1 { font-size: 5.5rem; font-weight: 900; margin: 0; letter-spacing: -4px; line-height: 0.85; }
-        .typing-box { font-size: 1.6rem; font-weight: 400; color: var(--text-sub); margin-top: 1.5rem; font-family: 'Fira Code', monospace; }
+        /* Profile Image */
+        .hero-img-area { flex: 0.8; display: flex; justify-content: center; }
+        .profile-img { width: 340px; height: 340px; border-radius: 40px; object-fit: cover; filter: grayscale(100%); transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid var(--border); }
+        .profile-img:hover { filter: grayscale(0%); transform: scale(1.02); }
 
-        /* About Section - Integrated Hero */
-        .about-box { margin-top: 3rem; max-width: 600px; line-height: 1.7; font-size: 1.15rem; color: var(--text-sub); }
-        .about-box strong { color: var(--text-main); }
+        /* About Section (Directly under Hero) */
+        .about-section { margin-top: 3rem; background: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .about-section h2 { margin-top: 0; font-size: 1.5rem; }
+        .about-text { color: var(--text-sub); font-size: 1.1rem; max-width: 700px; }
 
-        .social-row { display: flex; gap: 2rem; margin-top: 2.5rem; }
-        .social-row a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid transparent; transition: 0.3s; }
-        .social-row a:hover { border-color: var(--text-main); }
+        /* Social Socials */
+        .socials { display: flex; gap: 1rem; margin-top: 2rem; }
+        .social-link { background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        /* Hero Image */
-        .hero-img-area { flex: 0.6; position: relative; }
-        .profile-img { width: 100%; border-radius: 24px; filter: grayscale(100%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-        .profile-img:hover { filter: grayscale(0%); transform: translateY(-10px); }
-
-        /* Projects - The "Floattie" Cards */
-        #projects { padding: 120px 2rem; background: var(--surface); }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-label { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 3rem; display: block; }
+        /* Projects Section */
+        #projects { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-sub); margin-bottom: 1rem; display: block; }
         
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 3rem; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--glass); border: 1px solid white; border-radius: 32px; padding: 3rem; transition: 0.5s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
         
-        .project-card { 
-            background: white; 
-            padding: 4rem; 
-            border-radius: 32px; 
-            border: 1px solid var(--border);
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            /* This is the "Floattie" effect: Deep, soft shadow */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
+        .project-card h3 { font-size: 1.8rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        .project-card p { color: var(--text-sub); margin-bottom: 2rem; flex-grow: 1; }
+        
+        .btn-group { display: flex; gap: 1.5rem; align-items: center; }
+        .btn-main { font-weight: 700; text-decoration: none; color: var(--accent); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .btn-main:hover { gap: 12px; }
 
-        .project-card:hover { 
-            transform: translateY(-15px); 
-            box-shadow: 0 40px 70px rgba(0,0,0,0.07); 
-            border-color: rgba(0,0,0,0.1);
-        }
+        footer { text-align: center; padding: 6rem 2rem; color: var(--text-sub); border-top: 1px solid var(--border); font-size: 0.8rem; }
 
-        .project-card h3 { font-size: 2rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
-        .project-card p { color: var(--text-sub); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
-        .proj-link { font-weight: 800; text-decoration: none; color: var(--text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        footer { text-align: center; padding: 6rem 0; color: var(--text-sub); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
-
-        @media (max-width: 1000px) {
-            h1 { font-size: 3.5rem; }
-            #home { flex-direction: column; text-align: center; padding-top: 120px; }
-            .about-box { margin: 2rem auto; }
-            .social-row { justify-content: center; }
+        @media (max-width: 900px) {
+            #home { flex-direction: column; text-align: center; padding-top: 100px; }
+            h1 { font-size: 3rem; }
+            .profile-img { width: 280px; height: 280px; }
             .project-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -95,28 +74,34 @@
 
 <nav>
     <div class="nav-content">
-        <span class="logo">M. ELIJAH</span>
+        <span class="logo">Elijah.</span>
         <div class="nav-links">
-            <a href="#projects" style="color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.85rem;">Work</a>
-            <a href="mailto:your@email.com" style="margin-left: 2rem; color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.85rem;">Contact</a>
+            <a href="#home">Focus</a>
+            <a href="#projects">Portfolio</a>
+            <a href="mailto:your@email.com">Contact</a>
         </div>
     </div>
 </nav>
 
 <div id="home">
     <div class="hero-content">
-        <h1>Hey,<br>It's Elijah.</h1>
-        <div class="typing-box"><span id="typing"></span></div>
-        
-        <div class="about-box">
-            I am a <strong>Networking & Cybersecurity</strong> professional nearing the completion of my degree. 
-            I focus on building world-class information security systems by integrating <strong>Artificial Intelligence</strong> into network defense. Currently conducting research in Kampala.
+        <h1>Hey, It's Elijah</h1>
+        <div class="typing-box">
+            <span id="typing"></span>
         </div>
-
-        <div class="social-row">
-            <a href="#">LinkedIn</a>
-            <a href="#">GitHub</a>
-            <a href="mailto:your@email.com">Email</a>
+        
+        <div class="about-section">
+            <h2>About Me</h2>
+            <p class="about-text">
+                I am a <strong>Networking and Cybersecurity</strong> specialist dedicated to building the next generation of intelligent defense systems. Currently finalizing my research in Kampala, my work bridges the gap between traditional network architecture and <strong>AI-driven vulnerability detection</strong>. 
+                <br><br>
+                I don't just study theory; I learn by building. Whether it's hardening enterprise frameworks or training machine learning models to hunt for threats, my goal is world-class technical precision.
+            </p>
+            <div class="socials">
+                <a href="https://linkedin.com" class="social-link">LinkedIn</a>
+                <a href="https://github.com" class="social-link">GitHub</a>
+                <a href="mailto:your@email.com" class="social-link">Email Me</a>
+            </div>
         </div>
     </div>
     
@@ -126,47 +111,56 @@
 </div>
 
 <section id="projects">
-    <div class="container">
-        <span class="section-label">Selected Projects</span>
-        <div class="project-grid">
-            
-            <div class="project-card">
-                <h3>VULN-INTELLIGEN</h3>
-                <p>An AI-driven research project using <strong>DistilBert</strong> to automate vulnerability classification from network infrastructure logs.</p>
-                <a href="#" class="proj-link">View Project ↗</a>
+    <span class="section-label">Selected Works</span>
+    <div class="project-grid">
+        
+        <div class="project-card">
+            <h3>VULN-INTELLIGEN</h3>
+            <p>A flagship research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities within infrastructure logs. This system transforms raw network data into actionable security intelligence.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-main">View Repository ➔</a>
+                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem;">Documentation</a>
             </div>
-
-            <div class="project-card">
-                <h3>Net-Hardening Lab</h3>
-                <p>Architecting secure enterprise environments with a focus on <strong>identity access management</strong> and real-time threat monitoring.</p>
-                <a href="#" class="proj-link">Case Study ↗</a>
-            </div>
-
         </div>
+
+        <div class="project-card">
+            <h3>Net-Hardening Lab</h3>
+            <p>Design and deployment of a secure networking environment. Focused on <strong>identity access management</strong>, real-time monitoring, and architecture defense to mitigate sophisticated attack vectors.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-main">Case Study ➔</a>
+            </div>
+        </div>
+
     </div>
 </section>
 
 <footer>
-    &copy; 2026 MUGERWA ELIJAH. KAMPALA, UGANDA.
+    &copy; 2026 MUGERWA ELIJAH // KAMPALA, UGANDA // SECURING THE FUTURE.
 </footer>
 
 <script>
     const textElement = document.getElementById("typing");
-    const phrases = ["Security Architect.", "AI Researcher.", "Network Defender."];
+    const phrases = ["Cyber Security Professional.", "AI Research Specialist.", "Network Architect."];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
 
     function type() {
         const currentPhrase = phrases[phraseIndex];
-        textElement.textContent = isDeleting ? currentPhrase.substring(0, charIndex - 1) : currentPhrase.substring(0, charIndex + 1);
+        textElement.textContent = isDeleting 
+            ? currentPhrase.substring(0, charIndex - 1) 
+            : currentPhrase.substring(0, charIndex + 1);
+        
         charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
         let typeSpeed = isDeleting ? 40 : 100;
 
         if (!isDeleting && charIndex === currentPhrase.length) {
-            typeSpeed = 2000; isDeleting = true;
+            typeSpeed = 2000;
+            isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
-            isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
         }
         setTimeout(type, typeSpeed);
     }
