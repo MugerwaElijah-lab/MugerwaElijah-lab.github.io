@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugerwa Elijah | Security Architect</title>
+    <title>Mugerwa Elijah | Security Engineer </title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,23 +35,45 @@
         .profile-img { width: 340px; height: 340px; border-radius: 40px; object-fit: cover; filter: grayscale(100%); transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid var(--border); }
         .profile-img:hover { filter: grayscale(0%); transform: scale(1.02); }
 
-        /* About Section (Directly under Hero) */
+        /* About Section */
         .about-section { margin-top: 3rem; background: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .about-section h2 { margin-top: 0; font-size: 1.5rem; }
         .about-text { color: var(--text-sub); font-size: 1.1rem; max-width: 700px; }
 
-        /* Social Socials */
-        .socials { display: flex; gap: 1rem; margin-top: 2rem; }
+        /* Socials */
+        .socials { display: flex; gap: 1rem; margin-top: 2rem; align-items: center; }
         .social-link { background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
         .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
+        .email-display { font-size: 0.85rem; color: var(--text-sub); font-family: 'Fira Code', monospace; background: rgba(0,0,0,0.05); padding: 0.8rem 1.2rem; border-radius: 12px; border: 1px solid var(--border); }
 
-        /* --- NEW: Skills Section --- */
+        /* Skills Section (Technical Arsenal) */
         #skills { padding: 40px 2rem 20px; max-width: 1100px; margin: 0 auto; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .skill-card { background: var(--glass); border: 1px solid white; padding: 2rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .skill-card { 
+            background: var(--glass); 
+            border: 1px solid white; 
+            padding: 2rem; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            background: white;
+        }
         .skill-card h4 { margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; color: var(--accent); }
         .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 1.8; }
         .skill-list li::before { content: '▹'; color: var(--accent); margin-right: 8px; font-weight: bold; }
+
+        /* --- NEW: Experience Section --- */
+        #experience { padding: 60px 2rem; max-width: 1100px; margin: 0 auto; }
+        .exp-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        .exp-date { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-sub); }
+        .exp-content h3 { margin: 0; font-size: 1.2rem; color: var(--accent); }
+        .exp-content span { display: block; font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; font-weight: 600; }
+        .exp-content p { margin: 0; font-size: 0.95rem; color: var(--text-sub); }
 
         /* Projects Section */
         #projects { padding: 60px 2rem 100px; max-width: 1100px; margin: 0 auto; }
@@ -64,7 +86,7 @@
         .project-card h3 { font-size: 1.8rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
         .project-card p { color: var(--text-sub); margin-bottom: 1rem; }
 
-        /* --- NEW: STAR Method Box --- */
+        /* STAR Method Box */
         .star-box { background: rgba(255,255,255,0.5); border-left: 3px solid var(--accent); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem; flex-grow: 1; }
         .star-item { margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--text-sub); }
         .star-item:last-child { margin-bottom: 0; }
@@ -81,6 +103,8 @@
             h1 { font-size: 3rem; }
             .profile-img { width: 280px; height: 280px; }
             .project-grid { grid-template-columns: 1fr; }
+            .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .socials { flex-direction: column; }
         }
     </style>
 </head>
@@ -92,8 +116,8 @@
         <div class="nav-links">
             <a href="#home">About</a>
             <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
             <a href="#projects">Portfolio</a>
-            <a href="mailto:mugerwawilliams62@gmail.com">Contact</a>
         </div>
     </div>
 </nav>
@@ -113,9 +137,9 @@
                 I don't just study theory; I learn by building. Whether it's hardening enterprise frameworks or training machine learning models to hunt for threats, my goal is world-class technical precision.
             </p>
             <div class="socials">
-                <a href="https://www.linkedin.com/in/elijah-williams-b12112306?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="social-link" target="_blank">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/elijah-williams-b12112306" class="social-link" target="_blank">LinkedIn</a>
                 <a href="https://github.com/MugerwaElijah-lab" class="social-link" target="_blank">GitHub</a>
-                <a href="mailto:mugerwawilliams62@gmail.com" class="social-link">Email Me</a>
+                <span class="email-display">mugerwawilliams62@gmail.com</span>
             </div>
         </div>
     </div>
@@ -129,31 +153,49 @@
     <span class="section-label">Technical Arsenal</span>
     <div class="skills-grid">
         <div class="skill-card">
-            <h4>Cerifications</h4>
+            <h4>Certifications</h4>
             <ul class="skill-list">
                 <li>ISC2 Certified in Cybersecurity </li>
-                <li>Securiti AI securit and Governance</li>
-                <li></li>
-                <li></li>
+                <li>Securiti AI Security and Governance</li>
             </ul>
         </div>
         <div class="skill-card">
             <h4>Projects</h4>
             <ul class="skill-list">
-                <li>Context Aware Vulnerability prioritization and intelligence engine</li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>Context-Aware Vulnerability Prioritization</li>
+                <li>Threat Intelligence Engine (NLP)</li>
             </ul>
         </div>
         <div class="skill-card">
-            <h4>Areas of Interest </h4>
+            <h4>Areas of Interest</h4>
             <ul class="skill-list">
-                <li>Cybersecurity </li>
-                <li>Networking</li>
-                <li>Artifical Intelligence </li>
-                <li>CTFs</li>
+                <li>Cybersecurity & Networking</li>
+                <li>Artificial Intelligence (ML)</li>
+                <li>CTFs & Threat Hunting</li>
             </ul>
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <span class="section-label">Work Experience</span>
+    <div class="exp-list">
+        <div class="exp-item">
+            <div class="exp-date">MARCH 2026 — PRESENT</div>
+            <div class="exp-content">
+                <h3>Cybersecurity Researcher</h3>
+                <span>Academic & Lab Focus // Kampala</span>
+                <p>Currently spearheading research on automated log classification using machine learning. Focused on reducing alert fatigue for SOC analysts through intelligent threat triaging.</p>
+            </div>
+        </div>
+        
+        <div class="exp-item">
+            <div class="exp-date">2023 — 2026</div>
+            <div class="exp-content">
+                <h3>Networking & Security Student</h3>
+                <span>Degree Candidate</span>
+                <p>Developing a strong foundation in enterprise network hardening, firewall configuration, and secure architecture design while maintaining a 100% project-driven learning record.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -161,7 +203,6 @@
 <section id="projects">
     <span class="section-label">Selected Works</span>
     <div class="project-grid">
-        
         <div class="project-card">
             <h3>VULN-INTELLIGEN</h3>
             <p>A research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities and threat intelligence.</p>
@@ -178,7 +219,6 @@
                 <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Read Case Study</a>
             </div>
         </div>
-
     </div>
 </section>
 
