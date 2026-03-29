@@ -3,114 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugerwa Elijah | Security & AI Researcher</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Mugerwa Elijah | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #003cc5; --secondary: #f8fafc; --text: #1e293b; --accent: #60a5fa; --border: #e2e8f0;
+            --bg: #030712; --card: rgba(17, 24, 39, 0.7); --accent: #3b82f6; --text: #f3f4f6; --border: rgba(255, 255, 255, 0.1);
         }
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; color: var(--text); margin: 0; }
-        
-        /* Sticky Top Nav */
-        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 1rem 0; }
-        .nav-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; margin-left: 1.5rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-        
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-weight: 800; font-size: 1.2rem; color: var(--accent); }
+        .nav-links a { color: var(--text); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
         /* Hero Section */
-        #home { padding: 140px 0 80px; display: flex; align-items: center; gap: 4rem; }
-        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; color: #0f172a; }
-        .hero-text p { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; }
-        .profile-img { width: 300px; height: 300px; border-radius: 24px; object-fit: cover; border: 8px solid var(--secondary); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-
-        /* Case Studies */
-        section { padding: 100px 0; border-top: 1px solid var(--border); }
-        .section-tag { font-family: 'JetBrains Mono'; color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 1rem; }
-        h2 { font-size: 2rem; margin-bottom: 3rem; }
+        #home { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .hero-info { flex: 1; }
+        .hero-img-container { flex: 1; display: flex; justify-content: flex-end; position: relative; }
         
-        .case-study { background: var(--secondary); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; margin-bottom: 2rem; transition: 0.3s; }
-        .case-study:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .case-study h3 { font-size: 1.6rem; margin-top: 0; }
-        .case-tag { background: #dbeafe; color: var(--primary); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; }
-        
-        .metrics-grid { display: flex; gap: 3rem; margin-top: 2rem; }
-        .metric h4 { font-size: 1.8rem; margin: 0; color: var(--primary); }
-        .metric p { font-size: 0.85rem; color: #64748b; margin: 0; }
+        .hero-img-container::before { content: ''; position: absolute; width: 400px; height: 400px; background: var(--accent); filter: blur(100px); opacity: 0.2; z-index: -1; }
+        .profile-img { width: 380px; height: 380px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(59, 130, 246, 0.2); }
 
-        /* Contact Footer */
-        footer { background: #0f172a; color: white; padding: 80px 0; border-radius: 40px 40px 0 0; }
-        footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .typing-text { font-size: 2.5rem; font-weight: 700; color: var(--accent); border-right: 3px solid var(--accent); white-space: nowrap; overflow: hidden; animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero-p { color: #9ca3af; max-width: 500px; margin: 1.5rem 0; font-size: 1.1rem; }
+
+        /* Social Icons */
+        .socials { display: flex; gap: 1.5rem; margin-top: 2rem; }
+        .social-btn { background: var(--card); border: 1px solid var(--border); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; text-decoration: none; }
+        .social-btn:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); }
+
+        /* Sections */
+        section { padding: 100px 0; max-width: 1100px; margin: 0 auto; padding: 100px 2rem; }
+        .section-title { font-size: 2rem; margin-bottom: 3rem; display: block; border-left: 4px solid var(--accent); padding-left: 1rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 20px; transition: 0.4s; position: relative; overflow: hidden; }
+        .card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .card h3 { font-size: 1.4rem; margin-top: 0; }
+        
+        footer { text-align: center; padding: 4rem 0; border-top: 1px solid var(--border); background: #010409; }
+
+        @media (max-width: 900px) {
+            #home { flex-direction: column-reverse; text-align: center; padding-top: 150px; }
+            .hero-img-container { justify-content: center; margin-bottom: 3rem; }
+            .profile-img { width: 280px; height: 280px; }
+            .socials { justify-content: center; }
+            h1 { font-size: 2.5rem; }
+            .typing-text { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="nav-content">
-        <span style="font-weight: 800; color: var(--primary);">ELIJAH.SEC</span>
+        <span class="logo">ELIJAH.</span>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#projects">Projects</a>
-            <a href="#about">About</a>
+            <a href="#about">Education</a>
             <a href="#contact">Contact</a>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <header id="home">
-        <div class="hero-text">
-            <span class="section-tag">Information Security Professional</span>
-            <h1>Securing the future of AI infrastructure.</h1>
-            <p>Aspiring network security expert focused on integrating machine learning into enterprise defense systems.</p>
-            <a href="#contact" style="background: var(--primary); color: white; padding: 12px 30px; border-radius: 12px; text-decoration: none; font-weight: 600;">Get in Touch</a>
+<div id="home">
+    <div class="hero-info">
+        <h1>Hi, It's Elijah</h1>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 2.5rem; font-weight: 700;">I'm a </span>
+            <span id="typing" class="typing-text"></span>
         </div>
-        <img src="profile.jpg" alt="Mugerwa Elijah" class="profile-img">
-    </header>
-
-    <section id="projects">
-        <span class="section-tag">Featured Case Studies</span>
-        <h2>High-Impact Research</h2>
+        <p class="hero-p">Cybersecurity & AI Researcher. Specializing in network defense and automated vulnerability management.</p>
         
-        <div class="case-study">
-            <span class="case-tag">AI/ML Security</span>
-            <h3>VULN-INTELLIGEN: Automated Triage</h3>
-            <p>Implementing DistilBert models to analyze massive network logs for anomaly detection, reducing the manual workload for security analysts.</p>
-            <div class="metrics-grid">
-                <div class="metric"><h4>40%</h4><p>Time Reduction</p></div>
-                <div class="metric"><h4>98%</h4><p>Accuracy Rate</p></div>
-            </div>
+        <div class="socials">
+            <a href="#" class="social-btn">Li</a> <a href="#" class="social-btn">Gh</a> <a href="#" class="social-btn">X</a>
         </div>
-
-        <div class="case-study">
-            <span class="case-tag">Infrastructure</span>
-            <h3>Secure Network Architecture Labs</h3>
-            <p>Design and deployment of hardened network environments with real-time monitoring and identity access management protocols.</p>
-        </div>
-    </section>
-
-    <section id="about">
-        <span class="section-tag">Background</span>
-        <h2>About Me</h2>
-        <p style="font-size: 1.2rem; color: #475569; max-width: 700px;">
-            I am a student currently completing my degree in Networking and Cybersecurity. I believe that the next generation of security professionals must be able to bridge the gap between traditional networking and modern Artificial Intelligence.
-        </p>
-    </section>
+        
+        <a href="#contact" style="display: inline-block; background: var(--accent); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; margin-top: 2rem; transition: 0.3s;">Hire me</a>
+    </div>
+    
+    <div class="hero-img-container">
+        <img src="profile.jpg" alt="Mugerwa Elijah" class="profile-img">
+    </div>
 </div>
 
-<footer id="contact">
-    <div class="container">
-        <h2>Let's build something secure.</h2>
-        <p>Currently open to technical roles and research collaborations.</p>
-        <div style="margin-top: 2rem;">
-            <a href="https://linkedin.com">LinkedIn</a> • 
-            <a href="https://github.com/MugerwaElijah-lab">GitHub</a> • 
-            <a href="mailto:your@email.com">Email</a>
+<section id="projects">
+    <span class="section-title">Latest Projects</span>
+    <div class="grid">
+        <div class="card">
+            <h3>VULN-INTELLIGEN</h3>
+            <p>Developing machine learning models (DistilBert) for infrastructure log analysis and threat detection.</p>
+            <a href="#" style="color: var(--accent); text-decoration: none; font-weight: 600;">View Repository →</a>
+        </div>
+        <div class="card">
+            <h3>Network Defense Labs</h3>
+            <p>Architecting and monitoring secure enterprise network frameworks.</p>
         </div>
     </div>
+</section>
+
+<footer id="contact">
+    <p>&copy; 2026 Mugerwa Elijah | Information Security & AI</p>
 </footer>
+
+<script>
+    const textElement = document.getElementById("typing");
+    const phrases = ["Cybersecurity Pro", "AI Researcher", "Networking Student"];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+            textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 100 : 200;
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+</script>
 
 </body>
 </html>
