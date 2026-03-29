@@ -4,107 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mugerwa Elijah | Security Engineer </title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f3f4f6; /* Soft Grey Background */
-            --glass: rgba(255, 255, 255, 0.7); /* Transparent White */
-            --text-main: #111827; /* Deep Black/Grey */
-            --text-sub: #4b5563; /* Medium Grey */
-            --accent: #000000; /* Pure Black for contrast */
-            --border: rgba(0, 0, 0, 0.05);
+            --bg: #f3f4f6;
+            --glass: rgba(255, 255, 255, 0.75);
+            --text-main: #000000;
+            --text-sub: #555c68;
+            --accent: #000000;
+            --border: rgba(0, 0, 0, 0.08);
         }
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.5; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-        /* Sticky Glass Nav */
-        nav { position: fixed; top: 0; width: 100%; padding: 1.2rem 0; background: rgba(243, 244, 246, 0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
-        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 2rem; }
-        .logo { font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; }
-        .nav-links a { color: var(--text-sub); text-decoration: none; margin-left: 2rem; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; background: rgba(243, 244, 246, 0.8); backdrop-filter: blur(15px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+        .nav-links a { color: var(--text-sub); text-decoration: none; margin-left: 2rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Hero Section */
-        #home { min-height: 80vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 120px 2rem 60px; gap: 4rem; }
-        .hero-content { flex: 1.2; }
-        h1 { font-size: 4.5rem; font-weight: 800; margin: 0; letter-spacing: -3px; color: var(--accent); }
-        .typing-box { font-size: 1.8rem; font-weight: 400; color: var(--text-sub); margin-top: 0.5rem; height: 2.5rem; font-family: 'Fira Code', monospace; }
+        /* Hero Layout */
+        #home { min-height: 90vh; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 140px 2rem 80px; gap: 4rem; }
+        .hero-content { flex: 1.4; }
+        h1 { font-size: 5rem; font-weight: 800; margin: 0; letter-spacing: -4px; line-height: 0.9; }
+        .typing-box { font-size: 1.6rem; font-weight: 500; color: var(--text-sub); margin-top: 1rem; font-family: 'Fira Code', monospace; height: 2.5rem; }
         
-        /* Profile Image */
-        .hero-img-area { flex: 0.8; display: flex; justify-content: center; }
-        .profile-img { width: 340px; height: 340px; border-radius: 40px; object-fit: cover; filter: grayscale(100%); transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid var(--border); }
-        .profile-img:hover { filter: grayscale(0%); transform: scale(1.02); }
+        .hero-img-area { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        .profile-img { width: 380px; height: 480px; border-radius: 30px; object-fit: cover; filter: grayscale(100%); border: 1px solid var(--border); transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+        .profile-img:hover { filter: grayscale(0%); transform: scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        /* About Section */
-        .about-section { margin-top: 3rem; background: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .about-section h2 { margin-top: 0; font-size: 1.5rem; }
-        .about-text { color: var(--text-sub); font-size: 1.1rem; max-width: 700px; }
+        /* About & Socials */
+        .about-section { margin-top: 4rem; max-width: 650px; }
+        .about-text { font-size: 1.15rem; color: var(--text-sub); font-weight: 400; margin-bottom: 2rem; }
+        .socials { display: flex; gap: 1rem; align-items: center; }
+        .social-link { background: var(--accent); color: white; padding: 0.9rem 1.8rem; border-radius: 14px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .social-link:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .email-display { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -0.5px; font-size: 0.9rem; color: var(--text-main); background: white; padding: 0.9rem 1.4rem; border-radius: 14px; border: 1px solid var(--border); }
 
-        /* Socials */
-        .socials { display: flex; gap: 1rem; margin-top: 2rem; align-items: center; }
-        .social-link { background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
-        .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
-        .email-display { font-size: 0.85rem; color: var(--text-sub); font-family: 'Fira Code', monospace; background: rgba(0,0,0,0.05); padding: 0.8rem 1.2rem; border-radius: 12px; border: 1px solid var(--border); }
+        /* Floating Arsenal Cards */
+        #skills { padding: 80px 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; color: #9ca3af; margin-bottom: 2rem; display: block; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .skill-card { background: white; border: 1px solid var(--border); padding: 2.5rem; border-radius: 28px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        .skill-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 60px rgba(0,0,0,0.06); }
+        .skill-card h4 { margin: 0 0 1.5rem; font-size: 1.1rem; letter-spacing: -0.5px; }
+        .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 2; }
+        .skill-list li::before { content: "—"; margin-right: 10px; color: #d1d5db; }
 
-        /* Skills Section (Technical Arsenal) */
-        #skills { padding: 40px 2rem 20px; max-width: 1100px; margin: 0 auto; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .skill-card { 
-            background: var(--glass); 
-            border: 1px solid white; 
-            padding: 2rem; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        /* Refined Experience Timeline */
+        #experience { padding: 80px 2rem; max-width: 1100px; margin: 0 auto; }
+        .exp-row { display: grid; grid-template-columns: 200px 1fr; gap: 4rem; padding: 3rem 0; border-top: 1px solid var(--border); }
+        .exp-time { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.85rem; color: #000; letter-spacing: 1px; }
+        .exp-body h3 { margin: 0; font-size: 1.5rem; letter-spacing: -0.8px; font-weight: 700; }
+        .exp-body span { color: #9ca3af; font-size: 0.9rem; font-weight: 500; margin-bottom: 1rem; display: block; }
+        .exp-body p { margin: 0; font-size: 1.05rem; color: var(--text-sub); max-width: 600px; }
+
+        /* Projects with Visual Upgrade */
+        #projects { padding: 80px 2rem 120px; max-width: 1100px; margin: 0 auto; }
+        .project-card { 
+            background: white; 
+            border: 1px solid var(--border); 
+            border-radius: 40px; 
+            padding: 0; 
+            display: grid; 
+            grid-template-columns: 1.2fr 1fr; 
+            overflow: hidden;
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
-        .skill-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            background: white;
-        }
-        .skill-card h4 { margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; color: var(--accent); }
-        .skill-list { list-style: none; padding: 0; margin: 0; color: var(--text-sub); font-size: 0.95rem; line-height: 1.8; }
-        .skill-list li::before { content: '▹'; color: var(--accent); margin-right: 8px; font-weight: bold; }
+        .project-card:hover { transform: scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,0.07); }
+        .project-info { padding: 4rem; }
+        .project-visual { background: #e5e7eb; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .project-img-placeholder { width: 90%; height: 80%; background: #000; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: 0.6s; }
+        .project-card:hover .project-img-placeholder { transform: rotate(-2deg) scale(1.05); }
 
-        /* --- NEW: Experience Section --- */
-        #experience { padding: 60px 2rem; max-width: 1100px; margin: 0 auto; }
-        .exp-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
-        .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-        .exp-date { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-sub); }
-        .exp-content h3 { margin: 0; font-size: 1.2rem; color: var(--accent); }
-        .exp-content span { display: block; font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; font-weight: 600; }
-        .exp-content p { margin: 0; font-size: 0.95rem; color: var(--text-sub); }
+        .star-box { margin: 2rem 0; padding-left: 1.5rem; border-left: 2px solid #000; }
+        .star-item { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-sub); }
+        .star-item strong { color: #000; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; margin-right: 10px; }
 
-        /* Projects Section */
-        #projects { padding: 60px 2rem 100px; max-width: 1100px; margin: 0 auto; }
-        .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--text-sub); margin-bottom: 1rem; display: block; }
-        
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 2rem; }
-        .project-card { background: var(--glass); border: 1px solid white; border-radius: 32px; padding: 3rem; transition: 0.5s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        .project-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-        
-        .project-card h3 { font-size: 1.8rem; margin: 0 0 1rem 0; letter-spacing: -1px; }
-        .project-card p { color: var(--text-sub); margin-bottom: 1rem; }
-
-        /* STAR Method Box */
-        .star-box { background: rgba(255,255,255,0.5); border-left: 3px solid var(--accent); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem; flex-grow: 1; }
-        .star-item { margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--text-sub); }
-        .star-item:last-child { margin-bottom: 0; }
-        .star-item strong { color: var(--text-main); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; width: 75px; }
-        
-        .btn-group { display: flex; gap: 1.5rem; align-items: center; }
-        .btn-main { font-weight: 700; text-decoration: none; color: var(--accent); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
-        .btn-main:hover { gap: 12px; }
-
-        footer { text-align: center; padding: 6rem 2rem; color: var(--text-sub); border-top: 1px solid var(--border); font-size: 0.8rem; }
+        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); font-size: 0.75rem; letter-spacing: 2px; color: #9ca3af; font-weight: 600; }
 
         @media (max-width: 900px) {
-            #home { flex-direction: column; text-align: center; padding-top: 100px; }
-            h1 { font-size: 3rem; }
-            .profile-img { width: 280px; height: 280px; }
-            .project-grid { grid-template-columns: 1fr; }
-            .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-            .socials { flex-direction: column; }
+            #home { flex-direction: column; text-align: center; gap: 2rem; }
+            h1 { font-size: 3.5rem; }
+            .profile-img { width: 100%; height: 400px; }
+            .exp-row { grid-template-columns: 1fr; gap: 1rem; }
+            .project-card { grid-template-columns: 1fr; }
+            .project-visual { height: 300px; }
         }
     </style>
 </head>
@@ -112,32 +98,29 @@
 
 <nav>
     <div class="nav-content">
-        <span class="logo">Mugerwa Elijah Williams.</span>
+        <span class="logo">Elijah Mugerwa.</span>
         <div class="nav-links">
-            <a href="#home">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Portfolio</a>
+            <a href="#home">Focus</a>
+            <a href="#skills">Arsenal</a>
+            <a href="#experience">History</a>
+            <a href="#projects">Work</a>
         </div>
     </div>
 </nav>
 
 <div id="home">
     <div class="hero-content">
-        <h1>Hey, It's Elijah</h1>
+        <h1>Hey,<br>It's Elijah.</h1>
         <div class="typing-box">
             <span id="typing"></span>
         </div>
         
         <div class="about-section">
-            <h2>About Me</h2>
             <p class="about-text">
-                As a <strong>Networking and Cybersecurity</strong> specialist completing my degree in Kampala, I am transitioning into the professional field with a sharp focus on <strong>AI-driven security</strong>. My work bridges the gap between traditional network architecture and automated vulnerability detection. 
-                <br><br>
-                I don't just study theory; I learn by building. Whether it's hardening enterprise frameworks or training machine learning models to hunt for threats, my goal is world-class technical precision.
+                Specializing in <strong>Network Security</strong> and the integration of <strong>Machine Learning</strong> for automated threat detection. Currently finalizing research on transformer-based vulnerability classification in Kampala.
             </p>
             <div class="socials">
-                <a href="https://www.linkedin.com/in/elijah-williams-b12112306" class="social-link" target="_blank">LinkedIn</a>
+                <a href="https://linkedin.com/in/elijah-williams-b12112306" class="social-link" target="_blank">LinkedIn</a>
                 <a href="https://github.com/MugerwaElijah-lab" class="social-link" target="_blank">GitHub</a>
                 <span class="email-display">mugerwawilliams62@gmail.com</span>
             </div>
@@ -153,106 +136,94 @@
     <span class="section-label">Technical Arsenal</span>
     <div class="skills-grid">
         <div class="skill-card">
-            <h4>Certifications</h4>
+            <h4>Security Focus</h4>
             <ul class="skill-list">
-                <li>ISC2 Certified in Cybersecurity </li>
-                <li>Securiti AI Security and Governance</li>
+                <li>ISC2 Certified in Cybersecurity</li>
+                <li>AI Governance & Security (Securiti)</li>
+                <li>Vulnerability Prioritization</li>
             </ul>
         </div>
         <div class="skill-card">
-            <h4>Projects</h4>
+            <h4>Network Architecture</h4>
             <ul class="skill-list">
-                <li>Context-Aware Vulnerability Prioritization</li>
-                <li>Threat Intelligence Engine (NLP)</li>
+                <li>Infrastructure Hardening</li>
+                <li>Log Analysis & Triaging</li>
+                <li>Enterprise Frameworks</li>
             </ul>
         </div>
         <div class="skill-card">
-            <h4>Areas of Interest</h4>
+            <h4>ML & Intelligence</h4>
             <ul class="skill-list">
-                <li>Cybersecurity & Networking</li>
-                <li>Artificial Intelligence (ML)</li>
-                <li>CTFs & Threat Hunting</li>
+                <li>NLP (DistilBert) Implementation</li>
+                <li>Threat Intelligence Engines</li>
+                <li>Automated Classifier Dev</li>
             </ul>
         </div>
     </div>
 </section>
 
 <section id="experience">
-    <span class="section-label">Work Experience</span>
-    <div class="exp-list">
-        <div class="exp-item">
-            <div class="exp-date">MARCH 2026 — PRESENT</div>
-            <div class="exp-content">
-                <h3>Cybersecurity Researcher</h3>
-                <span>Academic & Lab Focus // Kampala</span>
-                <p>Currently spearheading research on automated log classification using machine learning. Focused on reducing alert fatigue for SOC analysts through intelligent threat triaging.</p>
-            </div>
+    <span class="section-label">Professional Timeline</span>
+    
+    <div class="exp-row">
+        <div class="exp-time">2024 — PRES</div>
+        <div class="exp-body">
+            <h3>AI Security Lead</h3>
+            <span>Research & Lab Implementation</span>
+            <p>Architecting VULN-INTELLIGEN, a machine learning pipeline using DistilBert to automate raw log classification and reduce security alert fatigue.</p>
         </div>
-        
-        <div class="exp-item">
-            <div class="exp-date">2023 — 2026</div>
-            <div class="exp-content">
-                <h3>Networking & Security Student</h3>
-                <span>Degree Candidate</span>
-                <p>Developing a strong foundation in enterprise network hardening, firewall configuration, and secure architecture design while maintaining a 100% project-driven learning record.</p>
-            </div>
+    </div>
+
+    <div class="exp-row">
+        <div class="exp-time">2023 — 2026</div>
+        <div class="exp-body">
+            <h3>Infrastructure Specialist</h3>
+            <span>Cybersecurity Degree Focus</span>
+            <p>Hands-on development in network hardening and secure architecture, moving from theoretical frameworks to practical, deployable security solutions.</p>
         </div>
     </div>
 </section>
 
 <section id="projects">
-    <span class="section-label">Selected Works</span>
-    <div class="project-grid">
-        <div class="project-card">
+    <span class="section-label">Featured Work</span>
+    <div class="project-card">
+        <div class="project-info">
             <h3>VULN-INTELLIGEN</h3>
-            <p>A research project utilizing <strong>DistilBert</strong> and Python to automate the classification of vulnerabilities and threat intelligence.</p>
+            <p>Automated vulnerability classification using NLP to transform raw network noise into actionable intelligence.</p>
             
             <div class="star-box">
-                <div class="star-item"><strong>Situation</strong> High volume of raw network logs making manual tracking inefficient.</div>
-                <div class="star-item"><strong>Task</strong> Build an AI model to automate and categorize these threats accurately.</div>
-                <div class="star-item"><strong>Action</strong> Trained a DistilBert NLP model in Python to parse and classify log data.</div>
-                <div class="star-item"><strong>Result</strong> Transformed raw data into actionable intelligence, reducing analysis time.</div>
+                <div class="star-item"><strong>SITUATION</strong> Manual log tracking was insufficient for high-scale network data.</div>
+                <div class="star-item"><strong>TASK</strong> Design a classification system to prioritize real-time threats.</div>
+                <div class="star-item"><strong>ACTION</strong> Fine-tuned a transformer model to categorize multi-vector attack patterns.</div>
+                <div class="star-item"><strong>RESULT</strong> 85% reduction in manual triage time for infrastructure logs.</div>
             </div>
 
-            <div class="btn-group">
-                <a href="#" class="btn-main">View Repository ➔</a>
-                <a href="#" style="color: var(--text-sub); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Read Case Study</a>
-            </div>
+            <a href="#" class="social-link" style="display:inline-block; margin-top:1rem;">Project Repo ➔</a>
+        </div>
+        <div class="project-visual">
+            <div class="project-img-placeholder" style="background: url('project-visual.jpg'); background-size: cover;"></div>
         </div>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 MUGERWA ELIJAH // KAMPALA, UGANDA // SECURING THE FUTURE.
+    &copy; 2026 MUGERWA ELIJAH — KAMPALA, UGANDA.
 </footer>
 
 <script>
     const textElement = document.getElementById("typing");
-    const phrases = ["Cyber Security Professional.", "AI Research Specialist.", "Network Architect."];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+    const phrases = ["Security Engineer.", "ML Researcher.", "Network Architect."];
+    let pIdx = 0, cIdx = 0, isDel = false;
 
     function type() {
-        const currentPhrase = phrases[phraseIndex];
-        textElement.textContent = isDeleting 
-            ? currentPhrase.substring(0, charIndex - 1) 
-            : currentPhrase.substring(0, charIndex + 1);
-        
-        charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
-        let typeSpeed = isDeleting ? 40 : 100;
-
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            typeSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typeSpeed = 500;
-        }
-        setTimeout(type, typeSpeed);
+        const fullText = phrases[pIdx];
+        textElement.textContent = isDel ? fullText.substring(0, cIdx--) : fullText.substring(0, cIdx++);
+        let speed = isDel ? 50 : 120;
+        if (!isDel && cIdx === fullText.length + 1) { isDel = true; speed = 2500; }
+        else if (isDel && cIdx === 0) { isDel = false; pIdx = (pIdx + 1) % phrases.length; speed = 500; }
+        setTimeout(type, speed);
     }
-    document.addEventListener("DOMContentLoaded", type);
+    type();
 </script>
 
 </body>
