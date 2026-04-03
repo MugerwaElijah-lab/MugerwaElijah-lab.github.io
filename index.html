@@ -889,13 +889,6 @@
             opacity: 1;
         }
 
-        .vault-name,
-        .vault-value,
-        .vault-issuer {
-            position: relative;
-            z-index: 2;
-        }
-
         .vault-name {
             font-size: 0.95rem;
             font-weight: 700;
@@ -948,24 +941,136 @@
             width: 100%;
             max-width: 100%;
             aspect-ratio: 1.45 / 1;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             border-radius: 12px;
             overflow: hidden;
-            background: #FFFFFF !important;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: var(--off-white);
+            border: 1px solid var(--glass-border-light);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            padding: 2rem;
+            gap: 1.2rem;
         }
 
-        .trophy-pdf {
-            position: absolute;
-            top: -12px;
-            left: -12px;
-            width: calc(100% + 24px);
-            height: calc(100% + 60px);
+        .trophy-vault-tile {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem !important;
+            cursor: pointer;
+            transition: all 0.5s var(--ease-spring);
+        }
+
+        .trophy-vault-tile .orb-sidebar {
+            position: relative;
+            width: auto;
+            height: auto;
+            background: none;
             border: none;
-            display: block;
-            pointer-events: none;
-            background: transparent;
+            backdrop-filter: none;
+            margin-bottom: 1.2rem;
+        }
+
+        .trophy-vault-tile:hover {
+            transform: translateY(-8px);
+        }
+
+        .trophy-vault-tile .vault-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.3;
+        }
+
+        .trophy-vault-tile .vault-issuer {
+            font-size: 0.65rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        .tap-to-view {
+            margin-top: 1.5rem;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .tap-to-view-arrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            transition: transform 0.5s var(--ease-spring);
+        }
+
+        .trophy-vault-tile:hover .tap-to-view {
+            opacity: 1;
+            letter-spacing: 0.22em;
+        }
+
+        .trophy-vault-tile:hover .tap-to-view-arrow {
+            transform: translateX(8px) scale(1.1);
+        }
+
+        [data-theme="dark"] .tap-to-view {
+            opacity: 0.85;
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .trophy-vault-tile:hover .tap-to-view {
+            opacity: 1;
+            color: var(--white);
+        }
+
+        .trophy-wrapper:hover .luxury-trophy-container {
+            transform: translateY(-8px) scale(1.1) rotate(5deg);
+        }
+
+        .trophy-filename {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--grey);
+            text-align: center;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            letter-spacing: -0.2px;
+        }
+
+        .trophy-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .trophy-wrapper:hover .trophy-btn {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .trophy-wrapper {
+            background: #1A1A1A;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] .trophy-btn {
+            background: var(--white);
+            color: var(--black);
         }
 
         .trophy-shadow {
@@ -990,11 +1095,6 @@
             color: var(--black);
             text-align: center;
             letter-spacing: -0.02em;
-        }
-
-        [data-theme="dark"] .trophy-wrapper {
-            border-color: rgba(255, 255, 255, 0.15);
-            background: #FFFFFF !important;
         }
 
         /* ═══════════════════════════════════════════════════════
@@ -1166,6 +1266,10 @@
             .bento-grid {
                 grid-template-columns: 1fr;
                 grid-template-areas: "off" "net" "ai" "dev" "cert";
+            }
+
+            .trophy-vault-tile {
+                padding: 2rem 1.5rem !important;
             }
 
             .project-card {
@@ -1426,85 +1530,97 @@
     <section id="trophies">
         <div class="container">
             <span class="section-label reveal">Trophies</span>
-            <div class="trophy-grid">
-                <div class="trophy-item reveal reveal-d1">
-                    <a href="AI-Security%20and%20Governance-Certification-Securiti-Education.pdf" target="_blank"
-                        rel="noopener" class="trophy-wrapper">
-                        <iframe
-                            src="AI-Security%20and%20Governance-Certification-Securiti-Education.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no" title="AI Governance & Security"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">AI Governance & Security (Securiti)</div>
-                </div>
+            <div class="bento-grid vault-pocket reveal reveal-d1">
+                <!-- AI Governance -->
+                <a href="AI-Security%20and%20Governance-Certification-Securiti-Education.pdf" target="_blank"
+                    rel="noopener" class="vault-tile trophy-vault-tile reveal reveal-d1">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">AI Governance & Security</div>
+                    <div class="vault-issuer">Securiti</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d2">
-                    <a href="CC_course%20conclusion.pdf" target="_blank" rel="noopener" class="trophy-wrapper">
-                        <iframe src="CC_course%20conclusion.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Certified in Cybersecurity"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Certified in Cybersecurity (ISC2 CC)</div>
-                </div>
+                <!-- ISC2 CC -->
+                <a href="CC_course%20conclusion.pdf" target="_blank" rel="noopener"
+                    class="vault-tile trophy-vault-tile reveal reveal-d2">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Certified in Cybersecurity</div>
+                    <div class="vault-issuer">ISC2</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d3">
-                    <a href="CISCO%20Network_Support_and_Security_certificate_.pdf" target="_blank" rel="noopener"
-                        class="trophy-wrapper">
-                        <iframe
-                            src="CISCO%20Network_Support_and_Security_certificate_.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Network Support and Security"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Network Support & Security (Cisco)</div>
-                </div>
+                <!-- Cisco Net Security -->
+                <a href="CISCO%20Network_Support_and_Security_certificate_.pdf" target="_blank" rel="noopener"
+                    class="vault-tile trophy-vault-tile reveal reveal-d3">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Network Support & Security</div>
+                    <div class="vault-issuer">Cisco</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d4">
-                    <a href="Delottie%20Australia%20Internship_completion_certificate.pdf" target="_blank"
-                        rel="noopener" class="trophy-wrapper">
-                        <iframe
-                            src="Delottie%20Australia%20Internship_completion_certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Deloitte Technology Internship"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Technology Job Simulation (Deloitte)</div>
-                </div>
+                <!-- Deloitte -->
+                <a href="Delottie%20Australia%20Internship_completion_certificate.pdf" target="_blank" rel="noopener"
+                    class="vault-tile trophy-vault-tile reveal reveal-d4">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Technology Job Simulation</div>
+                    <div class="vault-issuer">Deloitte (Forage)</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d5">
-                    <a href="MasterCard%20Virtual%20Job%20simulation%20completion_certificate.pdf" target="_blank"
-                        rel="noopener" class="trophy-wrapper">
-                        <iframe
-                            src="MasterCard%20Virtual%20Job%20simulation%20completion_certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Mastercard Job Simulation"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Cybersecurity Simulation (Mastercard)</div>
-                </div>
+                <!-- Mastercard -->
+                <a href="MasterCard%20Virtual%20Job%20simulation%20completion_certificate.pdf" target="_blank"
+                    rel="noopener" class="vault-tile trophy-vault-tile reveal reveal-d5">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Cybersecurity Simulation</div>
+                    <div class="vault-issuer">Mastercard (Forage)</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d1">
-                    <a href="Microsoft%20SOC%20foundations.pdf" target="_blank" rel="noopener" class="trophy-wrapper">
-                        <iframe src="Microsoft%20SOC%20foundations.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Microsoft SOC Foundations"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Microsoft SOC Foundations</div>
-                </div>
+                <!-- Microsoft SOC -->
+                <a href="Microsoft%20SOC%20foundations.pdf" target="_blank" rel="noopener"
+                    class="vault-tile trophy-vault-tile reveal reveal-d1">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Microsoft SOC Foundations</div>
+                    <div class="vault-issuer">Microsoft</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
 
-                <div class="trophy-item reveal reveal-d2">
-                    <a href="Red%20Team%20Leads%20Certified%20Cybersecurity%20Educator%20Professional%20(CCEP).pdf"
-                        target="_blank" rel="noopener" class="trophy-wrapper">
-                        <iframe
-                            src="Red%20Team%20Leads%20Certified%20Cybersecurity%20Educator%20Professional%20(CCEP).pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                            class="trophy-pdf" frameborder="0" scrolling="no"
-                            title="Certified Cybersecurity Educator Professional"></iframe>
-                        <div class="trophy-shadow"></div>
-                    </a>
-                    <div class="trophy-caption">Cybersecurity Educator Professional (CCEP)</div>
-                </div>
+                <!-- CCEP -->
+                <a href="Red%20Team%20Leads%20Certified%20Cybersecurity%20Educator%20Professional%20(CCEP).pdf"
+                    target="_blank" rel="noopener" class="vault-tile trophy-vault-tile reveal reveal-d2">
+                    <div class="orb-sidebar">
+                        <div class="orb-pocket">
+                            <div class="premium-orb"></div>
+                        </div>
+                    </div>
+                    <div class="vault-name">Cybersecurity Educator (CCEP)</div>
+                    <div class="vault-issuer">Red Team Leads</div>
+                    <div class="tap-to-view">Tap to view <span class="tap-to-view-arrow">➔</span></div>
+                </a>
             </div>
         </div>
     </section>
