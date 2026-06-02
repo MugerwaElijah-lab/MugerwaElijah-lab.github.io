@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter - Mugerwa Elijah Williams</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        :root {
+            --black: #000000;
+            --grey-dark: #333333;
+            --grey-light: #666666;
+            --white: #ffffff;
+            --line: #eeeeee;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: var(--black);
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm 25mm;
+            margin: 10mm auto;
+            background: var(--white);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; }
+            .no-print { display: none; }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 24pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 1.5px;
+        }
+        .subtitle {
+            font-size: 12pt;
+            font-weight: 400;
+            color: var(--grey-dark);
+            text-transform: uppercase;
+            margin: 5px 0 15px;
+            letter-spacing: 1px;
+        }
+        .contact {
+            font-size: 9pt;
+            color: var(--grey-light);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px 40px;
+            padding: 15px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .date { margin-bottom: 20px; font-weight: 600; }
+        .recipient { margin-bottom: 30px; }
+        .recipient p { margin: 2px 0; }
+
+        .content p { margin-bottom: 20px; text-align: justify; }
+        .closing { margin-top: 40px; }
+        .signature { margin-top: 10px; font-weight: 700; font-size: 14pt; }
+
+        .no-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            border: none;
+            z-index: 1000;
+        }
+        .no-print:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+
+    <div class="page" contenteditable="true">
+        <header>
+            <h1>Mugerwa Elijah Williams</h1>
+            <div class="subtitle">Cybersecurity & Network Professional</div>
+            <div class="contact">
+                <span><strong>Location:</strong> Kampala, Uganda</span>
+                <span><strong>Email:</strong> mugerwawilliams62@gmail.com</span>
+                <span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mugerwa-elijah-williams-b12112306/" target="_blank" rel="noopener">linkedin.com/in/mugerwa-elijah-williams-b12112306</a></span>
+                <span><strong>Portfolio:</strong> mugerwaelijah-lab.github.io</span>
+            </div>
+        </header>
+
+        <div class="date">May 13, 2026</div>
+
+        <div class="recipient">
+            <p><strong>Hiring Manager</strong></p>
+            <p>[Company Name]</p>
+            <p>[Company Address]</p>
+            <p>[City, Country]</p>
+        </div>
+
+        <div class="content">
+            <p>Dear Hiring Manager,</p>
+
+            <p>I am writing to express my strong interest in the [Job Title] position at [Company Name]. As a final-year BSc. Networking & Cybersecurity student at Isbat University with hands-on experience in enterprise-grade security environments, I am eager to contribute my technical skills and forward-thinking approach to your team.</p>
+
+            <p>During my recent internship at Pride Bank Uganda within the Business Technology department, I gained invaluable experience ensuring the high availability and security of critical banking systems. I was actively involved in configuring enterprise routers and switches, streamlining user access controls via Active Directory, and monitoring security protocols in a highly regulated financial environment. This role sharpened my ability to mitigate threats and manage complex network infrastructures under pressure.</p>
+
+            <p>Beyond traditional networking, I am deeply committed to the intersection of Cybersecurity and Artificial Intelligence. My final-year project, VULN-INTELLIGEN, utilized NLP to automate vulnerability classification, achieving an 85% reduction in manual triage time. Additionally, I developed C.A.S.P.E.R., a local security AI orchestration layer designed for secure knowledge management and automated defensive tasking. These projects demonstrate my ability to build innovative, secure solutions that solve real-world efficiency challenges.</p>
+
+            <p>I hold the ISC2 Certified in Cybersecurity (CC) credential and several certifications from Cisco, AWS, and OPSWAT, which have provided me with a robust foundation in security principles, threat analysis, and infrastructure protection. I am confident that my blend of technical proficiency, internship experience, and passion for AI-driven security makes me a strong fit for [Company Name].</p>
+
+            <p>Thank you for your time and consideration. I look forward to the possibility of discussing how my skills and background can support the security goals of your organization.</p>
+        </div>
+
+        <div class="closing">
+            <p>Sincerely,</p>
+            <div class="signature">Mugerwa Elijah Williams</div>
+        </div>
+    </div>
+
+</body>
+</html>

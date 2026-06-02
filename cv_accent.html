@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Modern Accent Template</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        :root {
+            --primary: #0f3e68; /* Deep Navy Accent */
+            --black: #111111;
+            --grey-dark: #333333;
+            --grey-light: #666666;
+            --white: #ffffff;
+            --line: #dddddd;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6f8;
+            color: var(--black);
+            line-height: 1.2;
+            font-size: 9pt;
+        }
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 8mm 15mm;
+            margin: 5mm auto;
+            background: var(--white);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        @media print {
+            body { background: none; }
+            .page { margin: 0; padding: 8mm 15mm; box-shadow: none; }
+            .no-print { display: none; }
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 6px;
+        }
+        h1 {
+            font-size: 22pt;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 0 2px 0;
+            letter-spacing: 0.5px;
+        }
+        .subtitle {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--grey-dark);
+            text-transform: uppercase;
+            margin: 0 0 6px 0;
+            letter-spacing: 1px;
+        }
+        .contact {
+            font-size: 8.5pt;
+            color: var(--grey-dark);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: 8px;
+        }
+        h2 {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin: 0 0 6px 0;
+            padding-left: 8px;
+            border-left: 3px solid var(--primary);
+            letter-spacing: 0.5px;
+        }
+        .summary-text {
+            font-size: 9pt;
+            color: var(--grey-dark);
+            text-align: justify;
+            margin: 0;
+        }
+
+        /* Entries */
+        .entry {
+            margin-bottom: 6px;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1px;
+        }
+        .entry-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+        }
+        .entry-date {
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .entry-org {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--grey-dark);
+            margin-bottom: 2px;
+        }
+        .entry-desc {
+            font-size: 9pt;
+            color: var(--grey-dark);
+        }
+        
+        /* Custom List */
+        .entry-list {
+            margin: 3px 0 0 0;
+            padding: 0;
+            list-style: none;
+        }
+        .entry-list li {
+            font-size: 9pt;
+            margin-bottom: 3px;
+            text-align: justify;
+            position: relative;
+            padding-left: 10px;
+        }
+        .entry-list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 9pt;
+        }
+
+        /* Skills/Certs Layout */
+        .skills-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 9pt;
+        }
+        .skills-list li {
+            margin-bottom: 2px;
+        }
+        .skills-label {
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 5px;
+        }
+        
+        .certs-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 9pt;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 15px;
+        }
+
+        /* Print Button */
+        .no-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            border: none;
+            z-index: 1000;
+        }
+        .no-print:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+
+    <div class="page" contenteditable="true">
+        <header>
+            <h1>Mugerwa Elijah Williams</h1>
+            <div class="subtitle">Cybersecurity &amp; Network Professional</div>
+            <div class="contact">
+                <span>Kampala, Uganda</span>
+                <span>|</span>
+                <span>mugerwawilliams62@gmail.com</span>
+                <span>|</span>
+                <span>LinkedIn: <a href="https://www.linkedin.com/in/mugerwa-elijah-williams-b12112306/" target="_blank" rel="noopener">Mugerwa Elijah Williams</a></span>
+                <span>|</span>
+                <span>mugerwaelijah-lab.github.io</span>
+            </div>
+        </header>
+
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <p class="summary-text">
+                Final-year BSc. Networking &amp; Cybersecurity student and ISC2-certified professional with hands-on experience in SOC operations, enterprise network infrastructure, and AI-driven threat intelligence gained through a banking-sector internship and self-built security lab environments. Combines deep technical grounding in SIEM/XDR, IDS/IPS, and MITRE ATT&amp;CK with a proven ability to automate threat response and reduce detection-to-mitigation time, delivering measurable security outcomes from day one.
+            </p>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">IT Security Intern (Business Technology)</div>
+                    <div class="entry-date">Oct 2025 to Jan 2026</div>
+                </div>
+                <div class="entry-org">Pride Bank Uganda</div>
+                <div class="entry-desc">
+                    <ul class="entry-list">
+                        <li><strong>Network &amp; Infrastructure:</strong> Deployed and configured enterprise-grade routers and switches across banking infrastructure, directly supporting high-availability operations for a regulated financial environment. Maintained physical and virtual server environments within the data center, contributing to zero unplanned downtime during the internship period.</li>
+                        <li><strong>Security &amp; Compliance:</strong> Monitored and enforced information security protocols aligned with financial-sector compliance requirements, focusing on threat mitigation, data integrity, and least-privilege access control. Identified and escalated connectivity and hardware failure incidents through cross-functional collaboration with Networks and Infrastructure teams, accelerating resolution timelines.</li>
+                        <li><strong>Systems Administration:</strong> Streamlined user lifecycle management and access control policies using Active Directory, reducing friction in onboarding and offboarding workflows across internal operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">Intrusion &amp; Visibility: Security Lab</div>
+                    <div class="entry-date">Personal Lab Build</div>
+                </div>
+                <div class="entry-desc">
+                    <ul class="entry-list">
+                        <li>Architected a fully segmented home lab network using pfSense (IDS/IPS) and Wazuh (SIEM/XDR), enabling real-time threat monitoring across simulated enterprise traffic.</li>
+                        <li>Engineered automated threat mitigation workflows via pfSense API integration, cutting incident response time to under 2 seconds.</li>
+                        <li>Authored custom detection rules mapped directly to the MITRE ATT&amp;CK framework, simulating real-world adversary TTPs including lateral movement and privilege escalation.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">Vuln-Intelligen: Automated Vulnerability Classification</div>
+                    <div class="entry-date">Final-Year Project</div>
+                </div>
+                <div class="entry-desc">
+                    <ul class="entry-list">
+                        <li>Built a context-aware vulnerability triage system leveraging NLP inference on CVE descriptions, automating classification that typically requires manual analyst review.</li>
+                        <li>Designed the pipeline to surface actionable, prioritized intelligence reducing time-to-decision on vulnerability remediation for security teams.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">C.A.S.P.E.R. Local Security AI Assistant</div>
+                    <div class="entry-date">Personal Project</div>
+                </div>
+                <div class="entry-desc">
+                    <ul class="entry-list">
+                        <li>Engineered a privacy-first AI orchestration layer using a locally hosted LLM and OpenWebUI, implementing encrypted knowledge management with secure RAG (Retrieval-Augmented Generation) search.</li>
+                        <li>Eliminated cloud data exposure risk by keeping all sensitive knowledge resources entirely on-premises.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li><span class="skills-label">Security Operations:</span> SIEM/XDR (Wazuh), IDS/IPS (pfSense), Incident Response, Log Analysis, Threat Intelligence, MITRE ATT&amp;CK, Vulnerability Management</li>
+                <li><span class="skills-label">Networking:</span> TCP/IP, Network Hardening, Enterprise Routing &amp; Switching, Firewall Configuration, Network Segmentation</li>
+                <li><span class="skills-label">Systems &amp; Infrastructure:</span> Active Directory, Linux, Windows Server, Data Center Operations, Access Control Management</li>
+                <li><span class="skills-label">AI &amp; Automation:</span> NLP for Security, AI-Driven Threat Classification, RAG Pipelines, Python Scripting, Security Automation</li>
+                <li><span class="skills-label">Cloud &amp; Platforms:</span> AWS (AI Practitioner Foundations), Critical Infrastructure Protection</li>
+            </ul>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <ul class="certs-list">
+                <li><strong>Certified in Cybersecurity (CC)</strong> | ISC2</li>
+                <li><strong>Network Support &amp; Security</strong> | Cisco</li>
+                <li><strong>AI Governance &amp; Security</strong> | Securiti</li>
+                <li><strong>Critical Infrastructure Protection (ICIP)</strong> | OPSWAT</li>
+                <li><strong>AWS AI Practitioner Foundations</strong> | Amazon Web Services</li>
+                <li><strong>Student SOC</strong> | Microsoft</li>
+            </ul>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">BSc. Networking &amp; Cybersecurity</div>
+                    <div class="entry-date">2023 to 2026</div>
+                </div>
+                <div class="entry-org">ISBAT University | Kampala, Uganda</div>
+                <div class="entry-desc">
+                    Final-year research project: AI-driven vulnerability classification and actionable threat intelligence using NLP
+                </div>
+            </div>
+            <div class="entry" style="margin-top: 4px;">
+                <div class="entry-header">
+                    <div class="entry-title">Uganda Advanced Certificate of Education (A' Level)</div>
+                    <div class="entry-date">2020 to 2022</div>
+                </div>
+                <div class="entry-org">St. Peters' S.S Nalyaa (SPENA)</div>
+            </div>
+            <div class="entry" style="margin-top: 4px;">
+                <div class="entry-header">
+                    <div class="entry-title">Uganda Certificate of Education (O' Level)</div>
+                    <div class="entry-date">2016 to 2019</div>
+                </div>
+                <div class="entry-org">Ndejje Senior Secondary School</div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
