@@ -1,0 +1,133 @@
+---
+---
+
+<div id="lightbox" class="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-500">
+  <div class="cyber-frame bg-[var(--bg-surface)] p-8 sm:p-10 max-w-2xl w-[90%] max-h-[85vh] overflow-y-auto relative scale-95 transition-transform duration-500 shadow-2xl" id="lightbox-inner">
+    <button id="lightbox-close" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-canvas)] flex items-center justify-center text-sm transition-all cursor-pointer" aria-label="Close modal">
+      ✕
+    </button>
+    <div id="lightbox-content" class="space-y-4"></div>
+  </div>
+</div>
+
+<script>
+  const vaultData: Record<string, { title: string; desc: string; icon: string }> = {
+    isc2: {
+      title: 'ISC2 — Certified in Cybersecurity (CC)',
+      desc: 'The ISC2 CC certification validates foundational knowledge across five domains: Security Principles, Incident Response & Business Continuity, Access Controls, Network Security, and Security Operations.',
+      icon: '🛡️'
+    },
+    securiti: {
+      title: 'AI Governance & Security — Securiti',
+      desc: 'Credential covering responsible AI frameworks, data governance best practices, privacy-by-design principles, and security considerations for AI/ML systems.',
+      icon: '🤖'
+    },
+    networking: {
+      title: 'Cisco Network Support and Security',
+      desc: 'Cisco-verified credential for supporting and securing endpoints, networks, and remote users. Demonstrates proficiency through 10+ hands-on labs and Packet Tracer activities.',
+      icon: '🌐'
+    },
+    python: {
+      title: 'Python for Security Automation',
+      desc: 'Self-directed mastery of Python applied to cybersecurity workflows: automated vulnerability scanning, log parsing, and API integration with threat intelligence platforms.',
+      icon: '🐍'
+    },
+    mastercard: {
+      title: 'Mastercard Cybersecurity Virtual Experience',
+      desc: 'Served as an analyst on Mastercard’s Security Awareness Team. Analyzed and identified threats like phishing, building procedures for business teams.',
+      icon: '💳'
+    },
+    deloitte: {
+      title: 'Deloitte Australia Cyber Job Simulation',
+      desc: 'Completed a job simulation involving reading web activity logs. Supported a client in a cyber security breach and identified suspicious user activity.',
+      icon: '🔍'
+    },
+    soc: {
+      title: 'Student SOC Program Foundations',
+      desc: 'Training to prepare students with hands-on experience and practical knowledge needed to actively contribute to a Security Operations Centre (SOC).',
+      icon: '🖥️'
+    },
+    dlapiper: {
+      title: 'DLA Piper — Data Privacy & Cybersecurity',
+      desc: 'Job simulation involving global data protection and cybersecurity for DLA Piper’s Data Privacy and Cybersecurity team.',
+      icon: '⚖️'
+    },
+    aig: {
+      title: 'AIG — Cybersecurity Threat Analysis Simulation',
+      desc: 'Threat analysis simulation for Cyber Defense Unit, researching reported vulnerabilities and drafting remediation emails.',
+      icon: '📡'
+    },
+    pwc: {
+      title: 'PwC — Cybersecurity Risk Assessment',
+      desc: 'Focused on cybersecurity risk assessment, determining missing controls, and completing Test of Design and Operating Effectiveness documentation.',
+      icon: '🏢'
+    },
+    icip: {
+      title: 'OPSWAT Academy — Critical Infrastructure Protection (ICIP)',
+      desc: 'Focuses on security standards and defensive requirements for Industrial Control Systems (ICS) and Essential Services.',
+      icon: '⚡'
+    },
+    aws: {
+      title: 'AWS AI Practitioner Challenge',
+      desc: 'Validates foundational expertise in building and deploying AI solutions on AWS, including Amazon Bedrock and responsible AI implementation.',
+      icon: '☁️'
+    }
+  };
+
+  const lightbox = document.getElementById('lightbox');
+  const lbContent = document.getElementById('lightbox-content');
+  const lbClose = document.getElementById('lightbox-close');
+
+  function openLightbox(htmlContent: string) {
+    if (!lightbox || !lbContent) return;
+    lbContent.innerHTML = htmlContent;
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    lightbox.classList.add('opacity-100');
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('opacity-100');
+    lightbox.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  // Bind vault tiles
+  document.querySelectorAll('.vault-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const key = tile.getAttribute('data-lightbox');
+      if (!key) return;
+      const data = vaultData[key];
+      if (!data) return;
+
+      const html = `
+        <div class="w-16 h-16 bg-[var(--bg-elevated)] rounded-xl flex items-center justify-center text-3xl mb-4 border border-[var(--border-frame)]">
+          ${data.icon}
+        </div>
+        <h3 class="text-xl font-extrabold text-[var(--text-primary)] mb-2">${data.title}</h3>
+        <p class="text-sm text-[var(--text-body)] leading-relaxed">${data.desc}</p>
+      `;
+      openLightbox(html);
+    });
+  });
+
+  // Bind project preview images
+  document.querySelectorAll('.project-preview').forEach(img => {
+    img.addEventListener('click', () => {
+      const src = img.getAttribute('src');
+      const alt = img.getAttribute('alt') || 'Project Preview';
+      const html = `
+        <img src="${src}" alt="${alt}" class="w-full h-auto rounded-lg border border-[var(--border-frame)] mb-4" />
+        <h3 class="text-base font-bold text-[var(--text-primary)] text-center">${alt}</h3>
+      `;
+      openLightbox(html);
+    });
+  });
+
+  lbClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
