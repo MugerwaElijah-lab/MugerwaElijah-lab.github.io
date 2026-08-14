@@ -1,0 +1,55 @@
+---
+---
+
+<nav id="main-nav" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9000] px-6 py-3 rounded-full flex items-center gap-6 border border-[var(--glass-border)] bg-[var(--glass-nav)] backdrop-blur-md transition-all duration-500 max-w-[92vw] sm:max-w-fit shadow-lg">
+  <a href="#home" class="font-black text-xs uppercase tracking-[2.5px] whitespace-nowrap text-[var(--text-primary)] hover:opacity-80 transition-opacity">
+    Mugerwa Elijah
+  </a>
+
+  <div class="hidden md:flex items-center gap-5">
+    <a href="#home" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">About</a>
+    <a href="#journey" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Journey</a>
+    <a href="#radar" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">SOC Radar</a>
+    <a href="#case-files" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Case Files</a>
+    <a href="#projects" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Projects</a>
+    <a href="#arsenal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Arsenal</a>
+    <a href="#certificates" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Certificates</a>
+  </div>
+
+  <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:scale-110 transition-transform cursor-pointer" aria-label="Toggle Dark/Light Theme">
+    <span id="theme-icon" class="text-xs">☾</span>
+  </button>
+</nav>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+
+  // Update theme icon on load
+  function updateThemeUI() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    if (themeIcon) {
+      themeIcon.textContent = currentTheme === 'dark' ? '☾' : '☼';
+    }
+  }
+  updateThemeUI();
+
+  // Toggle theme
+  themeToggle?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeUI();
+  });
+
+  // Nav scroll blur enhancement
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav?.classList.add('shadow-2xl', 'border-[var(--text-muted)]');
+    } else {
+      nav?.classList.remove('shadow-2xl', 'border-[var(--text-muted)]');
+    }
+  }, { passive: true });
+</script>

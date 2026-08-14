@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@layer base {
+  :root, [data-theme="dark"] {
+    --bg-canvas: #0a0a0a;
+    --bg-surface: #141414;
+    --bg-elevated: #1c1c1c;
+    --text-primary: #ffffff;
+    --text-body: #b0b0b0;
+    --text-muted: #666666;
+    --text-ghost: #2a2a2a;
+    --border-frame: #333333;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --pattern-stroke: rgba(255, 255, 255, 0.07);
+    --glass-fill: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-nav: rgba(10, 10, 10, 0.75);
+    
+    --accent-active: #4ade80;
+    --accent-progress: #a78bfa;
+    --accent-critical: #ef4444;
+  }
+
+  [data-theme="light"] {
+    --bg-canvas: #f2f2f4;
+    --bg-surface: #ffffff;
+    --bg-elevated: #e5e5e8;
+    --text-primary: #0a0a0a;
+    --text-body: #4a4a4a;
+    --text-muted: #888888;
+    --text-ghost: #d0d0d5;
+    --border-frame: #cccccc;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --pattern-stroke: rgba(0, 0, 0, 0.07);
+    --glass-fill: rgba(0, 0, 0, 0.03);
+    --glass-border: rgba(0, 0, 0, 0.12);
+    --glass-nav: rgba(242, 242, 244, 0.8);
+
+    --accent-active: #16a34a;
+    --accent-progress: #7c3aed;
+    --accent-critical: #dc2626;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-body);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    isolation: isolate;
+  }
+}
+
+/* Circuit-trace pattern overlay */
+.bg-circuit-pattern {
+  background-image: 
+    radial-gradient(var(--pattern-stroke) 1px, transparent 0),
+    linear-gradient(to right, var(--pattern-stroke) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pattern-stroke) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px, 80px 80px;
+  animation: grid-drift 60s linear infinite;
+}
+
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 80px 80px, 80px 80px, 80px 80px;
+  }
+}
+
+/* Cyberpunk angular frame styling & Classy Glow */
+.cyber-frame {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-frame);
+  transition: all 0.35s cubic-bezier(0.2, 1, 0.32, 1);
+}
+
+.cyber-frame:hover {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.07), inset 0 0 15px rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] .cyber-frame:hover {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.cyber-frame::before {
+  content: '+';
+  position: absolute;
+  top: -11px;
+  left: -5px;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.cyber-frame::after {
+  content: '×';
+  position: absolute;
+  top: -11px;
+  right: -5px;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Heading Luminescent Glow */
+.cyber-glow-text {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="light"] .cyber-glow-text {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Cyber Glitch Animation */
+.cyber-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-canvas);
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.cyber-glitch:hover::before {
+  left: -2px;
+  text-shadow: 2px 0 rgba(255, 255, 255, 0.8);
+  animation: glitch-anim-1 1.2s infinite linear alternate-reverse;
+}
+
+.cyber-glitch:hover::after {
+  left: 2px;
+  text-shadow: -2px 0 rgba(140, 140, 140, 0.8);
+  animation: glitch-anim-2 1.6s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(12px, 9999px, 42px, 0); }
+  25% { clip: rect(55px, 9999px, 18px, 0); }
+  50% { clip: rect(8px, 9999px, 70px, 0); }
+  75% { clip: rect(75px, 9999px, 28px, 0); }
+  100% { clip: rect(30px, 9999px, 85px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(75px, 9999px, 12px, 0); }
+  25% { clip: rect(20px, 9999px, 58px, 0); }
+  50% { clip: rect(48px, 9999px, 16px, 0); }
+  75% { clip: rect(12px, 9999px, 82px, 0); }
+  100% { clip: rect(65px, 9999px, 38px, 0); }
+}
+
+.cyber-hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--pattern-stroke),
+    var(--pattern-stroke) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+/* Scroll reveal system */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-frame);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Hide Matrix Rain in Light Mode — preserve clean circuit pattern */
+[data-theme="light"] #matrix-canvas {
+  display: none;
+}

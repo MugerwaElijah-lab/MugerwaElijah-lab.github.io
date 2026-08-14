@@ -1,3 +1,7 @@
+---
+import '../styles/global.css';
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #0a0a0a;
             color: var(--black);
             line-height: 1.2;
             font-size: 9pt;
@@ -31,7 +35,7 @@
             padding: 8mm 15mm;
             margin: 5mm auto;
             background: var(--white);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             box-sizing: border-box;
         }
         @media print {
@@ -40,155 +44,51 @@
             .no-print { display: none; }
         }
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        h1 {
-            font-size: 18pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: 0;
-            letter-spacing: 1.5px;
-        }
-        .subtitle {
-            font-size: 10pt;
-            font-weight: 500;
-            color: var(--grey-dark);
-            text-transform: uppercase;
-            margin: 2px 0 6px;
-            letter-spacing: 1px;
-        }
-        .contact {
-            font-size: 8.5pt;
-            color: var(--black);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 4px 0;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-        }
+        header { text-align: center; margin-bottom: 8px; }
+        h1 { font-size: 18pt; font-weight: 800; text-transform: uppercase; margin: 0; letter-spacing: 1.5px; }
+        .subtitle { font-size: 10pt; font-weight: 500; color: var(--grey-dark); text-transform: uppercase; margin: 2px 0 6px; letter-spacing: 1px; }
+        .contact { font-size: 8.5pt; color: var(--black); display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; padding: 4px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
         
-        /* Sections */
-        section {
-            margin-bottom: 6px;
-        }
-        h2 {
-            font-size: 10pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--black);
-            margin: 0 0 4px 0;
-            padding-bottom: 2px;
-            letter-spacing: 0.5px;
-        }
-        .summary-text {
-            font-size: 9pt;
-            color: var(--grey-dark);
-            text-align: justify;
-            margin: 0;
-        }
+        section { margin-bottom: 6px; }
+        h2 { font-size: 10pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid var(--black); margin: 0 0 4px 0; padding-bottom: 2px; letter-spacing: 0.5px; }
+        .summary-text { font-size: 9pt; color: var(--grey-dark); text-align: justify; margin: 0; }
 
-        /* Entries */
-        .entry {
-            margin-bottom: 4px;
-        }
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 1px;
-        }
-        .entry-title {
-            font-size: 9.5pt;
-            font-weight: 700;
-        }
-        .entry-date {
-            font-size: 8.5pt;
-            font-weight: 600;
-        }
-        .entry-org {
-            font-size: 9pt;
-            font-weight: 600;
-            color: var(--grey-dark);
-            margin-bottom: 2px;
-            font-style: italic;
-        }
-        .entry-desc {
-            font-size: 9pt;
-            color: var(--grey-dark);
-        }
+        .entry { margin-bottom: 4px; }
+        .entry-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+        .entry-title { font-size: 9.5pt; font-weight: 700; }
+        .entry-date { font-size: 8.5pt; font-weight: 600; }
+        .entry-org { font-size: 9pt; font-weight: 600; color: var(--grey-dark); margin-bottom: 2px; font-style: italic; }
+        .entry-desc { font-size: 9pt; color: var(--grey-dark); }
         
-        /* Custom "Human" List without standard bullets */
-        .entry-list {
-            margin: 3px 0 0 0;
-            padding: 0;
-            list-style: none;
-        }
-        .entry-list li {
-            font-size: 9pt;
-            margin-bottom: 3px;
-            text-align: justify;
-            position: relative;
-            padding-left: 12px;
-        }
-        .entry-list li::before {
-            content: '–';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--grey-light);
-            font-weight: 600;
-            font-size: 9pt;
-        }
+        .entry-list { margin: 3px 0 0 0; padding: 0; list-style: none; }
+        .entry-list li { font-size: 9pt; margin-bottom: 3px; text-align: justify; position: relative; padding-left: 12px; }
+        .entry-list li::before { content: '–'; position: absolute; left: 0; top: 0; color: var(--grey-light); font-weight: 600; font-size: 9pt; }
 
-        /* Skills/Certs Layout */
-        .skills-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-size: 9pt;
-        }
-        .skills-list li {
-            margin-bottom: 2px;
-        }
-        .skills-label {
-            font-weight: 700;
-            margin-right: 5px;
-        }
+        .skills-list { margin: 0; padding: 0; list-style: none; font-size: 9pt; }
+        .skills-list li { margin-bottom: 2px; }
+        .skills-label { font-weight: 700; margin-right: 5px; }
         
-        .certs-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-size: 9pt;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px 15px;
-        }
+        .certs-list { margin: 0; padding: 0; list-style: none; font-size: 9pt; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 15px; }
 
-        /* Print Button */
         .no-print {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #000;
-            color: #fff;
-            padding: 12px 24px;
+            background: #ffffff;
+            color: #000000;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: transform 0.2s;
             border: none;
             z-index: 1000;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .no-print:hover {
-            transform: scale(1.05);
-        }
+        .no-print:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -198,7 +98,7 @@
     <div class="page" contenteditable="true">
         <header>
             <h1>Mugerwa Elijah Williams</h1>
-            <div class="subtitle">Cybersecurity &amp; Network Professional</div>
+            <div class="subtitle">Cybersecurity &amp; Security Operations Analyst</div>
             <div class="contact">
                 <span>Kampala, Uganda</span>
                 <span>|</span>
@@ -213,7 +113,7 @@
         <section id="summary">
             <h2>Professional Summary</h2>
             <p class="summary-text">
-                Final-year BSc. Networking &amp; Cybersecurity student and ISC2-certified professional with hands-on experience in SOC operations, enterprise network infrastructure, and AI-driven threat intelligence gained through a banking-sector internship and self-built security lab environments. Combines deep technical grounding in SIEM/XDR, IDS/IPS, and MITRE ATT&amp;CK with a proven ability to automate threat response and reduce detection-to-mitigation time, delivering measurable security outcomes from day one.
+                Cybersecurity &amp; Security Operations Analyst and ISC2-certified professional with hands-on experience in enterprise SOC operations, threat detection, and network infrastructure gained through a banking-sector internship at Pride Bank and self-built security lab environments. Combines deep technical grounding in SIEM/XDR, IDS/IPS, and MITRE ATT&amp;CK with a proven ability to automate threat response and reduce detection-to-mitigation time.
             </p>
         </section>
 
@@ -227,8 +127,8 @@
                 <div class="entry-org">Pride Bank Uganda</div>
                 <div class="entry-desc">
                     <ul class="entry-list">
-                        <li><strong>Network &amp; Infrastructure:</strong> Deployed and configured enterprise-grade routers and switches across banking infrastructure, directly supporting high-availability operations for a regulated financial environment. Maintained physical and virtual server environments within the data center, contributing to zero unplanned downtime during the internship period.</li>
-                        <li><strong>Security &amp; Compliance:</strong> Monitored and enforced information security protocols aligned with financial-sector compliance requirements, focusing on threat mitigation, data integrity, and least-privilege access control. Identified and escalated connectivity and hardware failure incidents through cross-functional collaboration with Networks and Infrastructure teams, accelerating resolution timelines.</li>
+                        <li><strong>Network &amp; Infrastructure:</strong> Deployed and configured enterprise-grade routers and switches across banking infrastructure, directly supporting high-availability operations for a regulated financial environment. Maintained physical and virtual server environments within the data center.</li>
+                        <li><strong>Security &amp; Compliance:</strong> Monitored and enforced information security protocols aligned with financial-sector compliance requirements, focusing on threat mitigation, data integrity, and least-privilege access control. Identified and escalated connectivity and hardware failure incidents through cross-functional collaboration.</li>
                         <li><strong>Systems Administration:</strong> Streamlined user lifecycle management and access control policies using Active Directory, reducing friction in onboarding and offboarding workflows across internal operations.</li>
                     </ul>
                 </div>
@@ -236,7 +136,7 @@
         </section>
 
         <section id="projects">
-            <h2>Projects</h2>
+            <h2>Projects &amp; Investigations</h2>
             <div class="entry">
                 <div class="entry-header">
                     <div class="entry-title">Intrusion &amp; Visibility: Security Lab</div>
@@ -279,9 +179,9 @@
         </section>
 
         <section id="skills">
-            <h2>Skills</h2>
+            <h2>Skills &amp; Competencies</h2>
             <ul class="skills-list">
-                <li><span class="skills-label">Security Operations:</span> SIEM/XDR (Wazuh), IDS/IPS (pfSense), Incident Response, Log Analysis, Threat Intelligence, MITRE ATT&amp;CK, Vulnerability Management</li>
+                <li><span class="skills-label">Security Operations:</span> SIEM/XDR (Wazuh), IDS/IPS (pfSense), Incident Response, Log Analysis, Threat Intelligence, MITRE ATT&amp;CK, Vulnerability Assessment</li>
                 <li><span class="skills-label">Networking:</span> TCP/IP, Network Hardening, Enterprise Routing &amp; Switching, Firewall Configuration, Network Segmentation</li>
                 <li><span class="skills-label">Systems &amp; Infrastructure:</span> Active Directory, Linux, Windows Server, Data Center Operations, Access Control Management</li>
                 <li><span class="skills-label">AI &amp; Automation:</span> NLP for Security, AI-Driven Threat Classification, RAG Pipelines, Python Scripting, Security Automation</li>
@@ -296,8 +196,8 @@
                 <li><strong>Network Support &amp; Security</strong> | Cisco</li>
                 <li><strong>AI Governance &amp; Security</strong> | Securiti</li>
                 <li><strong>Critical Infrastructure Protection (ICIP)</strong> | OPSWAT</li>
-                <li><strong>AWS AI Practitioner Foundations</strong> | Amazon Web Services</li>
-                <li><strong>Student SOC</strong> | Microsoft</li>
+                <li><strong>AWS AI Practitioner Challenge</strong> | Amazon Web Services</li>
+                <li><strong>Student SOC Foundations</strong> | Microsoft</li>
             </ul>
         </section>
 
@@ -310,22 +210,8 @@
                 </div>
                 <div class="entry-org">ISBAT University | Kampala, Uganda</div>
                 <div class="entry-desc">
-                    Final-year research project: AI-driven vulnerability classification and actionable threat intelligence using NLP
+                    Final-year research project: AI-driven vulnerability classification and actionable threat intelligence using NLP. <strong>CGPA: 4.72</strong>
                 </div>
-            </div>
-            <div class="entry" style="margin-top: 5px;">
-                <div class="entry-header">
-                    <div class="entry-title">Uganda Advanced Certificate of Education (A' Level)</div>
-                    <div class="entry-date">2020 to 2022</div>
-                </div>
-                <div class="entry-org">St. Peters' S.S Nalyaa (SPENA)</div>
-            </div>
-            <div class="entry" style="margin-top: 5px;">
-                <div class="entry-header">
-                    <div class="entry-title">Uganda Certificate of Education (O' Level)</div>
-                    <div class="entry-date">2016 to 2019</div>
-                </div>
-                <div class="entry-org">Ndejje Senior Secondary School</div>
             </div>
         </section>
     </div>
