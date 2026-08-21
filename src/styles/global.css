@@ -16,7 +16,7 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-nav: rgba(10, 10, 10, 0.75);
     
-    --accent-active: #4ade80;
+    --accent-active: #0088ff;
     --accent-progress: #a78bfa;
     --accent-critical: #ef4444;
   }
@@ -36,7 +36,7 @@
     --glass-border: rgba(0, 0, 0, 0.12);
     --glass-nav: rgba(242, 242, 244, 0.8);
 
-    --accent-active: #16a34a;
+    --accent-active: #0066cc;
     --accent-progress: #7c3aed;
     --accent-critical: #dc2626;
   }
@@ -140,13 +140,13 @@
 
 .cyber-glitch:hover::before {
   left: -2px;
-  text-shadow: 2px 0 rgba(255, 255, 255, 0.8);
+  text-shadow: 2px 0 var(--accent-active);
   animation: glitch-anim-1 1.2s infinite linear alternate-reverse;
 }
 
 .cyber-glitch:hover::after {
   left: 2px;
-  text-shadow: -2px 0 rgba(140, 140, 140, 0.8);
+  text-shadow: -2px 0 var(--accent-progress);
   animation: glitch-anim-2 1.6s infinite linear alternate-reverse;
 }
 
