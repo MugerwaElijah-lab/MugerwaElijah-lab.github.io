@@ -18,6 +18,10 @@ const investigations = defineCollection({
     title: z.string().optional(),
     difficulty: z.string().optional(),
     category: z.string().optional(),
+    date: z.date().or(z.string()).optional(),
+    summary: z.string().optional(),
+    tools: z.array(z.string()).optional(),
+    published: z.boolean().optional(),
   }).optional(),
 });
 

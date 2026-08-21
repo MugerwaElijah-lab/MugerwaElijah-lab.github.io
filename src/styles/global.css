@@ -207,3 +207,25 @@
 [data-theme="light"] #matrix-canvas {
   display: none;
 }
+
+/* Universal Code Block & Pre Styling */
+pre.astro-code {
+  background-color: #111418 !important;
+  border: 1px solid var(--border-frame) !important;
+  border-radius: 6px;
+  padding: 1rem 1.25rem !important;
+  margin: 1.25rem 0 !important;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+pre.astro-code code,
+pre.astro-code span {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}

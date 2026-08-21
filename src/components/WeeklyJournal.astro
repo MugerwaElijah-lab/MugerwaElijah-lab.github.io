@@ -166,13 +166,33 @@ const renderedEntries = await Promise.all(
     color: var(--text-primary);
     font-weight: 700;
   }
-  .journal-markdown code {
+  .journal-markdown pre {
+    background: #111418 !important;
+    border: 1px solid var(--border-frame) !important;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .journal-markdown pre code,
+  .journal-markdown pre span {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: 'Fira Code', monospace;
+  }
+  .journal-markdown :not(pre) > code {
     font-family: 'Fira Code', monospace;
     font-size: 0.85em;
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     padding: 0.15rem 0.4rem;
-    border-radius: 2px;
+    border-radius: 3px;
     color: var(--accent-progress);
   }
 </style>
