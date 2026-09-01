@@ -13,16 +13,21 @@ try {
   console.warn('Could not load journal entries:', e);
 }
 
-// Render each entry's content
-const renderedEntries = await Promise.all(
-  entries.map(async (entry) => {
-    const { Content } = await render(entry);
-    return {
-      entry,
-      Content,
-    };
-  })
-);
+// Total count of entries for button count
+const totalLogs = entries.length;
+
+// Render ONLY the most recent entry for the homepage
+const latestEntry = entries[0];
+let LatestContent = null;
+if (latestEntry) {
+  const rendered = await render(latestEntry);
+  LatestContent = rendered.Content;
+}
+
+const weekNum = latestEntry?.data.week ?? totalLogs;
+const title = latestEntry?.data.title ?? `Weekly Progress Log — Week ${weekNum}`;
+const startDate = latestEntry?.data.startDate ?? (latestEntry?.data.date ? new Date(latestEntry.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Current Week');
+const summary = latestEntry?.data.summary ?? '';
 ---
 
 <section id="journal" class="py-24 max-w-[1200px] mx-auto px-6 sm:px-12">
@@ -37,76 +42,87 @@ const renderedEntries = await Promise.all(
       Weekly Log.
     </h2>
     <p class="text-sm sm:text-base text-[var(--text-body)] mt-2 max-w-2xl">
-      Weekly logs keeping track of what i did on a weekly basis.
+      Weekly logs keeping track of what i did on a weekly basis:
     </p>
   </div>
 
-  <div class="space-y-6">
-    {renderedEntries.length > 0 ? (
-      renderedEntries.map(({ entry, Content }, index) => {
-        const weekNum = entry.data.week ?? (renderedEntries.length - index);
-        const title = entry.data.title ?? `Weekly Progress Log — Week ${weekNum}`;
-        const startDate = entry.data.startDate ?? (entry.data.date ? new Date(entry.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Current Week');
-        const summary = entry.data.summary ?? '';
-        const isLatest = index === 0;
+  {latestEntry && LatestContent ? (
+    <div class="space-y-6">
+      <!-- Most Recent Weekly Log Entry Card -->
+      <article class="journal-card cyber-frame p-6 sm:p-8 reveal reveal-d1 transition-all" data-week={weekNum}>
+        <!-- Top Header / Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider">
+              WEEK {String(weekNum).padStart(2, '0')}
+            </span>
+            <span class="font-mono text-xs text-[var(--text-muted)]">
+              {startDate}
+            </span>
+          </div>
+          <span class="font-mono text-[0.65rem] uppercase tracking-widest text-[var(--accent-progress)] px-2.5 py-0.5 border border-[var(--accent-progress)]/30 bg-[var(--accent-progress)]/10 font-bold">
+            ● MOST RECENT LOG
+          </span>
+        </div>
 
-        return (
-          <article class="journal-card cyber-frame p-6 sm:p-8 reveal reveal-d1 transition-all" data-week={weekNum}>
-            <!-- Top Header / Bar -->
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-xs font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider">
-                  WEEK {String(weekNum).padStart(2, '0')}
-                </span>
-                <span class="font-mono text-xs text-[var(--text-muted)]">
-                  {startDate}
-                </span>
-              </div>
-              <span class="font-mono text-[0.65rem] uppercase tracking-widest text-[var(--accent-progress)] px-2.5 py-0.5 border border-[var(--accent-progress)]/30 bg-[var(--accent-progress)]/10">
-                Log Entry
+        <!-- Title & Summary Toggle Area -->
+        <div class="py-4 cursor-pointer journal-toggle group" role="button" tabindex="0" aria-expanded="true">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text={title}>
+                {title}
+              </h3>
+              {summary && (
+                <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed">
+                  {summary}
+                </p>
+              )}
+            </div>
+            <button
+              type="button"
+              class="shrink-0 p-2 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all toggle-icon mt-1 cursor-pointer"
+              aria-label="Toggle journal details"
+            >
+              <span class="font-mono text-xs font-bold block transition-transform duration-300">
+                ▲ HIDE
               </span>
-            </div>
+            </button>
+          </div>
+        </div>
 
-            <!-- Title & Summary -->
-            <div class="py-4 cursor-pointer journal-toggle group" role="button" tabindex="0" aria-expanded={isLatest ? "true" : "false"}>
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h3 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text={title}>
-                    {title}
-                  </h3>
-                  {summary && (
-                    <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed">
-                      {summary}
-                    </p>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  class="shrink-0 p-2 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all toggle-icon mt-1"
-                  aria-label="Toggle journal details"
-                >
-                  <span class="font-mono text-xs font-bold block transition-transform duration-300">
-                    {isLatest ? "▲ HIDE" : "▼ READ"}
-                  </span>
-                </button>
-              </div>
-            </div>
+        <!-- Expandable Body Content (Open by default) -->
+        <div class="journal-body overflow-hidden transition-all duration-500 block">
+          <div class="pt-6 border-t border-[var(--border-subtle)] journal-markdown text-sm sm:text-base">
+            <LatestContent />
+          </div>
+        </div>
+      </article>
 
-            <!-- Expandable Body Content -->
-            <div class={`journal-body overflow-hidden transition-all duration-500 ${isLatest ? 'block' : 'hidden'}`}>
-              <div class="pt-6 border-t border-[var(--border-subtle)] journal-markdown text-sm sm:text-base">
-                <Content />
-              </div>
-            </div>
-          </article>
-        );
-      })
-    ) : (
-      <div class="cyber-frame p-8 text-center text-[var(--text-muted)] font-mono text-sm">
-        No journal logs published yet. Check back soon!
+      <!-- Bottom Navigation CTA for Previous Weeks -->
+      <div class="cyber-frame p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 reveal reveal-d2">
+        <div>
+          <h4 class="font-mono text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">
+            Previous Weekly Logs Archive ({totalLogs} Total)
+          </h4>
+          <p class="text-xs text-[var(--text-muted)] font-mono mt-1">
+            Browse complete week-by-week progress chronicles, technical milestones, and key takeaways.
+          </p>
+        </div>
+
+        <a 
+          href="/journal" 
+          class="inline-flex items-center gap-3 px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-canvas)] text-xs font-mono font-bold uppercase tracking-wider hover:scale-[1.02] transition-all shadow-md shrink-0 group"
+        >
+          <span>View Previous Weeks Archive</span>
+          <span class="group-hover:translate-x-1 transition-transform">➔</span>
+        </a>
       </div>
-    )}
-  </div>
+    </div>
+  ) : (
+    <div class="cyber-frame p-8 text-center text-[var(--text-muted)] font-mono text-sm">
+      No journal logs published yet. Check back soon!
+    </div>
+  )}
 </section>
 
 <style is:global>
