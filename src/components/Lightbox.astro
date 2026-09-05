@@ -11,16 +11,23 @@
 </div>
 
 <script>
-  const vaultData: Record<string, { title: string; desc: string; icon: string }> = {
+  const vaultData: Record<string, { title: string; desc: string; icon: string; verifyUrl?: string; pdfUrl?: string }> = {
     isc2: {
       title: 'ISC2 — Certified in Cybersecurity (CC)',
       desc: 'The ISC2 CC certification validates foundational knowledge across five domains: Security Principles, Incident Response & Business Continuity, Access Controls, Network Security, and Security Operations.',
       icon: '🛡️'
     },
+    aisec: {
+      title: 'AI Security University — Introduction to AI Security',
+      desc: 'Validates foundational expertise in AI and Large Language Model (LLM) security risks across the full lifecycle—including threat modeling across input, decision, and tooling layers, adversarial prompt injection, data poisoning, model extraction, and AI governance controls. Credential ID: 143c1167-5e31-40b7-b700-a8b77dde2f2d.',
+      icon: '🛡️',
+      verifyUrl: 'https://aisec.university/verify/143c1167-5e31-40b7-b700-a8b77dde2f2d',
+      pdfUrl: '/Introduction-to-AI-Security-Certificate.pdf'
+    },
     securiti: {
       title: 'AI Governance & Security — Securiti',
       desc: 'Credential covering responsible AI frameworks, data governance best practices, privacy-by-design principles, and security considerations for AI/ML systems.',
-      icon: '🤖'
+      icon: '🔐'
     },
     networking: {
       title: 'Cisco Network Support and Security',
@@ -99,13 +106,31 @@
       const data = vaultData[key];
       if (!data) return;
 
-      const html = `
+      let html = `
         <div class="w-16 h-16 bg-[var(--bg-elevated)] rounded-xl flex items-center justify-center text-3xl mb-4 border border-[var(--border-frame)]">
           ${data.icon}
         </div>
         <h3 class="text-xl font-extrabold text-[var(--text-primary)] mb-2">${data.title}</h3>
-        <p class="text-sm text-[var(--text-body)] leading-relaxed">${data.desc}</p>
+        <p class="text-sm text-[var(--text-body)] leading-relaxed mb-4">${data.desc}</p>
       `;
+
+      if (data.verifyUrl || data.pdfUrl) {
+        html += `
+          <div class="pt-4 border-t border-[var(--border-subtle)] flex flex-wrap gap-3">
+            ${data.verifyUrl ? `
+              <a href="${data.verifyUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-canvas)] text-xs font-mono font-bold uppercase tracking-wider hover:scale-[1.02] transition-transform shadow-md">
+                Verify Credential ➔
+              </a>
+            ` : ''}
+            ${data.pdfUrl ? `
+              <a href="${data.pdfUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:border-[var(--text-primary)] text-xs font-mono font-bold uppercase tracking-wider hover:scale-[1.02] transition-transform">
+                View Certificate PDF 📄
+              </a>
+            ` : ''}
+          </div>
+        `;
+      }
+
       openLightbox(html);
     });
   });
