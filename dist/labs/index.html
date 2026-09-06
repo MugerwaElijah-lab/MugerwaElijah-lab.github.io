@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/_astro/index.DwWnvKA7.css"></head> <body class="bg-circuit-pattern min-h-screen text-[var(--text-body)] antialiased"> <canvas id="matrix-canvas" class="fixed inset-0 w-full h-full pointer-events-none" style="z-index: -1; mix-blend-mode: screen; opacity: 0.6;"></canvas> <nav id="main-nav" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9000] px-6 py-3 rounded-full flex items-center gap-6 border border-[var(--glass-border)] bg-[var(--glass-nav)] backdrop-blur-md transition-all duration-500 max-w-[92vw] sm:max-w-fit shadow-lg"> <a href="/#home" class="font-black text-xs uppercase tracking-[2.5px] whitespace-nowrap text-[var(--text-primary)] hover:opacity-80 transition-opacity">
 Mugerwa Elijah
 </a> <div class="hidden md:flex items-center gap-5"> <a href="/#home" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">About</a> <a href="/#journey" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Journey</a> <a href="/#radar" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">SOC Radar</a> <a href="/#journal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Weekly Log</a> <a href="/#case-files" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Lab Docs</a> <a href="/#projects" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Projects</a> <a href="/#arsenal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Arsenal</a> <a href="/#certificates" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Certificates</a> </div> <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:scale-110 transition-transform cursor-pointer" aria-label="Toggle Dark/Light Theme"> <span id="theme-icon" class="text-xs">☾</span> </button> </nav> <script type="module">const n=document.getElementById("main-nav"),o=document.getElementById("theme-toggle"),d=document.getElementById("theme-icon");function m(){const e=document.documentElement.getAttribute("data-theme")||"dark";d&&(d.textContent=e==="dark"?"☾":"☼")}m();o?.addEventListener("click",()=>{const t=(document.documentElement.getAttribute("data-theme")||"dark")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t),localStorage.setItem("theme",t),m()});window.addEventListener("scroll",()=>{window.scrollY>80?n?.classList.add("shadow-2xl","border-[var(--text-muted)]"):n?.classList.remove("shadow-2xl","border-[var(--text-muted)]")},{passive:!0});</script> <main>  <div class="py-28 max-w-[1100px] mx-auto px-6 sm:px-12 space-y-12"> <!-- Top Navigation / Breadcrumbs --> <div class="flex flex-wrap items-center justify-between gap-4"> <a href="/#case-files" class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] hover:text-[var(--accent-active)] transition-colors"> <span>←</span> Back to Portfolio
-</a> <span class="font-mono text-xs text-[var(--text-muted)] border border-[var(--border-subtle)] px-3 py-1 bg-[var(--bg-elevated)]"> <strong class="text-[var(--accent-active)]">4</strong> Case Reports Published
+</a> <span class="font-mono text-xs text-[var(--text-muted)] border border-[var(--border-subtle)] px-3 py-1 bg-[var(--bg-elevated)]"> <strong class="text-[var(--accent-active)]">5</strong> Case Reports Published
 </span> </div> <!-- Main Header --> <div class="cyber-frame p-6 sm:p-10 space-y-4"> <div class="flex items-center gap-3"> <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-active)] animate-pulse"></span> <span class="text-xs font-mono font-bold uppercase tracking-[4px] text-[var(--text-muted)]">
 DFIR &amp; Threat Intelligence Knowledge Base
 </span> </div> <h1 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[var(--text-primary)] cyber-glow-text cyber-glitch" data-text="LAB DOCUMENTATION.">
@@ -16,7 +16,125 @@ Lab Documentation.
 Comprehensive repository of hands-on Digital Forensics, Incident Response (DFIR), and Threat Intelligence investigation reports from Hack The Box Sherlocks and enterprise security homelabs. Each report details full forensic triage steps, query structures, Indicators of Compromise (IOCs), and defensive engineering mitigations.
 </p> </div> <!-- Standard Documentation Pipeline Grid --> <div class="cyber-frame p-6 sm:p-8"> <div class="inline-flex items-center gap-2 font-mono text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mb-4 border border-[var(--border-frame)] px-3 py-1 bg-[var(--bg-elevated)]"> <span class="w-2 h-2 rounded-full bg-[var(--accent-active)] animate-pulse"></span>
 Investigation Standards &amp; Methodology
-</div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[var(--border-subtle)]"> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">01 // Scenario &amp; Scope</span> <p class="text-xs text-[var(--text-muted)]">Alert premise, triage context, and scope definition.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">02 // Tools &amp; Environment</span> <p class="text-xs text-[var(--text-muted)]">Wireshark, Volatility, Zimmerman Tools, VirusTotal, WHOIS.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">03 // Step-by-Step Triage</span> <p class="text-xs text-[var(--text-muted)]">Task analysis, header parsing, payload extraction, and queries.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">04 // Evidence &amp; Defense</span> <p class="text-xs text-[var(--text-muted)]">Extracted IOC tables, MITRE mapping, and SEG/EDR rules.</p> </div> </div> </div> <!-- Published Lab Documentation Reports List --> <div class="space-y-8"> <article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="fortyseven-threat-intelligence"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> Threat Intelligence / APT Profiling </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 24 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="true"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile"> FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Comprehensive threat actor profiling of Mysterious Elephant (APT-K-47): analyzing Hajj-themed spear-phishing lures, WinRAR CVE-2023-38831 exploitation, ORPCBackdoor DLL hijacking, Asyncshell C2, MemLoader sandbox evasion, and WhatsApp exfiltration tooling. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> OpenCTI / MISP </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Kaspersky GREAT Intelligence </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Knownsec 404 Research </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▲ HIDE REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 block"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="introduction--scenario">Introduction &#x26; Scenario</h2>
+</div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[var(--border-subtle)]"> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">01 // Scenario &amp; Scope</span> <p class="text-xs text-[var(--text-muted)]">Alert premise, triage context, and scope definition.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">02 // Tools &amp; Environment</span> <p class="text-xs text-[var(--text-muted)]">Wireshark, Volatility, Zimmerman Tools, VirusTotal, WHOIS.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">03 // Step-by-Step Triage</span> <p class="text-xs text-[var(--text-muted)]">Task analysis, header parsing, payload extraction, and queries.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">04 // Evidence &amp; Defense</span> <p class="text-xs text-[var(--text-muted)]">Extracted IOC tables, MITRE mapping, and SEG/EDR rules.</p> </div> </div> </div> <!-- Published Lab Documentation Reports List --> <div class="space-y-8"> <article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="evidence-acquisition-ftk-kape"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> BTL1 Practical Lab </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 31 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="true"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Digital Evidence Acquisition — Memory Dumps, FTK Disk Imaging &#38; Remote KAPE"> Digital Evidence Acquisition — Memory Dumps, FTK Disk Imaging &amp; Remote KAPE </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Hands-on forensic data acquisition walkthrough: capturing full memory dumps &amp; process memory (ProcDump), acquiring physical/logical disk images in Expert Witness Format (.E01) with FTK Imager, verifying MD5/SHA1 integrity hashes, and executing remote live artifact collection with KAPE. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> FTK Imager </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> ProcDump (Sysinternals) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> KAPE (gkape) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> PowerShell </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> RDP </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▲ HIDE REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 block"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="scenario--objectives">Scenario &#x26; Objectives</h2>
+<p>To establish a defensible forensic investigation, raw digital evidence must be acquired using forensically sound methodologies before passing artifacts to analysis suites such as Autopsy, EnCase, and Volatility.</p>
+<p>This lab covers three core forensic acquisition pillars:</p>
+<ol>
+<li><strong>Volatile Memory Acquisition:</strong> Capturing full host physical memory and isolated process memory dumps (simulating active in-memory malware extraction).</li>
+<li><strong>Bit-Stream Disk Imaging:</strong> Creating forensic disk images in Expert Witness Format (<code>.E01</code>) with cryptographic hash verification.</li>
+<li><strong>Targeted Live Triage:</strong> Rapid remote artifact collection using Kestrel / KAPE over Remote Desktop (RDP).</li>
+</ol>
+<hr>
+<h2 id="task-1-memory-acquisition-full-memory--targeted-process-dumps">Task 1: Memory Acquisition (Full Memory &#x26; Targeted Process Dumps)</h2>
+<h3 id="1-full-physical-ram-capture-ftk-imager">1. Full Physical RAM Capture (FTK Imager)</h3>
+<p>Volatile memory contains critical transient evidence: active network sockets, injected DLLs, unencrypted credentials, and running malware payloads.</p>
+<ol>
+<li>Launch <strong>FTK Imager</strong> as Administrator.</li>
+<li>Navigate to <strong>File > Capture Memory</strong>.</li>
+<li>Specify destination path (<code>memdump.mem</code>) and include the pagefile if comprehensive analysis is required.</li>
+<li>Execute capture to generate a raw <code>.mem</code> / <code>.raw</code> image for memory forensics in Volatility.</li>
+</ol>
+<h3 id="2-isolated-process-memory-dump-sysinternals-procdump">2. Isolated Process Memory Dump (Sysinternals ProcDump)</h3>
+<p>In active incident response engagements, investigators often need to dump the memory space of a specific malicious process rather than the entire multi-gigabyte RAM space.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:#6A737D"># Identify target process and Process ID (PID)</span></span>
+<span class="line"><span style="color:#79B8FF">Get-Process</span><span style="color:#F97583"> |</span><span style="color:#E1E4E8"> findstr </span><span style="color:#F97583">-</span><span style="color:#E1E4E8">I </span><span style="color:#9ECBFF">"calc"</span></span></code></pre>
+<p>Once the PID is identified (e.g., <code>PID 1688</code>), execute <strong>ProcDump</strong> with the <code>-ma</code> flag (Write a dump file with all process memory):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:#6A737D"># Create full process memory dump</span></span>
+<span class="line"><span style="color:#E1E4E8">.\</span><span style="color:#79B8FF">procdump.exe</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">ma </span><span style="color:#79B8FF">1688</span></span></code></pre>
+<p>This generates a <code>.dmp</code> file containing the complete virtual memory allocation of the target process, ideal for string extraction, shellcode disassembly, and in-memory credential recovery.</p>
+<hr>
+<h2 id="task-2-bit-stream-disk-imaging--hash-verification-ftk-imager">Task 2: Bit-Stream Disk Imaging &#x26; Hash Verification (FTK Imager)</h2>
+<p>Forensic disk acquisition involves creating an exact, bit-by-bit duplicate of a storage drive while preventing any modification to the original media.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Evidence Source (Physical Drive) ──► Write Blocker ──► FTK Imager Engine ──► Expert Witness Format (.E01)</span></span>
+<span class="line"><span>                                                                       └──► Hash Verification (MD5 / SHA1)</span></span></code></pre>
+<h3 id="step-by-step-disk-imaging">Step-by-Step Disk Imaging:</h3>
+<ol>
+<li>Open <strong>FTK Imager</strong> and select <strong>File > Create Disk Image</strong>.</li>
+<li>Select <strong>Source Evidence Type</strong>: <code>Physical Drive</code> (captures unallocated clusters, slack space, and partition tables).</li>
+<li>Select the target drive volume (e.g., secondary 20 GB forensic target).</li>
+<li>Configure image destination:
+<ul>
+<li><strong>Image Type:</strong> <code>E01</code> (Expert Witness Format — embeds case metadata, compression, and per-block CRC integrity checksums).</li>
+<li><strong>Case Metadata:</strong> Case Number, Evidence Number, Unique Description, Examiner Name.</li>
+<li><strong>Image Destination &#x26; Fragment Size:</strong> Specify target path and set fragment size (default <code>1500 MB</code> or single volume).</li>
+</ul>
+</li>
+<li>Start the imaging job and await completion.</li>
+</ol>
+<h3 id="cryptographic-hash-verification">Cryptographic Hash Verification:</h3>
+<p>Upon completion, FTK Imager automatically calculates and compares the pre-acquisition and post-acquisition hashes:</p>
+<ul>
+<li><strong>MD5 Hash:</strong> Computed and verified against physical disk blocks.</li>
+<li><strong>SHA1 Hash:</strong> Computed and verified against physical disk blocks.</li>
+<li><strong>Bad Sectors:</strong> Logged in the acquisition report (<code>.txt</code>).</li>
+</ul>
+<blockquote>
+<p><strong>Forensic Best Practice:</strong> If the computed source hash and image hash match exactly, the evidence is legally defensible and proves zero data corruption or tampering occurred during transit.</p>
+</blockquote>
+<hr>
+<h2 id="task-3-remote-live-artifact-triage-with-kape">Task 3: Remote Live Artifact Triage with KAPE</h2>
+<p><strong>KAPE</strong> (Kroll Artifact Parser and Extractor) enables rapid, targeted artifact triage from live systems in minutes rather than waiting hours for full multi-terabyte disk images.</p>
+<h3 id="remote-deployment-workflow">Remote Deployment Workflow:</h3>
+<ol>
+<li>Establish an RDP connection to the target remote host (<code>192.168.x.x</code>).</li>
+<li>Transfer the standalone KAPE toolset to the remote environment.</li>
+<li>Launch GUI wrapper (<code>gkape.exe</code>) and configure target acquisition options:
+<ul>
+<li><strong>Use Target Options:</strong> Enabled (<code>--tsource C: --tdest Desktop\output</code>).</li>
+<li><strong>Selected Targets:</strong> <code>Browsers</code> (harvests Chrome, Edge, Firefox history, web cache, cookies, and installed extensions).</li>
+<li><strong>Execution Flags:</strong> Flush cache and execute automated copy using Volume Shadow Copy Service (VSS) to bypass OS file locks on active database files.</li>
+</ul>
+</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>gkape.exe --tsource C: --tdest C:\Users\btlo\Desktop\output --target Browsers --gui</span></span></code></pre>
+<ol start="4">
+<li>Retrieve the structured <code>output</code> directory containing extracted SQLite databases (<code>History</code>, <code>Login Data</code>, <code>Extensions</code>) and transfer back to the forensic workstation for offline artifact parsing.</li>
+</ol>
+<hr>
+<h2 id="summary-of-acquisition-tools--forensic-standards">Summary of Acquisition Tools &#x26; Forensic Standards</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool / Utility</th><th>Artifact Type</th><th>Output Format</th><th>Primary Use Case</th></tr></thead><tbody><tr><td><strong>FTK Imager</strong></td><td>Physical / Logical Disk</td><td><code>.E01</code> (EnCase) / <code>.raw</code></td><td>Bit-stream disk imaging with embedded hashes &#x26; metadata</td></tr><tr><td><strong>FTK Imager</strong></td><td>Volatile RAM</td><td><code>.mem</code> / <code>.raw</code></td><td>Full host memory capture for Volatility / Rekall</td></tr><tr><td><strong>ProcDump</strong></td><td>Process Memory</td><td><code>.dmp</code> (Minidump / Full)</td><td>Targeted process-level memory triage and malware dumping</td></tr><tr><td><strong>KAPE (gkape)</strong></td><td>Live Windows Artifacts</td><td>Structured Directories</td><td>Rapid live incident response, browser history, registry hives, prefetch</td></tr></tbody></table>
+<hr>
+<h2 id="key-takeaways--defensive-best-practices">Key Takeaways &#x26; Defensive Best Practices</h2>
+<ol>
+<li><strong>Order of Volatility:</strong> Prioritize capturing transient RAM and live process states before taking static storage images or shutting down systems.</li>
+<li><strong>Cryptographic Integrity:</strong> Always compute and document MD5/SHA-256 hashes immediately upon image completion to maintain strict Chain of Custody.</li>
+<li><strong>Targeted Triage vs. Full Imaging:</strong> While full disk images are necessary for deep file recovery and unallocated space analysis, tools like KAPE provide actionable intelligence in active enterprise triage scenarios within minutes.</li>
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="fortyseven-threat-intelligence"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> Threat Intelligence / APT Profiling </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 24 August 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile"> FortySeven-1 — Mysterious Elephant (APT-K-47) Threat Intelligence Profile </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Comprehensive threat actor profiling of Mysterious Elephant (APT-K-47): analyzing Hajj-themed spear-phishing lures, WinRAR CVE-2023-38831 exploitation, ORPCBackdoor DLL hijacking, Asyncshell C2, MemLoader sandbox evasion, and WhatsApp exfiltration tooling. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> OpenCTI / MISP </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> MITRE ATT&amp;CK </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Kaspersky GREAT Intelligence </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Knownsec 404 Research </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="introduction--scenario">Introduction &#x26; Scenario</h2>
 <p>An Advanced Persistent Threat (APT) group has been identified using Hajj-themed phishing lures to target and exfiltrate WhatsApp data and sensitive communications from government and diplomatic officials. By analyzing and synthesizing fragmented intelligence from public cybersecurity vendor reports, research publications, and internal security feeds, this investigation constructs a comprehensive threat intelligence profile of the adversary.</p>
 <h3 id="intelligence-sources--evidence-base">Intelligence Sources &#x26; Evidence Base</h3>
 <ul>
