@@ -1,1 +1,9 @@
 node_modules
+.astro
+
+# Local job applications and drafts (not for public portfolio)
+*yako*
+*agent_banking*
+academic_transcript*
+cover_letter*
+cv_*
