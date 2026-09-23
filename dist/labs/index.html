@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/_astro/index.BH8aMQVm.css"></head> <body class="bg-circuit-pattern min-h-screen text-[var(--text-body)] antialiased"> <canvas id="matrix-canvas" class="fixed inset-0 w-full h-full pointer-events-none" style="z-index: -1; mix-blend-mode: screen; opacity: 0.6;"></canvas> <nav id="main-nav" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9000] px-6 py-3 rounded-full flex items-center gap-6 border border-[var(--glass-border)] bg-[var(--glass-nav)] backdrop-blur-md transition-all duration-500 max-w-[92vw] sm:max-w-fit shadow-lg"> <a href="/#home" class="font-black text-xs uppercase tracking-[2.5px] whitespace-nowrap text-[var(--text-primary)] hover:opacity-80 transition-opacity">
 Mugerwa Elijah
 </a> <div class="hidden md:flex items-center gap-5"> <a href="/#home" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">About</a> <a href="/#journey" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Journey</a> <a href="/#radar" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">SOC Radar</a> <a href="/#journal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Weekly Log</a> <a href="/#case-files" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Lab Docs</a> <a href="/#projects" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Projects</a> <a href="/#arsenal" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Arsenal</a> <a href="/#certificates" class="text-[0.7rem] font-bold uppercase tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors whitespace-nowrap">Certificates</a> </div> <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-frame)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:scale-110 transition-transform cursor-pointer" aria-label="Toggle Dark/Light Theme"> <span id="theme-icon" class="text-xs">☾</span> </button> </nav> <script type="module">const n=document.getElementById("main-nav"),o=document.getElementById("theme-toggle"),d=document.getElementById("theme-icon");function m(){const e=document.documentElement.getAttribute("data-theme")||"dark";d&&(d.textContent=e==="dark"?"☾":"☼")}m();o?.addEventListener("click",()=>{const t=(document.documentElement.getAttribute("data-theme")||"dark")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t),localStorage.setItem("theme",t),m()});window.addEventListener("scroll",()=>{window.scrollY>80?n?.classList.add("shadow-2xl","border-[var(--text-muted)]"):n?.classList.remove("shadow-2xl","border-[var(--text-muted)]")},{passive:!0});</script> <main>  <div class="py-28 max-w-[1100px] mx-auto px-6 sm:px-12 space-y-12"> <!-- Top Navigation / Breadcrumbs --> <div class="flex flex-wrap items-center justify-between gap-4"> <a href="/#case-files" class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] hover:text-[var(--accent-active)] transition-colors"> <span>←</span> Back to Portfolio
-</a> <span class="font-mono text-xs text-[var(--text-muted)] border border-[var(--border-subtle)] px-3 py-1 bg-[var(--bg-elevated)]"> <strong class="text-[var(--accent-active)]">6</strong> Case Reports Published
+</a> <span class="font-mono text-xs text-[var(--text-muted)] border border-[var(--border-subtle)] px-3 py-1 bg-[var(--bg-elevated)]"> <strong class="text-[var(--accent-active)]">8</strong> Case Reports Published
 </span> </div> <!-- Main Header --> <div class="cyber-frame p-6 sm:p-10 space-y-4"> <div class="flex items-center gap-3"> <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-active)] animate-pulse"></span> <span class="text-xs font-mono font-bold uppercase tracking-[4px] text-[var(--text-muted)]">
 DFIR &amp; Threat Intelligence Knowledge Base
 </span> </div> <h1 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[var(--text-primary)] cyber-glow-text cyber-glitch" data-text="LAB DOCUMENTATION.">
@@ -16,7 +16,543 @@ Lab Documentation.
 Comprehensive repository of hands-on Digital Forensics, Incident Response (DFIR), and Threat Intelligence investigation reports from Hack The Box Sherlocks and enterprise security homelabs. Each report details full forensic triage steps, query structures, Indicators of Compromise (IOCs), and defensive engineering mitigations.
 </p> </div> <!-- Standard Documentation Pipeline Grid --> <div class="cyber-frame p-6 sm:p-8"> <div class="inline-flex items-center gap-2 font-mono text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mb-4 border border-[var(--border-frame)] px-3 py-1 bg-[var(--bg-elevated)]"> <span class="w-2 h-2 rounded-full bg-[var(--accent-active)] animate-pulse"></span>
 Investigation Standards &amp; Methodology
-</div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[var(--border-subtle)]"> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">01 // Scenario &amp; Scope</span> <p class="text-xs text-[var(--text-muted)]">Alert premise, triage context, and scope definition.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">02 // Tools &amp; Environment</span> <p class="text-xs text-[var(--text-muted)]">Wireshark, Volatility, Zimmerman Tools, VirusTotal, WHOIS.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">03 // Step-by-Step Triage</span> <p class="text-xs text-[var(--text-muted)]">Task analysis, header parsing, payload extraction, and queries.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">04 // Evidence &amp; Defense</span> <p class="text-xs text-[var(--text-muted)]">Extracted IOC tables, MITRE mapping, and SEG/EDR rules.</p> </div> </div> </div> <!-- Published Lab Documentation Reports List --> <div class="space-y-8"> <article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="stuxbot-elastic-threat-hunting"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB CDSA Investigation </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Advanced </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 7 September 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="true"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Stuxbot Incident &#38; Elastic SIEM Threat Hunting Walkthrough"> Stuxbot Incident &amp; Elastic SIEM Threat Hunting Walkthrough </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Comprehensive hypothesis-driven threat hunting investigation on the Stuxbot adversary campaign using Elastic SIEM and Kibana (KQL). Deconstructed secondary payload execution (VBScript), DCSync credential dumping (Mimikatz), in-memory PowerView reconnaissance, C:\Users\Public tool staging, Registry Run key persistence, and WinRM lateral movement targeting Domain Controllers. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Elastic SIEM </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Kibana (KQL) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Sysmon </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> PowerShell Script Block Logging </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Mimikatz </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> PowerView </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> WinRM </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▲ HIDE REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 block"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="executive-summary--mission-scope">Executive Summary &#x26; Mission Scope</h2>
+</div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[var(--border-subtle)]"> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">01 // Scenario &amp; Scope</span> <p class="text-xs text-[var(--text-muted)]">Alert premise, triage context, and scope definition.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">02 // Tools &amp; Environment</span> <p class="text-xs text-[var(--text-muted)]">Wireshark, Volatility, Zimmerman Tools, VirusTotal, WHOIS.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">03 // Step-by-Step Triage</span> <p class="text-xs text-[var(--text-muted)]">Task analysis, header parsing, payload extraction, and queries.</p> </div> <div class="space-y-1"> <span class="font-mono text-xs font-bold text-[var(--text-primary)] block">04 // Evidence &amp; Defense</span> <p class="text-xs text-[var(--text-muted)]">Extracted IOC tables, MITRE mapping, and SEG/EDR rules.</p> </div> </div> </div> <!-- Published Lab Documentation Reports List --> <div class="space-y-8"> <article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="botsv1-cerber-ransomware-investigation"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> Threat Hunting &amp; SIEM </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Advanced </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 15 September 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="true"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Boss of the SOC (BOTSv1): Multi-Stage Ransomware &#38; C2 Attack Chain Triage"> Boss of the SOC (BOTSv1): Multi-Stage Ransomware &amp; C2 Attack Chain Triage </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> End-to-end DFIR investigation using Splunk on BOTSv1 telemetry. Uncovered Acunetix web vulnerability scanning (40.80.148.42), Joomla brute-force login attacks (23.22.63.114), endpoint host infection of bob.smith on we8105desk, Cerber ransomware masquerading as osk.exe (Sysmon EID 7 hash), ipinfo.io external IP lookup (Suricata NIDS), and mass UDP port 6892 C2 botnet beaconing across 16,384 unique IPs (Fortigate UTM). </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Splunk Enterprise </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> SPL </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Sysmon (EID 1, 7) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Suricata NIDS </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Fortigate UTM Firewall </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> IIS / Web Logs </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> VirusTotal </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▲ HIDE REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 block"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="executive-summary--incident-scope">Executive Summary &#x26; Incident Scope</h2>
+<p>This investigation details the comprehensive end-to-end forensic analysis of the <strong>Boss of the SOC (BOTSv1)</strong> dataset using <strong>Splunk Enterprise</strong>. By cross-correlating multi-source enterprise telemetry, including web server access logs, Windows endpoint telemetry (Sysmon), Network Intrusion Detection System alerts (Suricata), and Next-Generation Firewall logs (Fortigate UTM), the full lifecycle of an adversary campaign was reconstructed.</p>
+<p>The attack spanned initial perimeter reconnaissance, web application brute forcing, endpoint host infection via masqueraded ransomware payloads, external IP discovery, and large-scale decentralized Command and Control (C2) botnet beaconing.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>┌───────────────────────────────────────┐      ┌───────────────────────────────────────┐</span></span>
+<span class="line"><span>│     Phase 1: Web Recon &#x26; Brute Force  │ ───► │     Phase 2: Endpoint Infection       │</span></span>
+<span class="line"><span>│  - Scanner: 40.80.148.42 (Acunetix)   │      │  - Host: we8105desk (192.168.250.100) │</span></span>
+<span class="line"><span>│  - Brute Force: 23.22.63.114 (Joomla) │      │  - User: WAYNECORPINC\bob.smith       │</span></span>
+<span class="line"><span>│  - Target: imreallynotbatman.com      │      │  - Payload: osk.exe (Cerber Ransomware│</span></span>
+<span class="line"><span>└───────────────────────────────────────┘      └───────────────────────────────────────┘</span></span>
+<span class="line"><span>                                                               │</span></span>
+<span class="line"><span>                                                               ▼</span></span>
+<span class="line"><span>┌───────────────────────────────────────┐      ┌───────────────────────────────────────┐</span></span>
+<span class="line"><span>│     Phase 4: Mass C2 Beaconing        │ ◄─── │     Phase 3: External IP Discovery    │</span></span>
+<span class="line"><span>│  - Outbound UDP Port 6892             │      │  - HTTP GET to ipinfo.io (54.148.194) │</span></span>
+<span class="line"><span>│  - 16,384 Unique IP Addresses         │      │  - Suricata: ET POLICY External IP    │</span></span>
+<span class="line"><span>│  - Fortigate UTM: Cerber.Botnet Alert │      │  - Identifies egress gateway &#x26; IP     │</span></span>
+<span class="line"><span>└───────────────────────────────────────┘      └───────────────────────────────────────┘</span></span></code></pre>
+<hr>
+<h2 id="investigation-overview--multi-source-telemetry">Investigation Overview &#x26; Multi-Source Telemetry</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Parameter</th><th>Operational Specification</th></tr></thead><tbody><tr><td><strong>SIEM Platform</strong></td><td>Splunk Enterprise</td></tr><tr><td><strong>Dataset</strong></td><td>Splunk Boss of the SOC (BOTSv1)</td></tr><tr><td><strong>Target Organization</strong></td><td>Wayne Enterprises (<code>waynecorpinc.local</code>)</td></tr><tr><td><strong>Target Web Property</strong></td><td><code>imreallynotbatman.com</code> (<code>192.168.250.70</code>)</td></tr><tr><td><strong>Compromised Endpoint</strong></td><td><code>we8105desk.waynecorpinc.local</code> (<code>192.168.250.100</code>)</td></tr><tr><td><strong>Compromised User Account</strong></td><td><code>WAYNECORPINC\bob.smith</code></td></tr><tr><td><strong>Telemetry Ingested</strong></td><td>IIS Web Logs (<code>sourcetype=iis</code>), Sysmon (<code>sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational</code>), Suricata NIDS (<code>sourcetype=suricata</code>), Fortigate UTM (<code>sourcetype=fgt_utm</code>)</td></tr></tbody></table>
+<hr>
+<h2 id="master-attack-chronology">Master Attack Chronology</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timestamp (UTC)</th><th>Telemetry Source</th><th>Source Entity</th><th>Target Entity</th><th>Technical Event &#x26; Findings</th></tr></thead><tbody><tr><td><strong>15:36:45</strong></td><td>IIS Web Logs / Stream</td><td><code>40.80.148.42</code></td><td><code>192.168.250.70</code></td><td><strong>Web Vulnerability Scanning:</strong> Acunetix scanner probes web server directories and extensions.</td></tr><tr><td><strong>16:12:10</strong></td><td>IIS Web Logs</td><td><code>23.22.63.114</code></td><td><code>/joomla/administrator</code></td><td><strong>Credential Brute Force:</strong> 412 HTTP POST login attempts testing common dictionary passwords (<code>12345678</code>, <code>baby</code>).</td></tr><tr><td><strong>16:44:22</strong></td><td>Sysmon EID 1 &#x26; 7</td><td><code>we8105desk</code> (<code>bob.smith</code>)</td><td><code>AppData\Roaming\</code></td><td><strong>Malware Execution &#x26; Masquerading:</strong> Binary <code>osk.exe</code> executed. SHA256 hash confirms <strong>Cerber Ransomware</strong>.</td></tr><tr><td><strong>16:44:38</strong></td><td>Suricata NIDS</td><td><code>192.168.250.100</code></td><td><code>54.148.194.58</code> (<code>ipinfo.io</code>)</td><td><strong>External IP Discovery:</strong> Outbound HTTP request triggered <code>ET POLICY Possible External IP Lookup ipinfo.io</code>.</td></tr><tr><td><strong>16:45:02</strong></td><td>Fortigate UTM</td><td><code>192.168.250.100</code></td><td><code>16,384 External IPs</code></td><td><strong>C2 Botnet Communication:</strong> Mass UDP port <code>6892</code> broadcast triggered Fortigate UTM alert <code>Cerber.Botnet</code>.</td></tr></tbody></table>
+<hr>
+<h2 id="phase-by-phase-forensic-walkthrough">Phase-by-Phase Forensic Walkthrough</h2>
+<h3 id="phase-1-web-perimeter-reconnaissance--brute-force-exploitation">Phase 1: Web Perimeter Reconnaissance &#x26; Brute-Force Exploitation</h3>
+<h4 id="1-the-who-why--how">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>Adversary Intent:</strong> Identify vulnerabilities and exposed administration panels on the public web server <code>imreallynotbatman.com</code> (<code>192.168.250.70</code>), followed by brute-forcing administrative access to gain initial foothold or upload web shells.</li>
+<li><strong>Forensic Signal in Splunk:</strong> Ingested web logs (IIS) record HTTP request methods, URIs, client IP addresses, user-agent strings, and HTTP response status codes. Automated scanners generate high-frequency requests with characteristic User-Agents or URI fuzzing patterns.</li>
+</ul>
+<h4 id="2-spl-query-identifying-web-vulnerability-scanning">2. SPL Query: Identifying Web Vulnerability Scanning</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">iis </span><span style="color:#FFAB70">dest_ip</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"192.168.250.70"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> stats</span><span style="color:#79B8FF"> count</span><span style="color:#79B8FF"> by</span><span style="color:#E1E4E8"> src_ip, cs_User_Agent</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> sort</span><span style="color:#E1E4E8"> - </span><span style="color:#79B8FF">count</span></span></code></pre>
+<ul>
+<li><strong>Analysis:</strong> IP <code>40.80.148.42</code> generated tens of thousands of rapid HTTP requests starting at <code>15:36:45</code>. The <code>cs_User_Agent</code> explicitly identified the automated scanner: <strong>Acunetix Web Vulnerability Scanner</strong>.</li>
+</ul>
+<h4 id="3-spl-query-investigating-authentication-brute-force-on-joomla">3. SPL Query: Investigating Authentication Brute Force on Joomla</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">iis </span><span style="color:#FFAB70">cs_method</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">POST </span><span style="color:#FFAB70">cs_uri_stem</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"*administrator*"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> stats</span><span style="color:#79B8FF"> count</span><span style="color:#79B8FF"> by</span><span style="color:#E1E4E8"> src_ip,</span><span style="color:#FFAB70"> cs_uri_stem</span><span style="color:#E1E4E8">, sc_status</span></span></code></pre>
+<ul>
+<li><strong>Findings:</strong> A separate IP address (<code>23.22.63.114</code>) initiated <strong>412 targeted POST requests</strong> against <code>/joomla/administrator/index.php</code>.</li>
+<li><strong>Payload Inspection:</strong> Extracting the POST body data revealed dictionary password attacks attempting trivial combinations (<code>12345678</code>, <code>admin123</code>, <code>baby</code>, <code>batman</code>) against the administrative portal.</li>
+</ul>
+<hr>
+<h3 id="phase-2-endpoint-compromise--malware-masquerading">Phase 2: Endpoint Compromise &#x26; Malware Masquerading</h3>
+<h4 id="1-the-who-why--how-1">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>Adversary Intent:</strong> Establish persistence and execute the malicious payload on internal workstations while evading user and antivirus detection.</li>
+<li><strong>The Technique (Masquerading - T1036.005):</strong> The malware placed itself in the user roaming profile folder <code>AppData\Roaming\{GUID}\osk.exe</code>. It named its binary <code>osk.exe</code>, mimicking the legitimate Windows <strong>On-Screen Keyboard</strong> utility (which normally resides strictly in <code>C:\Windows\System32\osk.exe</code>).</li>
+<li><strong>Forensic Signal:</strong> Sysmon <strong>Event ID 1 (Process Create)</strong> captures the abnormal execution path, while <strong>Event ID 7 (Image Loaded / Module Load)</strong> captures cryptographic file hashes (MD5, SHA256) of loaded binaries.</li>
+</ul>
+<h4 id="2-spl-query-isolating-the-compromised-endpoint--binary">2. SPL Query: Isolating the Compromised Endpoint &#x26; Binary</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span><span style="color:#FFAB70"> EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#FFAB70"> Image</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"*\\osk.exe"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time host User ParentImage Image CommandLine</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+------------+-------------------------+---------------------------------+-----------------------------------------------------------+</span></span>
+<span class="line"><span>| _time               | host       | User                    | ParentImage                     | Image                                                     |</span></span>
+<span class="line"><span>+---------------------+------------+-------------------------+---------------------------------+-----------------------------------------------------------+</span></span>
+<span class="line"><span>| 2016-08-24 16:44:22 | we8105desk | WAYNECORPINC\bob.smith  | C:\Windows\explorer.exe         | C:\Users\bob.smith\AppData\Roaming\{35AC489F}\osk.exe     |</span></span>
+<span class="line"><span>+---------------------+------------+-------------------------+---------------------------------+-----------------------------------------------------------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Finding:</strong> Host <code>we8105desk.waynecorpinc.local</code> (<code>192.168.250.100</code>) running under account <code>WAYNECORPINC\bob.smith</code> executed the masqueraded <code>osk.exe</code> payload from an unauthorized <code>AppData\Roaming</code> directory.</li>
+</ul>
+<h4 id="3-spl-query-extracting-cryptographic-hashes-for-threat-intel-triangulation">3. SPL Query: Extracting Cryptographic Hashes for Threat Intel Triangulation</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span><span style="color:#FFAB70"> EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">7</span><span style="color:#FFAB70"> Image</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"*\\AppData\\Roaming\\*\\osk.exe"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time Image Hashes</span></span></code></pre>
+<ul>
+<li><strong>Extracted Hash:</strong>
+<ul>
+<li><strong>SHA256:</strong> <code>37397f8d8e4b3731749094d7b7cd2cf56cacb12dd69e0131f07dd78dff6f262b</code></li>
+</ul>
+</li>
+<li><strong>Threat Intelligence Attribution (VirusTotal):</strong> Cross-referencing the SHA256 hash across global threat intelligence confirmed the binary as <strong>Cerber Ransomware</strong>, a notorious ransomware-as-a-service (RaaS) strain known for heavy evasion, audio ransom notes (<code>.vbs</code>), and UDP-based peer C2.</li>
+</ul>
+<hr>
+<h3 id="phase-3-outbound-reconnaissance--external-ip-discovery">Phase 3: Outbound Reconnaissance &#x26; External IP Discovery</h3>
+<h4 id="1-the-who-why--how-2">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>Adversary Intent:</strong> Ransomware strains require knowledge of the infected machine’s public WAN IP address and geographic location to calculate affiliate tracking codes, determine ransom currency pricing, and verify if the host is in an excluded region.</li>
+<li><strong>The Forensic Signal:</strong> Rather than hosting custom infrastructure, the ransomware reaches out to legitimate public IP lookup services (e.g., <code>ipinfo.io</code>, <code>api.ipify.org</code>, <code>whatismyip.com</code>). Suricata NIDS monitors network taps and generates policy-violation alerts when internal hosts trigger automated external IP query signatures.</li>
+</ul>
+<h4 id="2-spl-query-correlating-suricata-nids-alerts">2. SPL Query: Correlating Suricata NIDS Alerts</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">suricata </span><span style="color:#FFAB70">src_ip</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"192.168.250.100"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time alert.signature alert.category src_ip dest_ip dest_port</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+----------------------------------------------------+------------------+-----------------+---------------+-----------+</span></span>
+<span class="line"><span>| _time               | alert.signature                                    | alert.category   | src_ip          | dest_ip       | dest_port |</span></span>
+<span class="line"><span>+---------------------+----------------------------------------------------+------------------+-----------------+---------------+-----------+</span></span>
+<span class="line"><span>| 2016-08-24 16:44:38 | ET POLICY Possible External IP Lookup ipinfo.io   | Policy Violation | 192.168.250.100 | 54.148.194.58 | 80        |</span></span>
+<span class="line"><span>+---------------------+----------------------------------------------------+------------------+-----------------+---------------+-----------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Finding:</strong> Within 16 seconds of payload execution, <code>we8105desk</code> (<code>192.168.250.100</code>) initiated an HTTP GET request to <code>54.148.194.58</code> (<code>ipinfo.io</code>), generating an alert for automated IP location reconnaissance.</li>
+</ul>
+<hr>
+<h3 id="phase-4-large-scale-c2-botnet-communication--firewall-triage">Phase 4: Large-Scale C2 Botnet Communication &#x26; Firewall Triage</h3>
+<h4 id="1-the-who-why--how-3">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>Adversary Intent:</strong> Cerber Ransomware utilizes a decentralized Command and Control mechanism. Instead of contacting a single centralized domain (which defenders can quickly sinkhole or blacklist via DNS), Cerber sends UDP datagrams containing encrypted host registration statistics across massive ranges of IP addresses.</li>
+<li><strong>Forensic Signal:</strong> Next-Generation Firewalls (Fortigate UTM) track high-frequency outbound UDP connection attempts from internal hosts to external subnets and match traffic characteristics against threat intelligence signature databases.</li>
+</ul>
+<h4 id="2-spl-query-analyzing-outbound-udp-beaconing--destination-count">2. SPL Query: Analyzing Outbound UDP Beaconing &#x26; Destination Count</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">fgt_utm </span><span style="color:#FFAB70">srcip</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"192.168.250.100"</span><span style="color:#FFAB70"> dstport</span><span style="color:#F97583">=</span><span style="color:#79B8FF">6892</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> stats</span><span style="color:#E1E4E8"> dc(</span><span style="color:#FFAB70">dstip</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">as</span><span style="color:#E1E4E8"> unique_dest_ips,</span><span style="color:#FFAB70"> count by srcip</span><span style="color:#E1E4E8">,</span><span style="color:#FFAB70"> dstport</span><span style="color:#E1E4E8">, proto</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+-----------------+---------+-------+-----------------+-------+</span></span>
+<span class="line"><span>| srcip           | dstport | proto | unique_dest_ips | count |</span></span>
+<span class="line"><span>+-----------------+---------+-------+-----------------+-------+</span></span>
+<span class="line"><span>| 192.168.250.100 | 6892    | udp   | 16384           | 16384 |</span></span>
+<span class="line"><span>+-----------------+---------+-------+-----------------+-------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Finding:</strong> The infected host sent outbound UDP packets on port <strong><code>6892</code></strong> to exactly <strong>16,384 unique IP addresses</strong> (a full <code>/18</code> subnet space scan).</li>
+</ul>
+<h4 id="3-spl-query-correlating-firewall-threat-category--utm-signatures">3. SPL Query: Correlating Firewall Threat Category &#x26; UTM Signatures</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">botsv1 </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">fgt_utm </span><span style="color:#FFAB70">srcip</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"192.168.250.100"</span><span style="color:#FFAB70"> utmaction</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">*</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time srcip dstip dstport utmaction threat_name threat_category</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+-----------------+--------------+---------+-----------+---------------+-----------------+</span></span>
+<span class="line"><span>| _time               | srcip           | dstip        | dstport | utmaction | threat_name   | threat_category |</span></span>
+<span class="line"><span>+---------------------+-----------------+--------------+---------+-----------+---------------+-----------------+</span></span>
+<span class="line"><span>| 2016-08-24 16:45:02 | 192.168.250.100 | &#x3C;Multiple>   | 6892    | blocked   | Cerber.Botnet | Botnet          |</span></span>
+<span class="line"><span>+---------------------+-----------------+--------------+---------+-----------+---------------+-----------------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Assessment:</strong> Fortigate UTM identified the signature as <strong><code>Cerber.Botnet</code></strong> under the <strong><code>Botnet</code></strong> category, confirming active post-infection C2 telemetry broadcasts.</li>
+</ul>
+<hr>
+<h2 id="mitre-attck-framework-mapping">MITRE ATT&#x26;CK Framework Mapping</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tactic</th><th>Technique ID</th><th>Technique Name</th><th>Observation in Investigation</th></tr></thead><tbody><tr><td><strong>Reconnaissance</strong></td><td><a href="https://attack.mitre.org/techniques/T1595/002/">T1595.002</a></td><td>Active Scanning: Vulnerability Scanning</td><td>IP <code>40.80.148.42</code> using Acunetix against <code>imreallynotbatman.com</code>.</td></tr><tr><td><strong>Credential Access</strong></td><td><a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001</a></td><td>Brute Force: Password Guessing</td><td>IP <code>23.22.63.114</code> performing 412 POST attempts on <code>/joomla/administrator</code>.</td></tr><tr><td><strong>Defense Evasion</strong></td><td><a href="https://attack.mitre.org/techniques/T1036/005/">T1036.005</a></td><td>Masquerading: Match Legitimate Name or Location</td><td>Malicious binary disguised as <code>osk.exe</code> in <code>AppData\Roaming\{GUID}\</code>.</td></tr><tr><td><strong>Discovery</strong></td><td><a href="https://attack.mitre.org/techniques/T1016/">T1016</a></td><td>System Network Configuration Discovery</td><td>HTTP GET query to <code>ipinfo.io</code> (<code>54.148.194.58</code>) to resolve external IP.</td></tr><tr><td><strong>Command and Control</strong></td><td><a href="https://attack.mitre.org/techniques/T1071/001/">T1071.001</a></td><td>Application Layer Protocol: Web Protocols</td><td>Port 80 external IP lookup for egress profiling.</td></tr><tr><td><strong>Command and Control</strong></td><td><a href="https://attack.mitre.org/techniques/T1095/">T1095</a></td><td>Non-Application Layer Protocol</td><td>Mass UDP port 6892 beaconing across 16,384 external IPs.</td></tr><tr><td><strong>Impact</strong></td><td><a href="https://attack.mitre.org/techniques/T1486/">T1486</a></td><td>Data Encrypted for Impact</td><td>Cerber Ransomware deployment on endpoint <code>we8105desk</code>.</td></tr></tbody></table>
+<hr>
+<h2 id="soc-detection--response-playbook">SOC Detection &#x26; Response Playbook</h2>
+<h3 id="1-high-fidelity-detection-rules-splunk-spl">1. High-Fidelity Detection Rules (Splunk SPL)</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#E1E4E8"># Rule </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">: Detect User-Space Binaries Masquerading </span><span style="color:#79B8FF">as</span><span style="color:#E1E4E8"> Core Windows Tools</span></span>
+<span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">main </span><span style="color:#FFAB70">sourcetype</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"</span><span style="color:#FFAB70"> EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> eval</span><span style="color:#FFAB70"> is_system_name</span><span style="color:#F97583">=</span><span style="color:#79B8FF">if</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">match</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">Image</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(?i)\\(osk|svchost|csrss|lsass|smss|services|taskhost)\.exe$"</span><span style="color:#E1E4E8">),</span><span style="color:#FFAB70"> 1</span><span style="color:#E1E4E8">,</span><span style="color:#FFAB70"> 0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> eval</span><span style="color:#FFAB70"> is_system_path</span><span style="color:#F97583">=</span><span style="color:#79B8FF">if</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">match</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">Image</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(?i)^C:\\Windows\\(System32|SysWOW64)\\"), 1, 0)</span></span>
+<span class="line"><span style="color:#9ECBFF">| where is_system_name=1 AND is_system_path=0</span></span>
+<span class="line"><span style="color:#9ECBFF">| table _time host User Image CommandLine ParentImage</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF"># Rule 2: High-Volume Outbound UDP Fan-out (Ransomware / Botnet C2)</span></span>
+<span class="line"><span style="color:#9ECBFF">index=firewall proto=udp</span></span>
+<span class="line"><span style="color:#9ECBFF">| stats dc(dst_ip) as unique_destinations by src_ip, dst_port</span></span>
+<span class="line"><span style="color:#9ECBFF">| where unique_destinations > 500</span></span></code></pre>
+<h3 id="2-immediate-containment--incident-handling-actions">2. Immediate Containment &#x26; Incident Handling Actions</h3>
+<ol>
+<li><strong>Endpoint Isolation:</strong> Disconnect <code>we8105desk</code> (<code>192.168.250.100</code>) from the network immediately via EDR network containment to halt file encryption and lateral propagation.</li>
+<li><strong>Account Remediation:</strong> Force password reset and revoke all active Kerberos/NTLM tokens for <code>WAYNECORPINC\bob.smith</code>.</li>
+<li><strong>Firewall Egress Blocking:</strong> Implement temporary outbound boundary firewall rules dropping all UDP traffic targeting port <code>6892</code> and sinkhole known Cerber subnet ranges.</li>
+<li><strong>Web Tier Hardening:</strong> Apply IP rate limiting on <code>/joomla/administrator/</code> and enforce Multi-Factor Authentication (MFA) to neutralize automated dictionary attacks.</li>
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="splunk-lsass-ppid-spoofing"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB CDSA Investigation </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Intermediate </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 14 September 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Splunk SIEM Triage: LSASS Credential Access &#38; PPID Spoofing Analysis"> Splunk SIEM Triage: LSASS Credential Access &amp; PPID Spoofing Analysis </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Forensic analysis and threat hunting on endpoint ACADEMY-SFUND-WIN10 using Splunk SIEM. Detected LSASS memory dumping via ProcessHacker.exe (Sysmon EID 10, GrantedAccess 0x1fffff), evaluated post-dump Windows authentication telemetry (Event ID 4624 Logon Types), and isolated parent-child process anomalies involving WerFault.exe PPID spoofing. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Splunk Enterprise </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> SPL </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Sysmon (EID 1, 10) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Windows Security Logs (EID 4624) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> ProcessHacker </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> WerFault.exe </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="executive-summary--incident-scope">Executive Summary &#x26; Incident Scope</h2>
+<p>During digital forensics and incident triage on Windows endpoint <strong><code>ACADEMY-SFUND-WIN10</code></strong> (<code>10.129.153.92</code>), ingested host event telemetry was analyzed in <strong>Splunk Enterprise</strong> to identify unauthorized post-exploitation activity.</p>
+<p>The investigation exposed a multi-stage intrusion sequence:</p>
+<ol>
+<li><strong>Credential Access (LSASS Memory Dump):</strong> The adversary opened handles to the Local Security Authority Subsystem Service (<code>lsass.exe</code>) using a standalone <code>ProcessHacker.exe</code> binary, escalating permissions from query-level (<code>0x1000</code>) to full access (<code>0x1fffff</code> - <code>PROCESS_ALL_ACCESS</code>) to write a process dump to disk.</li>
+<li><strong>Post-Dumping Authentication Triage:</strong> Analysis of Windows Security Event ID 4624 events immediately following the dump confirmed that no malicious interactive (Logon Type 2), network (Logon Type 3), or remote desktop (Logon Type 10) sessions were initiated with the harvested credentials during the captured timeframe.</li>
+<li><strong>Defense Evasion (PPID Spoofing &#x26; Reconnaissance):</strong> The attacker executed discovery commands (<code>whoami</code>) by spoofing <code>WerFault.exe</code> (Windows Error Reporting) as the parent process to bypass endpoint detection rules looking for command shells spawned directly by suspicious binaries.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>┌─────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐</span></span>
+<span class="line"><span>│ Credential Extraction   │ ───► │  Authentication Triage  │ ───► │ Defense Evasion &#x26; Recon │</span></span>
+<span class="line"><span>│ ProcessHacker.exe       │      │  Security EID 4624      │      │ Sysmon EID 1            │</span></span>
+<span class="line"><span>│ Target: lsass.exe       │      │  Logon Type 5 (SYSTEM)  │      │ WerFault.exe (Parent)   │</span></span>
+<span class="line"><span>│ GrantedAccess: 0x1fffff │      │  No Malicious Logins    │      │ Child: cmd.exe /c whoami│</span></span>
+<span class="line"><span>└─────────────────────────┘      └─────────────────────────┘      └─────────────────────────┘</span></span></code></pre>
+<hr>
+<h2 id="investigation-overview--environment-telemetry">Investigation Overview &#x26; Environment Telemetry</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Parameter</th><th>Operational Specification</th></tr></thead><tbody><tr><td><strong>Platform &#x26; Module</strong></td><td>Hack The Box Academy · Understanding Log Sources &#x26; Investigating with Splunk</td></tr><tr><td><strong>SIEM Platform</strong></td><td>Splunk Enterprise</td></tr><tr><td><strong>Investigation Scope</strong></td><td>Post-Exploitation Triage on <code>ACADEMY-SFUND-WIN10</code> (<code>10.129.153.92</code>)</td></tr><tr><td><strong>Log Sources</strong></td><td>Microsoft-Windows-Sysmon/Operational (EID 1, 10), Security (EID 4624)</td></tr><tr><td><strong>Primary Focus</strong></td><td>MITRE ATT&#x26;CK T1003.001 (OS Credential Dumping: LSASS Memory), T1134.004 (Access Token Manipulation: Parent PID Spoofing)</td></tr></tbody></table>
+<hr>
+<h2 id="chronological-attack-timeline">Chronological Attack Timeline</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Timestamp (UTC)</th><th>Event Log &#x26; ID</th><th>Source / Parent</th><th>Target / Child</th><th>Access Mask / CommandLine</th><th>Operational Significance</th></tr></thead><tbody><tr><td><strong>2022-04-27 19:08:52</strong></td><td>Sysmon EID 10</td><td><code>ProcessHacker.exe</code></td><td><code>lsass.exe</code></td><td><code>0x1000</code> (<code>PROCESS_QUERY_LIMITED_INFORMATION</code>)</td><td>Attacker identifies and queries LSASS PID.</td></tr><tr><td><strong>2022-04-27 19:08:56</strong></td><td>Sysmon EID 10</td><td><code>ProcessHacker.exe</code></td><td><code>lsass.exe</code></td><td><code>0x1fffff</code> (<code>PROCESS_ALL_ACCESS</code>)</td><td><strong>Full LSASS memory dump initiated</strong> to disk.</td></tr><tr><td><strong>2022-04-27 19:09:44</strong></td><td>Security EID 4624</td><td><code>NT AUTHORITY\SYSTEM</code></td><td>N/A</td><td>Logon Type 5 (Service)</td><td>Benign background Windows system service logon.</td></tr><tr><td><strong>2022-04-27 19:17:25</strong></td><td>Sysmon EID 1</td><td><code>explorer.exe</code></td><td><code>WerFault.exe</code></td><td><code>"C:\Windows\System32\werfault.exe"</code></td><td>Error reporting service binary instantiated.</td></tr><tr><td><strong>2022-04-27 19:18:06</strong></td><td>Sysmon EID 1</td><td><code>WerFault.exe</code></td><td><code>cmd.exe</code></td><td><code>cmd.exe /c whoami</code></td><td><strong>PPID Spoofing detected.</strong> <code>WerFault.exe</code> illegally spawns <code>cmd.exe</code>.</td></tr></tbody></table>
+<hr>
+<h2 id="stage-by-stage-forensic-breakdown">Stage-by-Stage Forensic Breakdown</h2>
+<h3 id="stage-1-detecting-lsass-memory-dumping-via-sysmon-event-id-10">Stage 1: Detecting LSASS Memory Dumping via Sysmon (Event ID 10)</h3>
+<h4 id="1-the-who-why--how">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>The Threat:</strong> The <code>lsass.exe</code> process is responsible for enforcing security policy, handling password changes, and storing hashed/encrypted credentials in memory (such as NTLM password hashes, Kerberos tickets, and cached domain credentials).</li>
+<li><strong>The Technique:</strong> Adversaries frequently use administrative tools like Process Hacker, ProcDump, Mimikatz, or custom tools to dump LSASS memory space. Once written to a file, credentials can be parsed offline without running noisy tools against live memory.</li>
+<li><strong>The Forensic Signal:</strong> In Sysmon, <strong>Event ID 10 (<code>ProcessAccess</code>)</strong> reports when a process requests an access handle to another process. Normal system processes (like <code>csrss.exe</code> or <code>svchost.exe</code>) legitimately access <code>lsass.exe</code> with restricted access rights. However, third-party executables requesting <strong><code>0x1fffff</code> (<code>PROCESS_ALL_ACCESS</code>)</strong> or <code>0x1010</code> (<code>PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ</code>) signal memory dumping attempts.</li>
+</ul>
+<h4 id="2-splunk-spl-query-construction">2. Splunk SPL Query Construction</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">main </span><span style="color:#FFAB70">EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">10</span><span style="color:#FFAB70"> TargetImage</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"*\\lsass.exe"</span><span style="color:#79B8FF"> NOT</span><span style="color:#E1E4E8"> SourceImage IN (</span><span style="color:#9ECBFF">"*\\lsass.exe"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"*\\svchost.exe"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"*\\csrss.exe"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time SourceImage TargetImage GrantedAccess CallTrace</span></span></code></pre>
+<h4 id="3-query-breakdown--forensic-findings">3. Query Breakdown &#x26; Forensic Findings</h4>
+<ul>
+<li><code>index=main EventCode=10</code>: Restricts results to Sysmon Process Access events.</li>
+<li><code>TargetImage="*\\lsass.exe"</code>: Filters specifically for processes targeting the Local Security Authority Subsystem.</li>
+<li><code>NOT SourceImage IN (...)</code>: Suppresses known benign Windows core processes that frequently touch LSASS.</li>
+<li><code>table _time SourceImage TargetImage GrantedAccess CallTrace</code>: Formats the results to reveal the exact timestamp, calling binary, target, access rights, and memory call trace.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+-----------------------------------------------------------------------------------+-----------------------------+---------------+</span></span>
+<span class="line"><span>| _time               | SourceImage                                                                       | TargetImage                 | GrantedAccess |</span></span>
+<span class="line"><span>+---------------------+-----------------------------------------------------------------------------------+-----------------------------+---------------+</span></span>
+<span class="line"><span>| 2022-04-27 19:08:52 | C:\Users\waldo\Downloads\processhacker-3.0.4801-bin\64bit\ProcessHacker.exe       | C:\Windows\system32\lsass.exe| 0x1000        |</span></span>
+<span class="line"><span>| 2022-04-27 19:08:56 | C:\Users\waldo\Downloads\processhacker-3.0.4801-bin\64bit\ProcessHacker.exe       | C:\Windows\system32\lsass.exe| 0x1fffff      |</span></span>
+<span class="line"><span>+---------------------+-----------------------------------------------------------------------------------+-----------------------------+---------------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Finding:</strong> A standalone binary located in <code>C:\Users\waldo\Downloads\processhacker-3.0.4801-bin\64bit\ProcessHacker.exe</code> was executed by user <code>waldo</code>. At <code>19:08:52</code>, it requested query permissions (<code>0x1000</code>), followed immediately at <code>19:08:56</code> by requesting <code>0x1fffff</code> (<code>PROCESS_ALL_ACCESS</code>) to perform the full LSASS memory dump.</li>
+</ul>
+<hr>
+<h3 id="stage-2-post-dump-authentication-triage-security-event-id-4624">Stage 2: Post-Dump Authentication Triage (Security Event ID 4624)</h3>
+<h4 id="1-the-who-why--how-1">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>The Threat:</strong> Once an adversary dumps LSASS, their immediate next objective is usually <strong>Lateral Movement</strong> (using extracted credentials to authenticate to domain controllers, file servers, or adjacent workstations via SMB, RDP, or WinRM).</li>
+<li><strong>The Forensic Signal:</strong> Windows Security <strong>Event ID 4624</strong> records every successful logon session. To verify whether stolen credentials were immediately weaponized, the SOC analyst inspects the <code>LogonType</code> of all authentication events occurring after the dump timestamp (<code>19:08:56</code>).</li>
+</ul>
+<h4 id="2-understanding-windows-logon-types">2. Understanding Windows Logon Types</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Logon Type</th><th>Meaning</th><th>Operational Context in Incident Triage</th></tr></thead><tbody><tr><td><strong>Type 2</strong></td><td>Interactive</td><td>Direct logon via local console keyboard/monitor.</td></tr><tr><td><strong>Type 3</strong></td><td>Network</td><td>Remote connection over the network (e.g., SMB file shares, WinRM, IIS). Primary indicator of lateral movement.</td></tr><tr><td><strong>Type 4</strong></td><td>Batch</td><td>Scheduled tasks executing under a user context.</td></tr><tr><td><strong>Type 5</strong></td><td>Service</td><td>Background services started by the Service Control Manager.</td></tr><tr><td><strong>Type 10</strong></td><td>RemoteInteractive</td><td>Terminal Services, Remote Desktop (RDP), or Remote Assistance.</td></tr></tbody></table>
+<h4 id="3-splunk-spl-query-construction">3. Splunk SPL Query Construction</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">main </span><span style="color:#FFAB70">EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">4624</span><span style="color:#79B8FF"> earliest</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"04/27/2022:19:08:56"</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time TargetUserName LogonType IpAddress WorkstationName</span></span></code></pre>
+<h4 id="4-forensic-evaluation--finding">4. Forensic Evaluation &#x26; Finding</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+----------------+-----------+-----------+-----------------+</span></span>
+<span class="line"><span>| _time               | TargetUserName | LogonType | IpAddress | WorkstationName |</span></span>
+<span class="line"><span>+---------------------+----------------+-----------+-----------+-----------------+</span></span>
+<span class="line"><span>| 2022-04-27 19:09:44 | SYSTEM         | 5         | -         | -               |</span></span>
+<span class="line"><span>| 2022-04-27 19:09:45 | SYSTEM         | 5         | -         | -               |</span></span>
+<span class="line"><span>+---------------------+----------------+-----------+-----------+-----------------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Assessment:</strong> The only successful logons registered post-dump were <strong>Logon Type 5</strong> executed by the local <code>NT AUTHORITY\SYSTEM</code> account for routine background service maintenance.</li>
+<li><strong>Conclusion:</strong> No remote interactive (Type 10), network interactive (Type 3), or console (Type 2) logons occurred. <strong>Unauthorized login status: Negative.</strong></li>
+</ul>
+<hr>
+<h3 id="stage-3-defense-evasion--parent-process-spoofing-sysmon-event-id-1">Stage 3: Defense Evasion &#x26; Parent Process Spoofing (Sysmon Event ID 1)</h3>
+<h4 id="1-the-who-why--how-2">1. The “Who, Why, &#x26; How”</h4>
+<ul>
+<li><strong>The Threat:</strong> Modern EDR and SOC detection rules alert when non-standard executables (e.g., dropped malware binaries or downloaders) spawn command shells (<code>cmd.exe</code>, <code>powershell.exe</code>).</li>
+<li><strong>The Technique (PPID Spoofing):</strong> Adversaries manipulate the process creation attributes using the Windows API (<code>UpdateProcThreadAttribute</code> with <code>PROC_THREAD_ATTRIBUTE_PARENT_PROCESS</code>) to make a newly spawned process appear as though it was created by a legitimate, trusted system process (like <code>explorer.exe</code>, <code>svchost.exe</code>, or <code>WerFault.exe</code>).</li>
+<li><strong>The Forensic Signal:</strong> <code>WerFault.exe</code> is the Windows Error Reporting process. It handles process crashes and telemetry generation. <strong><code>WerFault.exe</code> has no legitimate engineering reason to ever spawn <code>cmd.exe</code> or <code>powershell.exe</code>.</strong> A parent-child relationship of <code>WerFault.exe -> cmd.exe</code> is a high-fidelity indicator of PPID spoofing.</li>
+</ul>
+<h4 id="2-splunk-spl-query-construction-1">2. Splunk SPL Query Construction</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="spl"><code><span class="line"><span style="color:#FFAB70">index</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">main </span><span style="color:#FFAB70">EventCode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">|</span><span style="color:#79B8FF"> table</span><span style="color:#E1E4E8"> _time ParentImage Image CommandLine</span></span></code></pre>
+<h4 id="3-forensic-evidence">3. Forensic Evidence</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>+---------------------+-------------------------------------+-------------------------------+--------------------+</span></span>
+<span class="line"><span>| _time               | ParentImage                         | Image                         | CommandLine        |</span></span>
+<span class="line"><span>+---------------------+-------------------------------------+-------------------------------+--------------------+</span></span>
+<span class="line"><span>| 2022-04-27 19:17:25 | C:\Windows\explorer.exe             | C:\Windows\System32\WerFault.exe| "C:\Windows\System32\werfault.exe" |</span></span>
+<span class="line"><span>| 2022-04-27 19:18:06 | C:\Windows\System32\WerFault.exe    | C:\Windows\System32\cmd.exe   | cmd.exe /c whoami  |</span></span>
+<span class="line"><span>+---------------------+-------------------------------------+-------------------------------+--------------------+</span></span></code></pre>
+<ul>
+<li><strong>Forensic Finding:</strong> At <code>19:18:06</code>, <code>WerFault.exe</code> was observed spawning <code>cmd.exe</code> executing <code>whoami</code>. This confirmed that the threat actor leveraged <code>WerFault.exe</code> via PPID spoofing to evade parent-process heuristics while conducting local user context discovery.</li>
+</ul>
+<hr>
+<h2 id="detection-engineering--soc-reference-matrix">Detection Engineering &#x26; SOC Reference Matrix</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Detection Focus</th><th>Primary Telemetry</th><th>Critical SPL Filters &#x26; Logic</th><th>MITRE ATT&#x26;CK ID</th></tr></thead><tbody><tr><td><strong>LSASS Memory Dumping</strong></td><td>Sysmon EID 10 (<code>ProcessAccess</code>)</td><td><code>EventCode=10 TargetImage="*\\lsass.exe" GrantedAccess IN ("0x1fffff", "0x1010", "0x1410") NOT SourceImage IN ("*\\svchost.exe", "*\\csrss.exe")</code></td><td><a href="https://attack.mitre.org/techniques/T1003/001/">T1003.001</a></td></tr><tr><td><strong>Post-Exploit Lateral Auth</strong></td><td>Windows Security EID 4624</td><td><code>EventCode=4624 LogonType IN (3, 10) NOT TargetUserName IN ("*$", "SYSTEM", "ANONYMOUS LOGON")</code></td><td><a href="https://attack.mitre.org/techniques/T1078/">T1078</a></td></tr><tr><td><strong>PPID Spoofing via Error Reporting</strong></td><td>Sysmon EID 1 (<code>ProcessCreate</code>)</td><td><code>EventCode=1 ParentImage="*\\WerFault.exe" Image IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\wscript.exe", "*\\cscript.exe")</code></td><td><a href="https://attack.mitre.org/techniques/T1134/004/">T1134.004</a></td></tr><tr><td><strong>Local Discovery Execution</strong></td><td>Sysmon EID 1 / Security EID 4688</td><td><code>EventCode=1 Image="*\\cmd.exe" CommandLine IN ("*whoami*", "*net user*", "*net group*", "*systeminfo*")</code></td><td><a href="https://attack.mitre.org/techniques/T1033/">T1033</a></td></tr></tbody></table>
+<hr>
+<h2 id="lessons-learned--defensive-recommendations">Lessons Learned &#x26; Defensive Recommendations</h2>
+<ol>
+<li><strong>Enable LSA Protection (RunAsPPL):</strong> Configure Windows Credential Guard and protected process mode for LSASS (<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RunAsPPL=1</code>). This blocks non-protected processes from requesting read or all-access masks against <code>lsass.exe</code>, preventing Process Hacker and Mimikatz from dumping LSASS memory.</li>
+<li><strong>Alert on High-Risk Sysmon EID 10 Access Masks:</strong> Implement high-priority SIEM alerts on any non-whitelisted process requesting <code>0x1fffff</code>, <code>0x1010</code>, or <code>0x1410</code> against <code>lsass.exe</code>.</li>
+<li><strong>Behavioral Parent-Child Process Monitoring:</strong> Establish strict correlation rules that trigger immediate SOC escalation whenever trusted Windows binaries (<code>WerFault.exe</code>, <code>spoolsv.exe</code>, <code>calc.exe</code>, <code>notepad.exe</code>) spawn command interpreters or scripting engines.</li>
+<li><strong>Attack Surface Reduction (ASR):</strong> Deploy Microsoft Defender ASR rule <em>“Block credential stealing from the Windows local security authority subsystem (lsass.exe)”</em> across all domain endpoints.</li>
+</ol> </div> </div> </article><article class="lab-card cyber-frame p-6 sm:p-8 transition-all" data-lab-id="stuxbot-elastic-threat-hunting"> <!-- Top Badges / Meta --> <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]"> <div class="flex flex-wrap items-center gap-2"> <span class="font-mono text-[0.65rem] font-bold px-3 py-1 bg-[var(--bg-elevated)] border border-[var(--border-frame)] text-[var(--accent-active)] tracking-wider uppercase"> HTB CDSA Investigation </span> <span class="font-mono text-[0.65rem] font-bold px-2.5 py-1 bg-[var(--accent-progress)]/10 border border-[var(--accent-progress)]/30 text-[var(--accent-progress)] tracking-wider uppercase"> Advanced </span> </div> <span class="font-mono text-xs text-[var(--text-muted)]"> 7 September 2026 </span> </div> <!-- Title & Summary Toggle Area --> <div class="py-5 cursor-pointer lab-toggle group" role="button" tabindex="0" aria-expanded="false"> <div class="flex items-start justify-between gap-4"> <div> <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text="Stuxbot Incident &#38; Elastic SIEM Threat Hunting Walkthrough"> Stuxbot Incident &amp; Elastic SIEM Threat Hunting Walkthrough </h2> <p class="text-sm text-[var(--text-body)] mt-2 leading-relaxed"> Comprehensive hypothesis-driven threat hunting investigation on the Stuxbot adversary campaign using Elastic SIEM and Kibana (KQL). Deconstructed secondary payload execution (VBScript), DCSync credential dumping (Mimikatz), in-memory PowerView reconnaissance, C:\Users\Public tool staging, Registry Run key persistence, and WinRM lateral movement targeting Domain Controllers. </p> <div class="flex flex-wrap gap-1.5 mt-4"> <span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Elastic SIEM </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Kibana (KQL) </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Sysmon </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> PowerShell Script Block Logging </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> Mimikatz </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> PowerView </span><span class="font-mono text-[0.65rem] px-2 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-muted)]"> WinRM </span> </div> </div> <button type="button" class="shrink-0 p-2.5 border border-[var(--border-frame)] bg-[var(--bg-surface)] text-[var(--text-primary)] group-hover:border-[var(--text-primary)] transition-all lab-toggle-btn mt-1 cursor-pointer" aria-label="Toggle full lab writeup"> <span class="font-mono text-xs font-bold block"> ▼ READ REPORT </span> </button> </div> </div> <!-- Expandable Report Body Content --> <div class="lab-body overflow-hidden transition-all duration-500 hidden"> <div class="pt-6 border-t border-[var(--border-subtle)] lab-markdown text-sm sm:text-base"> <h2 id="executive-summary--mission-scope">Executive Summary &#x26; Mission Scope</h2>
 <p>This investigation documents the end-to-end digital forensics and proactive threat hunting methodologies applied during the <strong>Stuxbot</strong> adversary simulation on <strong>Hack The Box (HTB CDSA)</strong>.</p>
 <p>Using <strong>Elastic Security / Kibana</strong> and structured <strong>KQL (Kibana Query Language)</strong> against Windows host events, Sysmon telemetry, and PowerShell script block logs, the investigation uncovered an intrusion campaign spanning initial secondary payload execution, domain credential harvesting, memory-resident reconnaissance, tool staging in world-writable paths, autostart registry persistence, and lateral movement targeting Domain Controllers.</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>┌─────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐</span></span>
