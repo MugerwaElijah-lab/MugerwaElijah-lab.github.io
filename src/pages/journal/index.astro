@@ -27,7 +27,7 @@ const renderedEntries = await Promise.all(
 ---
 
 <BaseLayout 
-  title="Weekly Progress Logs & Chronicles | Mugerwa Elijah"
+  title="Weekly Progress Logs & Chronicles | Mugerwa Elijah Williams"
   description="Weekly progress and professional development logs tracking cybersecurity study milestones, hands-on homelabs, and technical takeaways."
 >
   <div class="py-28 max-w-[1100px] mx-auto px-6 sm:px-12 space-y-12">
@@ -87,7 +87,7 @@ const renderedEntries = await Promise.all(
               </div>
 
               <!-- Title & Summary -->
-              <div class="py-4 cursor-pointer journal-toggle group" role="button" tabindex="0" aria-expanded={isLatest ? "true" : "false"}>
+              <div class="py-4 cursor-pointer journal-toggle group" role="button" tabindex="0" aria-expanded="false">
                 <div class="flex items-start justify-between gap-4">
                   <div>
                     <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--accent-active)] transition-colors cyber-glitch" data-text={title}>
@@ -105,14 +105,14 @@ const renderedEntries = await Promise.all(
                     aria-label="Toggle journal details"
                   >
                     <span class="font-mono text-xs font-bold block transition-transform duration-300">
-                      {isLatest ? "▲ HIDE" : "▼ READ"}
+                      ▼ READ
                     </span>
                   </button>
                 </div>
               </div>
 
-              <!-- Expandable Body Content -->
-              <div class={`journal-body overflow-hidden transition-all duration-500 ${isLatest ? 'block' : 'hidden'}`}>
+              <!-- Expandable Body Content (Hidden by default) -->
+              <div class="journal-body overflow-hidden transition-all duration-500 hidden">
                 <div class="pt-6 border-t border-[var(--border-subtle)] journal-markdown text-sm sm:text-base">
                   <Content />
                 </div>

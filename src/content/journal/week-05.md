@@ -32,7 +32,7 @@ Acquired practical skills in dissecting **Cyber Threat Intelligence (CTI)** repo
 
 ## Challenges and Friction
 
-Mastering multiple complex analytical platforms in a single week (Volatility 3, Elastic Stack, Linux terminal triage) required intensive focus. Extending study sessions to master intricate command parameters created cognitive fatigue, highlighting the importance of paced learning and modular note-taking.
+Learning multiple complex analytical platforms in a single week (Volatility 3, Elastic Stack, Linux terminal triage) required intensive focus. Extending study sessions to understand intricate command parameters created cognitive fatigue, highlighting the importance of paced learning and modular note-taking.
 
 ## Looking Ahead
 ### Week 6

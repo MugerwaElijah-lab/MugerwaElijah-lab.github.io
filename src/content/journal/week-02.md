@@ -27,7 +27,7 @@ Threat Intelligence is a continuous, collective discipline: from targeted OSINT 
 For Threat Intelligence to be truly actionable, context and deep understanding of the protected enterprise environment are essential. Navigating the MITRE ATT&CK framework is critical for mapping adversarial Tactics, Techniques, and Procedures (TTPs) to potential vulnerabilities and defensive controls.
 
 ## Challenges and Friction
-Invested significant time mastering Event Tracing for Windows (ETW) and syntax structures for the `Get-WinEvent` PowerShell tool. Parsing provider channels and constructing filter-hashtables was initially challenging during practical exercises, but consistent hands-on repetition is cementing the methodology.
+Invested significant time studying Event Tracing for Windows (ETW) and syntax structures for the `Get-WinEvent` PowerShell tool. Parsing provider channels and constructing filter-hashtables was initially challenging during practical exercises, but consistent hands-on repetition is cementing the methodology.
 
 ## Looking Ahead
 ### Week 3
